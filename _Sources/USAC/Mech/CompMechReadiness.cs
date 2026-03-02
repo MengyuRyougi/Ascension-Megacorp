@@ -126,7 +126,7 @@ namespace USAC
 
         private void UpdateHediff()
         {
-            if (Pawn == null || Props.lowReadinessHediff == null) return;
+            if (Pawn == null || !Pawn.Spawned || Pawn.Dead || Props.lowReadinessHediff == null) return;
 
             Hediff existing = Pawn.health.hediffSet.GetFirstHediffOfDef(Props.lowReadinessHediff);
 
