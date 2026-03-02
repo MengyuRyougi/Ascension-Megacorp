@@ -9,6 +9,7 @@ using static USAC.InternalUI.PortalUIUtility;
 namespace USAC
 {
     // USAC门户界面
+    [StaticConstructorOnStartup]
     public class Dialog_USACPortal : Window
     {
         #region 字段
