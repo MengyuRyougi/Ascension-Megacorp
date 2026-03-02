@@ -12,9 +12,6 @@ namespace USAC
         // 引用信用债券定义
         public static ThingDef USAC_Bond;
 
-        // 轨道夹具 Mote 定义
-        public static ThingDef USAC_GripperMote;
-
         // 轨道夹具定义
         public static ThingDef USAC_GripperIncoming;
 

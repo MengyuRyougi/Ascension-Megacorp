@@ -5,6 +5,7 @@ using static USAC.InternalUI.PortalUIUtility;
 namespace USAC.InternalUI
 {
     // USAC门户首页
+    [StaticConstructorOnStartup]
     public class Page_Home : IPortalPage
     {
         public string Title => "USAC.UI.Home.Title".Translate();

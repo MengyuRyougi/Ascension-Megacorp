@@ -72,25 +72,6 @@
     </skyfaller>
   </ThingDef>
 
-  <!-- USAC 轨道夹具 视觉 Mote -->
-  <ThingDef ParentName="MoteBase">
-    <defName>USAC_GripperMote</defName>
-    <label>orbital gripper</label>
-    <thingClass>USAC.Mote_USACGripper</thingClass>
-    <altitudeLayer>MoteOverhead</altitudeLayer>
-    <graphicData>
-      <texPath>USAC/Debt/OrbitalGripper</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(2, 2)</drawSize>
-      <color>(1, 0.8, 0.2)</color>
-    </graphicData>
-    <mote>
-      <solidTime>999</solidTime><!-- 生命周期由C#自管理 -->
-      <fadeInTime>0</fadeInTime>
-      <fadeOutTime>0</fadeOutTime>
-    </mote>
-  </ThingDef>
-
   <!-- USAC 轨道钻地破拆投射物 Projectile -->
   <ThingDef ParentName="BaseBullet">
     <defName>USAC_DrillShellProjectile</defName>
@@ -104,11 +85,11 @@
     <projectile>
       <damageDef>Bullet</damageDef>
       <damageAmountBase>0</damageAmountBase>
-      <speed>150</speed><!-- 高速进入 -->
+      <speed>150</speed>
       <armorPenetrationBase>1.0</armorPenetrationBase>
-      <soundExplode>Artillery_Boom</soundExplode>
+      <soundExplode>Explosion_Bomb</soundExplode>
       <shadowSize>0</shadowSize>
-      <flyOverhead>true</flyOverhead><!-- 确保可以飞跃障碍物直接击中目标点 -->
+      <flyOverhead>true</flyOverhead>
     </projectile>
   </ThingDef>
 
