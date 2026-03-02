@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
     <!-- USAC Faction -->
 
     <!-- EN: A Rising Giant -->
-  <USAC_FactionName>飛升巨企</USAC_FactionName>
+  <USAC_FactionName>飛昇巨企</USAC_FactionName>
 
     <!-- EN: A giant corporation that emerged from the enlightenment of the world, after the departure of the colonial fleet, it monopolized the local energy industry through information and technological advantages, and rapidly expanded through cultural hegemony.  -->
   <USAC_FactionDesc>來自啟迪世界崛起的巨企，在殖民艦隊離開之後透過訊息與技術優勢來壟斷當地的能源產業，並且透過文化霸權來快速的擴張並開展邊疆計畫來將勢力範圍擴張到新的世界。</USAC_FactionDesc>
@@ -187,7 +187,7 @@
     <!-- EN: They do not belong to any known faction. -->
   <TraderArrivalNoFaction>他們不屬於任何已知派系。</TraderArrivalNoFaction>
 
-    <!-- Site 站点标签 -->
+    <!-- Site 站點標籤 -->
   <!-- EN: Hostile Outpost -->
   <USAC_SiteLabel_HostileOutpost>敵方前哨</USAC_SiteLabel_HostileOutpost>
   <!-- EN: Enemy Camp -->

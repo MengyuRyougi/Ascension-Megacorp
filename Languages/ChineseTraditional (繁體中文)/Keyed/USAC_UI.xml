@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 通用內容 -->
+  <USAC.UI.Back>&lt; BACK</USAC.UI.Back>
+  <USAC.UI.Credits>CREDITS</USAC.UI.Credits>
+
+  <!-- 首頁 Page_Home -->
+  <USAC.UI.Home.Title>STRATEGIC_OVERVIEW // 戰略概覽</USAC.UI.Home.Title>
+  <USAC.UI.Home.Banner>UNITED STELLAR ARMAMENT COMPANY\n[CORPORATE_INTRANET_V4.2]</USAC.UI.Home.Banner>
+  <USAC.UI.Home.Slogan>DEFINING THE FUTURE OF PLANETARY SECURITY</USAC.UI.Home.Slogan>
+  <USAC.UI.Home.Description>USAC 是星際資源壟斷與武裝貿易的領導者。我們通過軌道結算網絡，確保資產的絕對流動性。</USAC.UI.Home.Description>
+  <USAC.UI.Home.Bento.Products.Title>ARMORY_CATALOG</USAC.UI.Home.Bento.Products.Title>
+  <USAC.UI.Home.Bento.Products.Desc>授權武器與機兵系統目錄</USAC.UI.Home.Bento.Products.Desc>
+  <USAC.UI.Home.Bento.Assets.Title>FINANCIAL_TERMINAL</USAC.UI.Home.Bento.Assets.Title>
+  <USAC.UI.Home.Bento.Assets.Desc>信用資產與債務槓桿管理</USAC.UI.Home.Bento.Assets.Desc>
+  <USAC.UI.Home.Bento.Legal.Title>COMPLIANCE</USAC.UI.Home.Bento.Legal.Title>
+  <USAC.UI.Home.Bento.Legal.Desc>法律條款與自動化徵收協議</USAC.UI.Home.Bento.Legal.Desc>
+  <USAC.UI.Home.Bento.Services.Title>CORPORATE_SERVICES</USAC.UI.Home.Bento.Services.Title>
+  <USAC.UI.Home.Bento.Services.Desc>定製化企業支援與遠程資產維護</USAC.UI.Home.Bento.Services.Desc>
+
+  <!-- 目錄頁 Page_Products -->
+  <USAC.UI.Products.Title>AUTHORIZED_PRODUCT_CATALOG // 授權目錄</USAC.UI.Products.Title>
+  <USAC.UI.Products.Tab.Mech>機兵訂單</USAC.UI.Products.Tab.Mech>
+  <USAC.UI.Products.Tab.Weapon>戰術武器</USAC.UI.Products.Tab.Weapon>
+  <USAC.UI.Products.Tab.Apparel>戰術裝備</USAC.UI.Products.Tab.Apparel>
+  <USAC.UI.Products.Tab.Supply>後勤配給</USAC.UI.Products.Tab.Supply>
+
+  <!-- 詳情頁 Page_ProductDetail -->
+  <USAC.UI.Detail.Title>PRODUCT_SPECIFICATION // 產品規格</USAC.UI.Detail.Title>
+  <USAC.UI.Detail.Summary>EXECUTIVE_SUMMARY // 執行摘要</USAC.UI.Detail.Summary>
+  <USAC.UI.Detail.Btn>查看詳情</USAC.UI.Detail.Btn>
+  <USAC.UI.Stat.Identifier>IDENTIFIER</USAC.UI.Stat.Identifier>
+  <USAC.UI.Stat.Category>CATEGORY</USAC.UI.Stat.Category>
+  <USAC.UI.Stat.SubType>SUB_TYPE</USAC.UI.Stat.SubType>
+  <USAC.UI.Stat.MoveSpeed>MOVE_SPEED</USAC.UI.Stat.MoveSpeed>
+  <USAC.UI.Stat.ArmorSharp>ARMOR_SHARP</USAC.UI.Stat.ArmorSharp>
+  <USAC.UI.Stat.ArmorBlunt>ARMOR_BLUNT</USAC.UI.Stat.ArmorBlunt>
+  <USAC.UI.Stat.HealthFact>HEALTH_FACT</USAC.UI.Stat.HealthFact>
+  <USAC.UI.Stat.WeightClass>WEIGHT_CLASS</USAC.UI.Stat.WeightClass>
+  <USAC.UI.Stat.Damage>DAMAGE</USAC.UI.Stat.Damage>
+  <USAC.UI.Stat.ArmorPen>ARMOR_PEN</USAC.UI.Stat.ArmorPen>
+  <USAC.UI.Stat.Range>RANGE</USAC.UI.Stat.Range>
+  <USAC.UI.Stat.Cooldown>COOLDOWN</USAC.UI.Stat.Cooldown>
+  <USAC.UI.Stat.InsulCold>INSUL_COLD</USAC.UI.Stat.InsulCold>
+  <USAC.UI.Stat.InsulHeat>INSUL_HEAT</USAC.UI.Stat.InsulHeat>
+  <USAC.UI.Stat.Nutrition>NUTRITION</USAC.UI.Stat.Nutrition>
+  <USAC.UI.Stat.MedPotency>MED_POTENCY</USAC.UI.Stat.MedPotency>
+  <USAC.UI.Stat.Mass>LOGISTICS_MASS</USAC.UI.Stat.Mass>
+
+  <!-- 資產頁 Page_Assets —— 總覽與申請 -->
+  <USAC.UI.Assets.Title>ASSET_TERMINAL // 資產終端</USAC.UI.Assets.Title>
+  <USAC.UI.Assets.SyncStatus>正在實時同步軌道結算網絡數據庫...</USAC.UI.Assets.SyncStatus>
+  <USAC.UI.Assets.CreditLevel>當前信用等級: [UNREGISTERED / NONE]</USAC.UI.Assets.CreditLevel>
+  <USAC.UI.Assets.NoAgreement>警告: 尚未建立合法的資產抵押協議</USAC.UI.Assets.NoAgreement>
+  <USAC.UI.Assets.CreditScore>信用分: {0}</USAC.UI.Assets.CreditScore>
+  <USAC.UI.Assets.TotalDebt>總計負債: ₿{0}</USAC.UI.Assets.TotalDebt>
+  <USAC.UI.Assets.ActiveContracts>ACTIVE_CONTRACTS // 活動合同</USAC.UI.Assets.ActiveContracts>
+  
+  <!-- 嵌套申請面板 -->
+  <USAC.UI.Assets.Apply.Title>RISK_PRICING_APPLICATION // 風險定價申請</USAC.UI.Assets.Apply.Title>
+  <USAC.UI.Assets.InterestRate>基礎方案利率</USAC.UI.Assets.InterestRate>
+  <USAC.UI.Assets.GrowthRate>週期風險費率/手續費</USAC.UI.Assets.GrowthRate>
+  <USAC.UI.Assets.Stat.GrowthMode>風險增長基準</USAC.UI.Assets.Stat.GrowthMode>
+  <USAC.UI.Assets.Stat.ActualInterest>實際執行利率</USAC.UI.Assets.Stat.ActualInterest>
+  <USAC.UI.Assets.Stat.CreditDiscount>信用折扣優惠</USAC.UI.Assets.Stat.CreditDiscount>
+  <USAC.UI.Assets.Apply.Confirm>確認簽署合同</USAC.UI.Assets.Apply.Confirm>
+  <USAC.UI.Assets.Apply.Warning>警告: 您正在通過提高利率與風險費率來換取更高的授信。一旦簽署，USAC 軌道徵收系統將嚴格執行合同，任何欠繳將導致資產保全行動。</USAC.UI.Assets.Apply.Warning>
+
+  <!-- 合同列表行 -->
+  <USAC.UI.Assets.NextSettlement>距結算</USAC.UI.Assets.NextSettlement>
+  <USAC.UI.Assets.MissedWarning>⚠ 已欠繳 {0} 次！再次欠繳將觸發強制徵收！</USAC.UI.Assets.MissedWarning>
+  <USAC.UI.Assets.Cycle>每週期</USAC.UI.Assets.Cycle>
+
+  <!-- 增長模式相關 -->
+  <USAC.UI.Assets.GrowthMode.WealthBased>資產聯動增長 ({0}%/週期)</USAC.UI.Assets.GrowthMode.WealthBased>
+  <USAC.UI.Assets.GrowthMode.PrincipalBased>本金聯動增長 ({0}%/週期)</USAC.UI.Assets.GrowthMode.PrincipalBased>
+
+  <!-- 不可申請原因 -->
+  <USAC.UI.Assets.Block.LowCredit>信用評分不足 (需≥30)，系統已關閉融資通道。</USAC.UI.Assets.Block.LowCredit>
+  <USAC.UI.Assets.Block.LowWealth>當前資產估值不足以支持申請額度，請提高利率方案以通過評估。</USAC.UI.Assets.Block.LowWealth>
+  
+  <!-- 信用評估卡各字段標籤 -->
+  <USAC.UI.Assets.Stat.CreditScore>信用評分</USAC.UI.Assets.Stat.CreditScore>
+  <USAC.UI.Assets.Stat.Wealth>地圖總財富</USAC.UI.Assets.Stat.Wealth>
+  <USAC.UI.Assets.Stat.MaxAmount>最高評估額度</USAC.UI.Assets.Stat.MaxAmount>
+  <USAC.UI.Assets.Stat.Growth>負債預測</USAC.UI.Assets.Stat.Growth>
+
+  <USAC.UI.Assets.MaxAmount>授信額度: ₿{0}</USAC.UI.Assets.MaxAmount>
+  <USAC.UI.Assets.InterestRate>週期利率: {0}%</USAC.UI.Assets.InterestRate>
+  <USAC.UI.Assets.GrowthRate>資產增長率: {0}%</USAC.UI.Assets.GrowthRate>
+
+  <!-- 合同詳情頁 —— 頂欄 -->
+  <USAC.UI.Assets.Contract.Details>CONTRACT_SPECIFICATIONS // 合同細節</USAC.UI.Assets.Contract.Details>
+  <USAC.UI.Assets.Contract.ID>合同編號: {0}</USAC.UI.Assets.Contract.ID>
+  <USAC.UI.Assets.Contract.Type>抵押模式: {0}</USAC.UI.Assets.Contract.Type>
+  <USAC.UI.Assets.Contract.Status>執行狀態: [ IN_EFFECT / 運行中 ]</USAC.UI.Assets.Contract.Status>
+  <USAC.UI.Assets.Contract.PaidQuarter>本季度已償還: ₿{0}</USAC.UI.Assets.Contract.PaidQuarter>
+
+  <!-- 合同詳情頁 —— 財務狀態卡 -->
+  <USAC.UI.Assets.Principal>本金餘額</USAC.UI.Assets.Principal>
+  <USAC.UI.Assets.Stat.Principal>本金基準聯動</USAC.UI.Assets.Stat.Principal>
+  <USAC.UI.Assets.Interest>本期利息</USAC.UI.Assets.Interest>
+  <USAC.UI.Assets.Stat.InterestRate>利率</USAC.UI.Assets.Stat.InterestRate>
+  <USAC.UI.Assets.Imminent>即將結算</USAC.UI.Assets.Imminent>
+
+  <!-- 合同詳情頁 —— 危險警告橫幅 -->
+  <USAC.UI.Assets.Warning.Caution>已欠繳 {0} 次，信用評分持續下滑，請儘快繳納。</USAC.UI.Assets.Warning.Caution>
+  <USAC.UI.Assets.Warning.Critical>⚠ 已欠繳 {0} 次！再次欠繳將立即觸發強制徵收程序！</USAC.UI.Assets.Warning.Critical>
+
+  <!-- 合同詳情頁 —— 利息繳納面板 -->
+  <USAC.UI.Assets.InterestPanel.Title>INTEREST_SETTLEMENT // 利息結算</USAC.UI.Assets.InterestPanel.Title>
+  <USAC.UI.Assets.InterestPaid>✓ 本期無掛賬利息</USAC.UI.Assets.InterestPaid>
+  <USAC.UI.Assets.BondsNeeded>需 {0} 張債券</USAC.UI.Assets.BondsNeeded>
+  <USAC.UI.Assets.BondsOwned>當前持有債券: {0} 張</USAC.UI.Assets.BondsOwned>
+  <USAC.UI.Assets.PayInterest>繳納利息 ({0} 張債券)</USAC.UI.Assets.PayInterest>
+
+  <!-- 合同詳情頁 —— 本金償還面板 -->
+  <USAC.UI.Assets.RepayPanel.Title>PRINCIPAL_REPAYMENT // 本金償還</USAC.UI.Assets.RepayPanel.Title>
+  <USAC.UI.Assets.QuarterFree>本季免費額度</USAC.UI.Assets.QuarterFree>
+  <USAC.UI.Assets.Used>已使用</USAC.UI.Assets.Used>
+  <USAC.UI.Assets.Repay>償還本金 ({0} 張債券)</USAC.UI.Assets.Repay>
+  <USAC.UI.Assets.RepaySurcharge>償還本金 ({0} 張, 含手續費 {1} 張)</USAC.UI.Assets.RepaySurcharge>
+
+  <!-- 合同詳情頁 —— 增長預測卡 -->
+  <USAC.UI.Assets.GrowthForecast>GROWTH_FORECAST // 本金增長預測</USAC.UI.Assets.GrowthForecast>
+  <USAC.UI.Assets.GrowthMode.Wealth>財富百分比增長 ({0}% / 週期)</USAC.UI.Assets.GrowthMode.Wealth>
+  <USAC.UI.Assets.GrowthMode.Principal>本金百分比增長 ({0}% / 週期)</USAC.UI.Assets.GrowthMode.Principal>
+  <USAC.UI.Assets.CurrentWealth>當前地圖財富: ₿{0}</USAC.UI.Assets.CurrentWealth>
+
+  <!-- 側邊欄與框架 Dialog_USACPortal -->
+  <USAC.UI.Nav.Home>戰略概覽</USAC.UI.Nav.Home>
+  <USAC.UI.Nav.Assets>資產終端</USAC.UI.Nav.Assets>
+  <USAC.UI.Nav.Products>授權目錄</USAC.UI.Nav.Products>
+  <USAC.UI.Nav.Legal>法律合規</USAC.UI.Nav.Legal>
+  <USAC.UI.Nav.Services>企業服務</USAC.UI.Nav.Services>
+  <USAC.UI.StatusBar>● TUNNEL_ACTIVE // ENCRYPTION: SECURE</USAC.UI.StatusBar>
+
+  <!-- 法律頁 Page_Legal -->
+  <USAC.UI.Legal.Title>LEGAL_COMPLIANCE // 法律合規</USAC.UI.Legal.Title>
+  <USAC.UI.Legal.Ordinance>COLLECTION_ORDINANCE_V1.1 // 徵收條例</USAC.UI.Legal.Ordinance>
+  <USAC.UI.Legal.Clause01.Title>條款 01: 資產優先權</USAC.UI.Legal.Clause01.Title>
+  <USAC.UI.Legal.Clause01.Desc>在任何違約情況下，USAC 擁有對本地所有物質資產的絕對優先回收權。</USAC.UI.Legal.Clause01.Desc>
+  <USAC.UI.Legal.Clause02.Title>條款 02: 自動化執行</USAC.UI.Legal.Clause02.Title>
+  <USAC.UI.Legal.Clause02.Desc>回收過程由軌道平臺自動引導，不接受任何形式的人工辯護或延期申請。</USAC.UI.Legal.Clause02.Desc>
+  <USAC.UI.Legal.Footer>警告：點擊進入本門戶即代表您已默認並簽署了上述所有協議。USAC 不對回收過程中的意外平民傷亡或次生傷害負責。</USAC.UI.Legal.Footer>
+
+  <!-- 交互反饋 -->
+  <USAC_PaymentSuccess>[USAC] {0} 核銷完成，信用評分已上調。</USAC_PaymentSuccess>
+  <USAC_InsufficientBonds>[USAC] 支付失敗：軌道衛星未在該區域信標範圍內檢測到足夠的信用債券。</USAC_InsufficientBonds>
+  <USAC_LoanApproved>[USAC] 合同簽署成功：{0} 資產已通過軌道投放投遞至貿易信標附近。</USAC_LoanApproved>
+  <USAC_FunctionInProgress>[USAC] 訪問受限：該功能模塊正在升級，或者您的信用等級尚未解鎖此權限。</USAC_FunctionInProgress>
+
+  <!-- 錯誤 Page_404 -->
+  <USAC.UI.Error.404.Title>CONNECTION_LOST // 連接中斷</USAC.UI.Error.404.Title>
+  <USAC.UI.Error.404.Text>請求的資源未在 USAC 內網中註冊，或者您的訪問權限已被剝奪。</USAC.UI.Error.404.Text>
+  <USAC.UI.Error.ProductNotFound>錯誤: 找不到指定產品</USAC.UI.Error.ProductNotFound>
+
+  <!-- 企業服務 Page_Services -->
+  <USAC.UI.Services.Title>CORPORATE_SERVICES // 企業服務</USAC.UI.Services.Title>
+  <USAC.UI.Services.Lease.Title>LEASE_SERVICES // 租賃服務</USAC.UI.Services.Lease.Title>
+  <USAC.UI.Services.Lease.Desc>USAC 資產租賃方案。由軌道平臺投送重型突擊採礦機至指定區域。1,000信用點/24小時作業週期。支持動態週期配置與自動續期功能。</USAC.UI.Services.Lease.Desc>
+  <USAC.UI.Services.Lease.Days>初始租賃時長：{0} 天</USAC.UI.Services.Lease.Days>
+  <USAC.UI.Services.Lease.Btn>啟動租賃方案</USAC.UI.Services.Lease.Btn>
+  <USAC_ActiveRigs>資產部署監控 // 投送中礦機</USAC_ActiveRigs>
+  <USAC_LeaseActive>採礦作業進行中</USAC_LeaseActive>
+  <USAC.UI.Services.Renewal.Title>REMOTE_RENEWAL // 遠程續訂</USAC.UI.Services.Renewal.Title>
+  <USAC.UI.Services.Renewal.Desc>為臨時機控帶寬加密鏈路提供續費。通過增加本地數據中繼授權，有效延長非永久性機控中樞的在線壽命。</USAC.UI.Services.Renewal.Desc>
+  <USAC.UI.Services.Renewal.Btn>續訂帶寬通道</USAC.UI.Services.Renewal.Btn>
+  <USAC.UI.Services.Renewal.Header>已登記的臨時帶寬鏈接</USAC.UI.Services.Renewal.Header>
+  <USAC.UI.Services.Renewal.NoMechnitor>未檢測到受控範圍內的臨時機控帶寬鏈接。</USAC.UI.Services.Renewal.NoMechnitor>
+  <USAC.UI.Services.Renewal.Remaining>剩餘鏈路時長: {0}</USAC.UI.Services.Renewal.Remaining>
+
+  <!-- 債務條目 -->
+  <USAC.Debt.LeaseDrill>USAC 重型突擊採礦機租賃費用</USAC.Debt.LeaseDrill>
+  <USAC.Debt.Renewal>{0} 的臨時帶寬鏈路續期費用</USAC.Debt.Renewal>
+
+  <USAC.Message.Renewed>[USAC] 續期成功：已為 {0} 續訂 30 週期帶寬鏈路。</USAC.Message.Renewed>
+  <USAC.Message.AutoRenewed>[USAC] 自動續期：已自動為 {0} 續訂 30 週期鏈路時長。</USAC.Message.AutoRenewed>
+  <USAC.Message.AutoRenewFailed>[USAC] 續期中止：因信標範圍內債券餘額不足，已停用 {0} 的自動續訂服務。</USAC.Message.AutoRenewFailed>
+  <USAC.Message.InsufficientBonds>[USAC] 支付失敗：貿易信標範圍內儲備的信用債券不足。</USAC.Message.InsufficientBonds>
+  <USAC.Message.InsufficientBondsForLease>[USAC] 租賃中止：當前儲備的信用債券不足以支持選定的起始租賃時長。</USAC.Message.InsufficientBondsForLease>
+  <USAC.Message.LeaseAutoRenewed>[USAC] 自動續簽：已通過軌道結算網絡為採礦機續訂了 24 小時的部署時長。</USAC.Message.LeaseAutoRenewed>
+  <USAC.Message.LeaseAutoRenewFailed>[USAC] 續簽失敗：因軌道信標附近債券儲備不足，已停用該採礦機的自動續期功能並將按期回收。</USAC.Message.LeaseAutoRenewFailed>
+
+  <USAC_LeaseDurationLeft>租期剩餘時間: {0}</USAC_LeaseDurationLeft>
+  <USAC_ExtractionCountdown>撤離倒計時: {0}</USAC_ExtractionCountdown>
+
+  <!-- 採礦機 Gizmo -->
+  <USAC.UI.Drill.EmptyMinerals>清空礦倉</USAC.UI.Drill.EmptyMinerals>
+  <USAC.UI.Drill.EmptyMinerals.Desc>手動將已採集的礦物從密封艙中彈出。注意：如果在撤離前未清空，USAC 軌道平臺將直接回收所有機內物資。</USAC.UI.Drill.EmptyMinerals.Desc>
+</LanguageData>
