@@ -30,7 +30,8 @@ namespace USAC
             if (mech == null || !mech.RaceProps.IsMechanoid || mech.Faction != pawn.Faction) return false;
 
             CompMechReadiness comp = mech.TryGetComp<CompMechReadiness>();
-            if (comp == null || comp.ReadinessPercent >= 1f) return false;
+            Need_Readiness need = mech.needs?.TryGetNeed<Need_Readiness>();
+            if (comp == null || need == null || need.CurLevelPercentage >= 1f) return false;
 
             if (mech.InAggroMentalState || mech.HostileTo(pawn)) return false;
             if (mech.IsBurning() || mech.IsAttacking()) return false;
@@ -38,7 +39,7 @@ namespace USAC
             if (!pawn.CanReserve(mech, 1, -1, null, forced)) return false;
 
             // 阈值保护过滤
-            if (!forced && comp.Readiness > comp.Props.capacity * 0.75f) return false;
+            if (!forced && need.CurLevel > comp.Props.capacity * 0.75f) return false;
 
             // 自动开关限制
             if (!forced && !comp.autoResupply) return false;
@@ -53,17 +54,19 @@ namespace USAC
         {
             Pawn mech = (Pawn)t;
             CompMechReadiness comp = mech.TryGetComp<CompMechReadiness>();
+            Need_Readiness need = mech.needs?.TryGetNeed<Need_Readiness>();
             Thing supply = FindSupply(pawn, comp);
 
             Job job = JobMaker.MakeJob(USAC_DefOf.USAC_ResupplyMech, mech, supply);
-            job.count = CalcToConsume(comp);
+            job.count = CalcToConsume(comp, need);
             return job;
         }
 
         // 计算实际消耗零件数
-        private int CalcToConsume(CompMechReadiness comp)
+        private int CalcToConsume(CompMechReadiness comp, Need_Readiness need)
         {
-            float needed = comp.Props.capacity - comp.Readiness;
+            if (need == null) return 0;
+            float needed = comp.Props.capacity - need.CurLevel;
             float restorePerItem = comp.Props.capacity * 0.25f;
             int n = UnityEngine.Mathf.CeilToInt(needed / restorePerItem);
             float waste = n * restorePerItem - needed;

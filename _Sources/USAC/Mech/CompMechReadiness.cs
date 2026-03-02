@@ -30,50 +30,18 @@ namespace USAC
     // 定义机兵整备逻辑组件
     public class CompMechReadiness : ThingComp
     {
-        private float readiness;
-
         public CompProperties_MechReadiness Props => (CompProperties_MechReadiness)props;
-
-        public float Readiness => readiness;
-        public float ReadinessPercent => readiness / Props.capacity;
-        public bool IsLowReadiness => readiness <= 0f;
+        public bool autoResupply = true;
 
         private Pawn Pawn => parent as Pawn;
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
-        {
-            base.PostSpawnSetup(respawningAfterLoad);
-            if (!respawningAfterLoad)
-            {
-                readiness = Props.capacity;
-            }
-            UpdateHediff();
-        }
-
-        public void SetReadinessDirectly(float amount)
-        {
-            readiness = UnityEngine.Mathf.Clamp(amount, 0f, Props.capacity);
-            UpdateHediff();
-        }
-
-        public override void CompTick()
-        {
-            base.CompTick();
-
-            // 执行机兵整备周期损耗
-            if (parent.IsHashIntervalTick(2500) && Pawn?.Faction != null && Pawn.Faction.IsPlayer)
-            {
-                ConsumeReadiness(Props.consumptionPerDay / 24f);
-                UpdateHediff();
-            }
-        }
-
-        public bool autoResupply = true;
+        public float Readiness => Pawn?.needs?.TryGetNeed<Need_Readiness>()?.CurLevel ?? 0f;
+        public float ReadinessPercent => Readiness / Props.capacity;
+        public bool IsLowReadiness => Readiness <= 0f;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look(ref readiness, "readiness", Props.capacity);
             Scribe_Values.Look(ref autoResupply, "autoResupply", true);
         }
 
@@ -93,56 +61,11 @@ namespace USAC
             }
         }
 
-        public void ConsumeReadiness(float amount)
-        {
-            readiness -= amount;
-            if (readiness < 0) readiness = 0;
-        }
-
-        public void Resupply(float amount)
-        {
-            readiness += amount;
-            if (readiness > Props.capacity) readiness = Props.capacity;
-            UpdateHediff();
-        }
-
-        public void Resupply(Thing supplyThing)
-        {
-            if (supplyThing.def != Props.supplyDef) return;
-
-            float needed = Props.capacity - readiness;
-            float restorePerItem = Props.capacity * 0.25f;
-            int toConsume = UnityEngine.Mathf.CeilToInt(needed / restorePerItem);
-
-            toConsume = UnityEngine.Mathf.Min(toConsume, supplyThing.stackCount);
-
-            if (toConsume > 0)
-            {
-                float amountToRestore = toConsume * restorePerItem;
-                supplyThing.SplitOff(toConsume).Destroy();
-                Resupply(amountToRestore);
-            }
-        }
-
-        private void UpdateHediff()
-        {
-            if (Pawn == null || !Pawn.Spawned || Pawn.Dead || Props.lowReadinessHediff == null) return;
-
-            Hediff existing = Pawn.health.hediffSet.GetFirstHediffOfDef(Props.lowReadinessHediff);
-
-            if (IsLowReadiness && existing == null)
-            {
-                Pawn.health.AddHediff(Props.lowReadinessHediff);
-            }
-            else if (!IsLowReadiness && existing != null)
-            {
-                Pawn.health.RemoveHediff(existing);
-            }
-        }
-
         public override string CompInspectStringExtra()
         {
-            return "USAC_Readiness".Translate() + ": " + readiness.ToString("F0") + " / " + Props.capacity.ToString("F0");
+            var need = Pawn?.needs?.TryGetNeed<Need_Readiness>();
+            if (need == null) return null;
+            return "USAC_Readiness".Translate() + ": " + need.CurLevel.ToString("F0") + " / " + Props.capacity.ToString("F0");
         }
     }
 }

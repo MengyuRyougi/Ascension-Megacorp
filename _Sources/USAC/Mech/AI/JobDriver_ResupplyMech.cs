@@ -14,7 +14,8 @@ namespace USAC
 
         protected Pawn Mech => (Pawn)job.GetTarget(MechInd).Thing;
         protected Thing Supply => job.GetTarget(SupplyInd).Thing;
-        protected CompMechReadiness Readiness => Mech.TryGetComp<CompMechReadiness>();
+        protected CompMechReadiness ReadinessComp => Mech.TryGetComp<CompMechReadiness>();
+        protected Need_Readiness ReadinessNeed => Mech.needs?.TryGetNeed<Need_Readiness>();
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -30,7 +31,7 @@ namespace USAC
             this.FailOnDespawnedNullOrForbidden(MechInd);
 
             // 状态已满则跳过
-            AddFailCondition(() => Readiness == null || Readiness.ReadinessPercent >= 1f);
+            AddFailCondition(() => ReadinessNeed == null || ReadinessNeed.CurLevelPercentage >= 1f);
 
             // 提取目标物品数量
             yield return Toils_General.DoAtomic(delegate
@@ -75,19 +76,20 @@ namespace USAC
 
             yield return Toils_General.Do(delegate
             {
-                Readiness.Resupply(Supply);
+                ReadinessNeed?.Resupply(Supply);
             });
         }
 
         // 计算实际消耗零件数
         private int GetRequiredSupplyCount()
         {
-            float needed = Readiness.Props.capacity - Readiness.Readiness;
-            float restorePerItem = Readiness.Props.capacity * 0.25f;
+            if (ReadinessComp == null || ReadinessNeed == null) return 0;
+            float needed = ReadinessComp.Props.capacity - ReadinessNeed.CurLevel;
+            float restorePerItem = ReadinessComp.Props.capacity * 0.25f;
             int n = UnityEngine.Mathf.CeilToInt(needed / restorePerItem);
             float waste = n * restorePerItem - needed;
             // 浪费超过5%则少取一个零件
-            if (waste > Readiness.Props.capacity * 0.05f && n > 1) n--;
+            if (waste > ReadinessComp.Props.capacity * 0.05f && n > 1) n--;
             return n;
         }
     }

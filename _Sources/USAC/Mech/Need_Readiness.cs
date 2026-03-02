@@ -21,21 +21,65 @@ namespace USAC
 
         public override float CurLevel
         {
-            get => Comp?.Readiness ?? curLevelInt;
+            get => curLevelInt;
             set
             {
-                float clamped = UnityEngine.Mathf.Clamp(value, 0f, MaxLevel);
-                curLevelInt = clamped;
-                Comp?.SetReadinessDirectly(clamped);
+                curLevelInt = UnityEngine.Mathf.Clamp(value, 0f, MaxLevel);
+                UpdateHediff();
             }
         }
 
         // 判定整备需求列表可见性
         public override bool ShowOnNeedList => Comp != null && pawn.Faction != null && pawn.Faction.IsPlayer;
 
+        // 初始化整备等级
+        public override void SetInitialLevel()
+        {
+            CurLevelPercentage = 1f;
+        }
+
         public override void NeedInterval()
         {
-            // 依赖组件时钟
+            if (IsFrozen || Comp == null || pawn.Faction == null || !pawn.Faction.IsPlayer) return;
+            float consumeAmount = Comp.Props.consumptionPerDay / 400f;
+            CurLevel -= consumeAmount;
+        }
+
+        public void Resupply(Thing supplyThing)
+        {
+            var comp = Comp;
+            if (comp == null || supplyThing.def != comp.Props.supplyDef) return;
+
+            float needed = MaxLevel - CurLevel;
+            float restorePerItem = MaxLevel * 0.25f;
+            int toConsume = UnityEngine.Mathf.CeilToInt(needed / restorePerItem);
+
+            toConsume = UnityEngine.Mathf.Min(toConsume, supplyThing.stackCount);
+
+            if (toConsume > 0)
+            {
+                float amountToRestore = toConsume * restorePerItem;
+                supplyThing.SplitOff(toConsume).Destroy();
+                CurLevel += amountToRestore;
+            }
+        }
+
+        private void UpdateHediff()
+        {
+            var comp = Comp;
+            if (comp == null || pawn == null || !pawn.Spawned || pawn.Dead || comp.Props.lowReadinessHediff == null) return;
+
+            bool isLow = CurLevel <= 0f;
+            Hediff existing = pawn.health.hediffSet.GetFirstHediffOfDef(comp.Props.lowReadinessHediff);
+
+            if (isLow && existing == null)
+            {
+                pawn.health.AddHediff(comp.Props.lowReadinessHediff);
+            }
+            else if (!isLow && existing != null)
+            {
+                pawn.health.RemoveHediff(existing);
+            }
         }
 
         public override string GetTipString()
