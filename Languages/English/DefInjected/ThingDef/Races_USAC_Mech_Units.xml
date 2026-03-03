@@ -1,51 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   
-  <!-- EN: M7 "Cobalt" -->
-  <USAC_Mech_Cobalt.label>M7 "Cobalt"</USAC_Mech_Cobalt.label>
-  <!-- EN: A medium quadruped cargo mech with integrated machine gun. Features shotgun-resistant armor plating, cargo hauling capability, and smoke grenade deployment system. -->
-  <USAC_Mech_Cobalt.description>A medium quadruped cargo mech with integrated machine gun. Features shotgun-resistant armor plating, cargo hauling capability, and smoke grenade deployment system.</USAC_Mech_Cobalt.description>
-  <!-- EN: head -->
-  <USAC_Mech_Cobalt.tools.head.label>head</USAC_Mech_Cobalt.tools.head.label>
-  
-  <!-- EN: XM3 "Gonk" -->
-  <USAC_Mech_Gonk.label>XM3 "Gonk"</USAC_Mech_Gonk.label>
-  <!-- EN: A heavy self-propelled artillery mech with tank-level armor, very slow movement, and extreme long-range firepower. Based on the geochelone chassis. -->
-  <USAC_Mech_Gonk.description>A heavy self-propelled artillery mech with tank-level armor, very slow movement, and extreme long-range firepower. Based on the geochelone chassis.</USAC_Mech_Gonk.description>
-  <!-- EN: head -->
-  <USAC_Mech_Gonk.tools.head.label>head</USAC_Mech_Gonk.tools.head.label>
-  
-  <!-- EN: M110 "Omaha" -->
-  <USAC_Mech_Omaha.label>M110 "Omaha"</USAC_Mech_Omaha.label>
-  <!-- EN: An amphibious assault mech capable of operating both on land and water, providing close to mid-range fire support for USAC operations. Based on the Krepost heavy walker chassis. -->
-  <USAC_Mech_Omaha.description>An amphibious assault mech capable of operating both on land and water, providing close to mid-range fire support for USAC operations. Based on the Krepost heavy walker chassis.</USAC_Mech_Omaha.description>
-  <!-- EN: mechanical head -->
+  <!-- UNUSED -->
   <USAC_Mech_Omaha.tools.mechanical_head.label>mechanical head</USAC_Mech_Omaha.tools.mechanical_head.label>
-  <!-- EN: left leg -->
-  <USAC_Mech_Omaha.tools.left_leg.label>left leg</USAC_Mech_Omaha.tools.left_leg.label>
-  <!-- EN: right leg -->
-  <USAC_Mech_Omaha.tools.right_leg.label>right leg</USAC_Mech_Omaha.tools.right_leg.label>
-  
-  <!-- EN: M939 "Paraman" -->
-  <USAC_Mech_Paraman.label>M939 "Paraman"</USAC_Mech_Paraman.label>
-  <!-- EN: A medium mechanized airborne unit. Designed for rapid deployment operations with enhanced mobility and moderate firepower. Based on the battle frame chassis. -->
-  <USAC_Mech_Paraman.description>A medium mechanized airborne unit. Designed for rapid deployment operations with enhanced mobility and moderate firepower. Based on the battle frame chassis.</USAC_Mech_Paraman.description>
-  <!-- EN: head -->
-  <USAC_Mech_Paraman.tools.head.label>head</USAC_Mech_Paraman.tools.head.label>
-  <!-- EN: left fist -->
-  <USAC_Mech_Paraman.tools.left_fist.label>left fist</USAC_Mech_Paraman.tools.left_fist.label>
-  <!-- EN: right fist -->
-  <USAC_Mech_Paraman.tools.right_fist.label>right fist</USAC_Mech_Paraman.tools.right_fist.label>
-  
-  <!-- EN: M88 "Rocky" -->
-  <USAC_Mech_Rocky.label>M88 "Rocky"</USAC_Mech_Rocky.label>
-  <!-- EN: A USAC Marine Corps synthetic infantry unit. Designed to use standard infantry weapons and can wear human armor. Provides basic infantry support with moderate protection. -->
-  <USAC_Mech_Rocky.description>A USAC Marine Corps synthetic infantry unit. Designed to use standard infantry weapons and can wear human armor. Provides basic infantry support with moderate protection.</USAC_Mech_Rocky.description>
-  <!-- EN: head -->
-  <USAC_Mech_Rocky.tools.head.label>head</USAC_Mech_Rocky.tools.head.label>
-  <!-- EN: left fist -->
-  <USAC_Mech_Rocky.tools.left_fist.label>left fist</USAC_Mech_Rocky.tools.left_fist.label>
-  <!-- EN: right fist -->
-  <USAC_Mech_Rocky.tools.right_fist.label>right fist</USAC_Mech_Rocky.tools.right_fist.label>
   
 </LanguageData>

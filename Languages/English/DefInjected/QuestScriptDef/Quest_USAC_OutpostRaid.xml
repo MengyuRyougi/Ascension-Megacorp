@@ -1,18 +1,113 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  
+  <!-- EN:
+    <li>questDescription(usacRelation==neutral)->A low-level liaison of [asker_faction_name] has contacted you via encrypted channel. A hostile outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been [hostileAction] [asker_faction_name]'s [targetAsset] in the region.\n\n[asker_faction_name] demands you to assault and eliminate all hostiles at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>questDescription(usacRelation==ally,targetRelation==hostile)->A liaison of [asker_faction_name] has contacted you via encrypted channel. A hostile outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been [hostileAction] [asker_faction_name]'s [targetAsset] in the region.\n\n[asker_faction_name] is requesting you to assault and eliminate all hostiles at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>questDescription(usacRelation==ally,targetRelation==neutral)->A senior liaison of [asker_faction_name] has contacted you via encrypted channel. An outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been assessed as a target of strategic value to [asker_faction_name].\n\n[asker_faction_name] is requesting your assistance to assault and eliminate everyone at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>hostileAction->disrupting</li>
+    <li>hostileAction->harassing</li>
+    <li>hostileAction->raiding</li>
+    <li>hostileAction->ambushing</li>
+    <li>hostileAction->intercepting</li>
+    <li>targetAsset->logistics and supply routes</li>
+    <li>targetAsset->forward outposts</li>
+    <li>targetAsset->comm relays</li>
+    <li>targetAsset->resource convoys</li>
+    <li>targetAsset->patrol units</li>
+  -->
+  <USAC_OpportunitySite_OutpostRaid.questDescriptionRules.rulesStrings>
+    <li>questDescription(usacRelation==neutral)->A low-level liaison of [asker_faction_name] has contacted you via encrypted channel. A hostile outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been [hostileAction] [asker_faction_name]'s [targetAsset] in the region.\n\n[asker_faction_name] demands you to assault and eliminate all hostiles at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>questDescription(usacRelation==ally,targetRelation==hostile)->A liaison of [asker_faction_name] has contacted you via encrypted channel. A hostile outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been [hostileAction] [asker_faction_name]'s [targetAsset] in the region.\n\n[asker_faction_name] is requesting you to assault and eliminate all hostiles at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>questDescription(usacRelation==ally,targetRelation==neutral)->A senior liaison of [asker_faction_name] has contacted you via encrypted channel. An outpost belonging to [siteFaction_name] has been identified near your position. Their [siteFaction_pawnsPlural] have been assessed as a target of strategic value to [asker_faction_name].\n\n[asker_faction_name] is requesting your assistance to assault and eliminate everyone at the site. In return, they will provide compensation for the operation. According to recon data, [sitePart0_description].</li>
+    <li>hostileAction->disrupting</li>
+    <li>hostileAction->harassing</li>
+    <li>hostileAction->raiding</li>
+    <li>hostileAction->ambushing</li>
+    <li>hostileAction->intercepting</li>
+    <li>targetAsset->logistics and supply routes</li>
+    <li>targetAsset->forward outposts</li>
+    <li>targetAsset->comm relays</li>
+    <li>targetAsset->resource convoys</li>
+    <li>targetAsset->patrol units</li>
+  </USAC_OpportunitySite_OutpostRaid.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->[target] [operation]</li>
+    <li>questName->[asker_faction_name] [operation]</li>
+    <li>questName->USAC [operation]: [target]</li>
+    <li>target(targetRelation==hostile)->Hostile Outpost</li>
+    <li>target(targetRelation==hostile)->Enemy Camp</li>
+    <li>target(targetRelation==hostile)->Rogue Base</li>
+    <li>target(targetRelation==hostile)->Forward Post</li>
+    <li>target(targetRelation==neutral)->Resort Camp</li>
+    <li>target(targetRelation==neutral)->Retreat Site</li>
+    <li>target(targetRelation==neutral)->Remote Lodge</li>
+    <li>target(targetRelation==neutral)->Frontier Outpost</li>
+    <li>operation(targetRelation==hostile)->Sweep</li>
+    <li>operation(targetRelation==hostile)->Raid</li>
+    <li>operation(targetRelation==hostile)->Cleanup</li>
+    <li>operation(targetRelation==hostile)->Elimination</li>
+    <li>operation(targetRelation==hostile)->Clearance</li>
+    <li>operation(targetRelation==neutral)->Special Op</li>
+    <li>operation(targetRelation==neutral)->Disposal</li>
+    <li>operation(targetRelation==neutral)->Sanction</li>
+    <li>operation(targetRelation==neutral)->Directive</li>
+    <li>operation(targetRelation==neutral)->Clean Sweep</li>
+  -->
+  <USAC_OpportunitySite_OutpostRaid.questNameRules.rulesStrings>
+    <li>questName->[target] [operation]</li>
+    <li>questName->[asker_faction_name] [operation]</li>
+    <li>questName->USAC [operation]: [target]</li>
+    <li>target(targetRelation==hostile)->Hostile Outpost</li>
+    <li>target(targetRelation==hostile)->Enemy Camp</li>
+    <li>target(targetRelation==hostile)->Rogue Base</li>
+    <li>target(targetRelation==hostile)->Forward Post</li>
+    <li>target(targetRelation==neutral)->Resort Camp</li>
+    <li>target(targetRelation==neutral)->Retreat Site</li>
+    <li>target(targetRelation==neutral)->Remote Lodge</li>
+    <li>target(targetRelation==neutral)->Frontier Outpost</li>
+    <li>operation(targetRelation==hostile)->Sweep</li>
+    <li>operation(targetRelation==hostile)->Raid</li>
+    <li>operation(targetRelation==hostile)->Cleanup</li>
+    <li>operation(targetRelation==hostile)->Elimination</li>
+    <li>operation(targetRelation==hostile)->Clearance</li>
+    <li>operation(targetRelation==neutral)->Special Op</li>
+    <li>operation(targetRelation==neutral)->Disposal</li>
+    <li>operation(targetRelation==neutral)->Sanction</li>
+    <li>operation(targetRelation==neutral)->Directive</li>
+    <li>operation(targetRelation==neutral)->Clean Sweep</li>
+  </USAC_OpportunitySite_OutpostRaid.questNameRules.rulesStrings>
+  <!-- EN: siteFaction -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeFactionAs.slateRef>siteFaction</USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeFactionAs.slateRef>
+  <!-- EN: targetRelation -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeRelationAs.slateRef>targetRelation</USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeRelationAs.slateRef>
+  <!-- EN: sitePartDefs -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeSitePartsAs.slateRef>sitePartDefs</USAC_OpportunitySite_OutpostRaid.root.nodes.USAC_GetEnemyFaction.storeSitePartsAs.slateRef>
+  <!-- EN: <rulesStrings><li TKey="USAC_SitePart_NeutralOutpost">root(priority=1,sitePart==USAC_NeutralOutpost)->there's an outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</li><li TKey="USAC_SitePart_BanditCamp">root(priority=1,sitePart==BanditCamp)->there's a bandit camp at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</li><li TKey="USAC_SitePart_Outpost">root(priority=1,sitePart==Outpost)->there's an enemy outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</li><li TKey="USAC_SitePart_Fallback">root->there's a [label]</li></rulesStrings> -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.GenerateSite.singleSitePartRules.slateRef>&lt;rulesStrings>&lt;li TKey="USAC_SitePart_NeutralOutpost">root(priority=1,sitePart==USAC_NeutralOutpost)-&amp;gt;there's an outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)&lt;/li>&lt;li TKey="USAC_SitePart_BanditCamp">root(priority=1,sitePart==BanditCamp)-&amp;gt;there's a bandit camp at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)&lt;/li>&lt;li TKey="USAC_SitePart_Outpost">root(priority=1,sitePart==Outpost)-&amp;gt;there's an enemy outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)&lt;/li>&lt;li TKey="USAC_SitePart_Fallback">root-&amp;gt;there's a [label]&lt;/li>&lt;/rulesStrings></USAC_OpportunitySite_OutpostRaid.root.nodes.GenerateSite.singleSitePartRules.slateRef>
+  <!-- EN: Operation compromised: [resolvedQuestName] -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.EnemyEscaped.node.nodes.Letter.label.slateRef>Operation compromised: [resolvedQuestName]</USAC_OpportunitySite_OutpostRaid.root.nodes.EnemyEscaped.node.nodes.Letter.label.slateRef>
+  <!-- EN: Hostiles have escaped from the target site. The operation has been compromised. [siteFaction_name] will learn of your attack. -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.EnemyEscaped.node.nodes.Letter.text.slateRef>Hostiles have escaped from the target site. The operation has been compromised. [siteFaction_name] will learn of your attack.</USAC_OpportunitySite_OutpostRaid.root.nodes.EnemyEscaped.node.nodes.Letter.text.slateRef>
+  <!-- EN: Quest expired: [resolvedQuestName] -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>Quest expired: [resolvedQuestName]</USAC_OpportunitySite_OutpostRaid.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <!-- EN: The target outpost has relocated. The operation [resolvedQuestName] has been canceled. -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>The target outpost has relocated. The operation [resolvedQuestName] has been canceled.</USAC_OpportunitySite_OutpostRaid.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <!-- EN: Quest failed: [resolvedQuestName] -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>Quest failed: [resolvedQuestName]</USAC_OpportunitySite_OutpostRaid.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <!-- EN: The target outpost has detected your approach and dispersed. The operation [resolvedQuestName] has failed. -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>The target outpost has detected your approach and dispersed. The operation [resolvedQuestName] has failed.</USAC_OpportunitySite_OutpostRaid.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+  <!-- EN: USAC payment arrived -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.allKilledSignal.node.nodes.GiveRewards.customLetterLabel.slateRef>USAC payment arrived</USAC_OpportunitySite_OutpostRaid.root.nodes.allKilledSignal.node.nodes.GiveRewards.customLetterLabel.slateRef>
+  <!-- EN: You have eliminated the target outpost!\n\nUSAC has sent the agreed compensation from [asker_faction_name]. -->
+  <USAC_OpportunitySite_OutpostRaid.root.nodes.allKilledSignal.node.nodes.GiveRewards.customLetterText.slateRef>You have eliminated the target outpost!
 
-    <USAC_LetterLabelOutpostExpired>Quest expired: [resolvedQuestName]</USAC_LetterLabelOutpostExpired>
-    <USAC_LetterTextOutpostExpired>The target outpost has relocated. The operation [resolvedQuestName] has been canceled.</USAC_LetterTextOutpostExpired>
-
-    <USAC_LetterLabelOutpostFailed>Quest failed: [resolvedQuestName]</USAC_LetterLabelOutpostFailed>
-    <USAC_LetterTextOutpostFailed>The target outpost has detected your approach and dispersed. The operation [resolvedQuestName] has failed.</USAC_LetterTextOutpostFailed>
-
-    <USAC_LetterLabelPayment>USAC payment arrived</USAC_LetterLabelPayment>
-    <USAC_LetterTextPayment>You have eliminated the target outpost!\n\nUSAC has sent the agreed compensation from [asker_faction_name].</USAC_LetterTextPayment>
-
-    <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_NeutralOutpost>root(priority=1,sitePart==USAC_NeutralOutpost)->there's an outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_NeutralOutpost>
-    <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_BanditCamp>root(priority=1,sitePart==BanditCamp)->there's a bandit camp at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_BanditCamp>
-    <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Outpost>root(priority=1,sitePart==Outpost)->there's an enemy outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Outpost>
-    <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Fallback>root->there's a [label]</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Fallback>
-
+USAC has sent the agreed compensation from [asker_faction_name].</USAC_OpportunitySite_OutpostRaid.root.nodes.allKilledSignal.node.nodes.GiveRewards.customLetterText.slateRef>
+  
+  <!-- UNUSED -->
+  <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_NeutralOutpost>root(priority=1,sitePart==USAC_NeutralOutpost)->there's an outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_NeutralOutpost>
+  <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_BanditCamp>root(priority=1,sitePart==BanditCamp)->there's a bandit camp at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_BanditCamp>
+  <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Outpost>root(priority=1,sitePart==Outpost)->there's an enemy outpost at the site guarded by (*Threat)[enemiesCount] [enemiesLabel](/Threat)</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Outpost>
+  <USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Fallback>root->there's a [label]</USAC_OpportunitySite_OutpostRaid.USAC_SitePart_Fallback>
+  
 </LanguageData>

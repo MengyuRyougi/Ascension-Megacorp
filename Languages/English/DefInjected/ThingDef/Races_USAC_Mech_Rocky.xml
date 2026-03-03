@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: M88 "Rocky" -->
+  <USAC_Mech_Rocky.label>M88 "Rocky"</USAC_Mech_Rocky.label>
+  <!-- EN: A USAC Marine Corps synthetic infantry unit. Designed to use standard infantry weapons and can wear human armor. Provides basic infantry support with moderate protection. -->
+  <USAC_Mech_Rocky.description>A USAC Marine Corps synthetic infantry unit. Designed to use standard infantry weapons and can wear human armor. Provides basic infantry support with moderate protection.</USAC_Mech_Rocky.description>
+  <!-- EN: head -->
+  <USAC_Mech_Rocky.tools.head.label>head</USAC_Mech_Rocky.tools.head.label>
+  <!-- EN: left fist -->
+  <USAC_Mech_Rocky.tools.left_fist.label>left fist</USAC_Mech_Rocky.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <USAC_Mech_Rocky.tools.right_fist.label>right fist</USAC_Mech_Rocky.tools.right_fist.label>
+  
+</LanguageData>

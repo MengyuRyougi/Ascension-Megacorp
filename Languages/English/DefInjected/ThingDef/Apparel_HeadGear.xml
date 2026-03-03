@@ -3,22 +3,22 @@
   
   <!-- EN: Assault helmet -->
   <USAC_Apparel_AssaultHelmet.label>Assault helmet</USAC_Apparel_AssaultHelmet.label>
-  <!-- EN: todo -->
-  <USAC_Apparel_AssaultHelmet.description>todo</USAC_Apparel_AssaultHelmet.description>
+  <!-- EN: A lightweight tactical helmet made with a composite plasteel shell, which can be fitted with different additional components in addition to earmuffs as needed. -->
+  <USAC_Apparel_AssaultHelmet.description>A lightweight tactical helmet made with a composite plasteel shell, which can be fitted with different additional components in addition to earmuffs as needed.</USAC_Apparel_AssaultHelmet.description>
   
   <!-- EN: Heavy helmet -->
   <USAC_Apparel_HeavyHelmet.label>Heavy helmet</USAC_Apparel_HeavyHelmet.label>
-  <!-- EN: todo -->
-  <USAC_Apparel_HeavyHelmet.description>todo</USAC_Apparel_HeavyHelmet.description>
+  <!-- EN: Composite plasteel protective helmets with enhanced frontal shrapnel protection are widely used by machine gunners and heavy infantry support infantry units engaged in high-profile combat on the battlefield contact line. -->
+  <USAC_Apparel_HeavyHelmet.description>Composite plasteel protective helmets with enhanced frontal shrapnel protection are widely used by machine gunners and heavy infantry support infantry units engaged in high-profile combat on the battlefield contact line.</USAC_Apparel_HeavyHelmet.description>
   
   <!-- EN: Gladiator helmet -->
   <USAC_Apparel_MeleeHelmet.label>Gladiator helmet</USAC_Apparel_MeleeHelmet.label>
-  <!-- EN: todo -->
-  <USAC_Apparel_MeleeHelmet.description>todo</USAC_Apparel_MeleeHelmet.description>
+  <!-- EN: A tactical helmet for use in indoor environments features bulletproof eyepieces that protect the eyes from shrapnel and burns, but its reflectivity at certain angles can hinder aiming during firing. -->
+  <USAC_Apparel_MeleeHelmet.description>A tactical helmet for use in indoor environments features bulletproof eyepieces that protect the eyes from shrapnel and burns, but its reflectivity at certain angles can hinder aiming during firing.</USAC_Apparel_MeleeHelmet.description>
   
   <!-- EN: Night vision helmet -->
   <USAC_Apparel_NightVisionHelmet.label>Night vision helmet</USAC_Apparel_NightVisionHelmet.label>
-  <!-- EN: todo -->
-  <USAC_Apparel_NightVisionHelmet.description>todo</USAC_Apparel_NightVisionHelmet.description>
+  <!-- EN: A lightweight tactical helmet with added night vision goggles can improve shooting ability and accuracy. However, the forward center of gravity reduces reaction time in close-range combat. -->
+  <USAC_Apparel_NightVisionHelmet.description>A lightweight tactical helmet with added night vision goggles can improve shooting ability and accuracy. However, the forward center of gravity reduces reaction time in close-range combat.</USAC_Apparel_NightVisionHelmet.description>
   
 </LanguageData>

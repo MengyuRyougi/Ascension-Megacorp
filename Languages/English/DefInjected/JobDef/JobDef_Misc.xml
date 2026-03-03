@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   
+  <!-- EN: resupplying {0} with {1}. -->
+  <USAC_ResupplyMech.reportString>resupplying {0} with {1}.</USAC_ResupplyMech.reportString>
+  
   <!-- EN: using {0} on {1}. -->
   <USAC_UseItemOnTarget.reportString>using {0} on {1}.</USAC_UseItemOnTarget.reportString>
+  
+  <!-- EN: detonating MICLIC. -->
+  <USAC_WaitDetonate.reportString>detonating MICLIC.</USAC_WaitDetonate.reportString>
+  
+  <!-- EN: waiting for resupply. -->
+  <USAC_WaitForResupply.reportString>waiting for resupply.</USAC_WaitForResupply.reportString>
   
 </LanguageData>

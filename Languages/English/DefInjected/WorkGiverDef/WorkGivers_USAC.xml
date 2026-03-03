@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: resupply USAC mech -->
+  <USAC_ResupplyMech.label>resupply USAC mech</USAC_ResupplyMech.label>
+  <!-- EN: resupplying -->
+  <USAC_ResupplyMech.gerund>resupplying</USAC_ResupplyMech.gerund>
+  <!-- EN: resupply -->
+  <USAC_ResupplyMech.verb>resupply</USAC_ResupplyMech.verb>
+  
+</LanguageData>

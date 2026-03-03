@@ -4,6 +4,12 @@
   <!-- EN: crate (incoming) -->
   <USAC_CrateIncoming.label>crate (incoming)</USAC_CrateIncoming.label>
   
+  <!-- EN: USAC orbital drill shell -->
+  <USAC_DrillShellProjectile.label>USAC orbital drill shell</USAC_DrillShellProjectile.label>
+  
+  <!-- EN: orbital gripper (incoming) -->
+  <USAC_GripperIncoming.label>orbital gripper (incoming)</USAC_GripperIncoming.label>
+  
   <!-- EN: mech (incoming) -->
   <USAC_MechIncoming.label>mech (incoming)</USAC_MechIncoming.label>
   

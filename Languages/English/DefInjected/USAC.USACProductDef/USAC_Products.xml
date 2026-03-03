@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Advanced support weapon -->
+  <USAC_Product_ACSW.label>Advanced support weapon</USAC_Product_ACSW.label>
+  <!-- EN: M307 "Terminator" light automatic grenade launcher. It combines a high rate of fire with portability, enabling sustained fragmentation bombardment against enemy infantry formations and serving as a core area-denial weapon on the battlefield. -->
+  <USAC_Product_ACSW.description>M307 "Terminator" light automatic grenade launcher. It combines a high rate of fire with portability, enabling sustained fragmentation bombardment against enemy infantry formations and serving as a core area-denial weapon on the battlefield.</USAC_Product_ACSW.description>
+  <!-- EN: AGL // Automatic Grenades -->
+  <USAC_Product_ACSW.subLabel>AGL // Automatic Grenades</USAC_Product_ACSW.subLabel>
+  
+  <!-- EN: Assault helmet -->
+  <USAC_Product_AssaultHelmet.label>Assault helmet</USAC_Product_AssaultHelmet.label>
+  <!-- EN: A light tactical helmet with a composite plasteel shell. In addition to integrated ear protection, it can be fitted with optional attachments such as flashlights as needed. -->
+  <USAC_Product_AssaultHelmet.description>A light tactical helmet with a composite plasteel shell. In addition to integrated ear protection, it can be fitted with optional attachments such as flashlights as needed.</USAC_Product_AssaultHelmet.description>
+  <!-- EN: HEADWEAR // Infantry Standard -->
+  <USAC_Product_AssaultHelmet.subLabel>HEADWEAR // Infantry Standard</USAC_Product_AssaultHelmet.subLabel>
+  
+  <!-- EN: Advanced Auto Rifle -->
+  <USAC_Product_AssaultRifle.label>Advanced Auto Rifle</USAC_Product_AssaultRifle.label>
+  <!-- EN: An advanced automatic rifle. Standard issue for USAC infantry, achieving a perfect "corporate balance" between accuracy, firepower, and weight. -->
+  <USAC_Product_AssaultRifle.description>An advanced automatic rifle. Standard issue for USAC infantry, achieving a perfect "corporate balance" between accuracy, firepower, and weight.</USAC_Product_AssaultRifle.description>
+  <!-- EN: RIFLE // Infantry Light -->
+  <USAC_Product_AssaultRifle.subLabel>RIFLE // Infantry Light</USAC_Product_AssaultRifle.subLabel>
+  
+  <!-- EN: Disposable Battery -->
+  <USAC_Product_Battery.label>Disposable Battery</USAC_Product_Battery.label>
+  <!-- EN: A round single-use battery that can rapidly fully charge mechanized units. To prevent users from illegally modifying and reusing charging hardware, it is designed to short-circuit and self-destruct after discharge. -->
+  <USAC_Product_Battery.description>A round single-use battery that can rapidly fully charge mechanized units. To prevent users from illegally modifying and reusing charging hardware, it is designed to short-circuit and self-destruct after discharge.</USAC_Product_Battery.description>
+  <!-- EN: ELECTRONICS // Power Module -->
+  <USAC_Product_Battery.subLabel>ELECTRONICS // Power Module</USAC_Product_Battery.subLabel>
+  
+  <!-- EN: Credit bonds -->
+  <USAC_Product_Bond.label>Credit bonds</USAC_Product_Bond.label>
+  <!-- EN: A special high-toughness fiber paper voucher issued by USAC dealers during trade with ground factions. Printed with special ink, it includes anti-counterfeit markings and registered ownership data. Remaining value from purchases and equipment sales can be converted into this fixed-purchasing-power certificate for future transactions. Because it is registered, only the listed owner can use it, making this highly durable paper practically useless to other rimworld factions. -->
+  <USAC_Product_Bond.description>A special high-toughness fiber paper voucher issued by USAC dealers during trade with ground factions. Printed with special ink, it includes anti-counterfeit markings and registered ownership data. Remaining value from purchases and equipment sales can be converted into this fixed-purchasing-power certificate for future transactions. Because it is registered, only the listed owner can use it, making this highly durable paper practically useless to other rimworld factions.</USAC_Product_Bond.description>
+  <!-- EN: DOCUMENTS // Credit Assets -->
+  <USAC_Product_Bond.subLabel>DOCUMENTS // Credit Assets</USAC_Product_Bond.subLabel>
+  
+  <!-- EN: Bushmaster III -->
+  <USAC_Product_Bushmaster.label>Bushmaster III</USAC_Product_Bushmaster.label>
+  <!-- EN: A large-caliber chain cannon. Core armament for USAC air platforms and heavy units, capable of penetrating even light ship armor. -->
+  <USAC_Product_Bushmaster.description>A large-caliber chain cannon. Core armament for USAC air platforms and heavy units, capable of penetrating even light ship armor.</USAC_Product_Bushmaster.description>
+  <!-- EN: CHAIN-CANNON // Chain Cannon -->
+  <USAC_Product_Bushmaster.subLabel>CHAIN-CANNON // Chain Cannon</USAC_Product_Bushmaster.subLabel>
+  
+  <!-- EN: M7 "Cobalt" -->
+  <USAC_Product_Cobalt.label>M7 "Cobalt"</USAC_Product_Cobalt.label>
+  <!-- EN: A medium quadruped mech platform independently developed by USAC, designed to support infantry advances with heavy firepower and conduct point-clearance operations. Its hull uses a patented high-temperature-resistant nanocoating, allowing steady movement even in severe fire conditions. Its calm, unstoppable mechanical presence has earned it the nickname "Hellhound." -->
+  <USAC_Product_Cobalt.description>A medium quadruped mech platform independently developed by USAC, designed to support infantry advances with heavy firepower and conduct point-clearance operations. Its hull uses a patented high-temperature-resistant nanocoating, allowing steady movement even in severe fire conditions. Its calm, unstoppable mechanical presence has earned it the nickname "Hellhound."</USAC_Product_Cobalt.description>
+  <!-- EN: LOGISTICS // Logistics Platform -->
+  <USAC_Product_Cobalt.subLabel>LOGISTICS // Logistics Platform</USAC_Product_Cobalt.subLabel>
+  
+  <!-- EN: Cobra Assault Cannon -->
+  <USAC_Product_Cobra.label>Cobra Assault Cannon</USAC_Product_Cobra.label>
+  <!-- EN: The Cobra autocannon. Commonly mounted on mech infantry or heavy exoskeletons, delivering devastating sustained area fire. -->
+  <USAC_Product_Cobra.description>The Cobra autocannon. Commonly mounted on mech infantry or heavy exoskeletons, delivering devastating sustained area fire.</USAC_Product_Cobra.description>
+  <!-- EN: AUTOCANNON // Suppression Cannon -->
+  <USAC_Product_Cobra.subLabel>AUTOCANNON // Suppression Cannon</USAC_Product_Cobra.subLabel>
+  
+  <!-- EN: Hardiman unit -->
+  <USAC_Product_ExoSkeleton.label>Hardiman unit</USAC_Product_ExoSkeleton.label>
+  <!-- EN: An exoskeleton unit that can mount plasteel inserts for defense, with protection effectiveness decreasing as insert durability drops. This motor-driven powered frame allows personnel to lift and operate heavy weapon systems. -->
+  <USAC_Product_ExoSkeleton.description>An exoskeleton unit that can mount plasteel inserts for defense, with protection effectiveness decreasing as insert durability drops. This motor-driven powered frame allows personnel to lift and operate heavy weapon systems.</USAC_Product_ExoSkeleton.description>
+  <!-- EN: EXO-SKELETON // Powered Frame -->
+  <USAC_Product_ExoSkeleton.subLabel>EXO-SKELETON // Powered Frame</USAC_Product_ExoSkeleton.subLabel>
+  
+  <!-- EN: XM3 "Gonk" -->
+  <USAC_Product_Gonk.label>XM3 "Gonk"</USAC_Product_Gonk.label>
+  <!-- EN: An anti-infantry support platform for security operations in occupied urban zones. It is designed for urban combat against armored ambushers equipped with exoskeletons and heavy anti-tank weapons. With high survivability, it also mounts an experimental rapid-response laser weapon system. -->
+  <USAC_Product_Gonk.description>An anti-infantry support platform for security operations in occupied urban zones. It is designed for urban combat against armored ambushers equipped with exoskeletons and heavy anti-tank weapons. With high survivability, it also mounts an experimental rapid-response laser weapon system.</USAC_Product_Gonk.description>
+  <!-- EN: ARTILLERY // Long-Range Barrage -->
+  <USAC_Product_Gonk.subLabel>ARTILLERY // Long-Range Barrage</USAC_Product_Gonk.subLabel>
+  
+  <!-- EN: Heavy helmet -->
+  <USAC_Product_HeavyHelmet.label>Heavy helmet</USAC_Product_HeavyHelmet.label>
+  <!-- EN: A full-coverage composite plasteel protective helmet with enhanced frontal fragment protection, widely used by machine gunners and heavy infantry operating in high-intensity frontline engagements. -->
+  <USAC_Product_HeavyHelmet.description>A full-coverage composite plasteel protective helmet with enhanced frontal fragment protection, widely used by machine gunners and heavy infantry operating in high-intensity frontline engagements.</USAC_Product_HeavyHelmet.description>
+  <!-- EN: HEADWEAR // Heavy Defense -->
+  <USAC_Product_HeavyHelmet.subLabel>HEADWEAR // Heavy Defense</USAC_Product_HeavyHelmet.subLabel>
+  
+  <!-- EN: Advanced LMG -->
+  <USAC_Product_LMG.label>Advanced LMG</USAC_Product_LMG.label>
+  <!-- EN: An advanced light machine gun. Its air-cooled barrel and belt feed provide sustained suppressive fire, making it a prime choice for area denial. -->
+  <USAC_Product_LMG.description>An advanced light machine gun. Its air-cooled barrel and belt feed provide sustained suppressive fire, making it a prime choice for area denial.</USAC_Product_LMG.description>
+  <!-- EN: LMG // Squad Suppression -->
+  <USAC_Product_LMG.subLabel>LMG // Squad Suppression</USAC_Product_LMG.subLabel>
+  
+  <!-- EN: Marksman Rifle -->
+  <USAC_Product_Marksman.label>Marksman Rifle</USAC_Product_Marksman.label>
+  <!-- EN: An advanced designated marksman rifle. Designed for rapid follow-up fire at long range, it uses full-power ammunition and can effectively penetrate standard ballistic protection. -->
+  <USAC_Product_Marksman.description>An advanced designated marksman rifle. Designed for rapid follow-up fire at long range, it uses full-power ammunition and can effectively penetrate standard ballistic protection.</USAC_Product_Marksman.description>
+  <!-- EN: DMR // Long-Range Precision -->
+  <USAC_Product_Marksman.subLabel>DMR // Long-Range Precision</USAC_Product_Marksman.subLabel>
+  
+  <!-- EN: Gladiator helmet -->
+  <USAC_Product_MeleeHelmet.label>Gladiator helmet</USAC_Product_MeleeHelmet.label>
+  <!-- EN: A tactical helmet for indoor operations equipped with ballistic goggles that protect the eyes from fragments and burns. Although reflective angles may slightly hinder aiming, it offers excellent close-quarters visual protection. -->
+  <USAC_Product_MeleeHelmet.description>A tactical helmet for indoor operations equipped with ballistic goggles that protect the eyes from fragments and burns. Although reflective angles may slightly hinder aiming, it offers excellent close-quarters visual protection.</USAC_Product_MeleeHelmet.description>
+  <!-- EN: HEADWEAR // Close-Quarters -->
+  <USAC_Product_MeleeHelmet.subLabel>HEADWEAR // Close-Quarters</USAC_Product_MeleeHelmet.subLabel>
+  
+  <!-- EN: Neuro-Booster -->
+  <USAC_Product_NeuroBooster.label>Neuro-Booster</USAC_Product_NeuroBooster.label>
+  <!-- EN: A neural enhancement drug (Neuro Augment Serum). Embedded nanomachines improve neural activity and rational cognition, making it a common performance enhancer for USAC technical workers and military personnel. As nanomachines gradually deactivate over time, users may experience agitation and emotional instability, and rare susceptible cases suggest low activity can trigger unexplained allergic shock. After first use, regular continued dosing is required to maintain nanomachine activity. -->
+  <USAC_Product_NeuroBooster.description>A neural enhancement drug (Neuro Augment Serum). Embedded nanomachines improve neural activity and rational cognition, making it a common performance enhancer for USAC technical workers and military personnel. As nanomachines gradually deactivate over time, users may experience agitation and emotional instability, and rare susceptible cases suggest low activity can trigger unexplained allergic shock. After first use, regular continued dosing is required to maintain nanomachine activity.</USAC_Product_NeuroBooster.description>
+  <!-- EN: PHARMACEUTICAL // Neural Regulation -->
+  <USAC_Product_NeuroBooster.subLabel>PHARMACEUTICAL // Neural Regulation</USAC_Product_NeuroBooster.subLabel>
+  
+  <!-- EN: Night vision helmet -->
+  <USAC_Product_NightVisionHelmet.label>Night vision helmet</USAC_Product_NightVisionHelmet.label>
+  <!-- EN: A light tactical helmet with a quad-eye night vision array, significantly improving nighttime firing capability and accuracy. While its front-heavy balance slightly reduces close-combat response speed, it provides overwhelming advantages in darkness. -->
+  <USAC_Product_NightVisionHelmet.description>A light tactical helmet with a quad-eye night vision array, significantly improving nighttime firing capability and accuracy. While its front-heavy balance slightly reduces close-combat response speed, it provides overwhelming advantages in darkness.</USAC_Product_NightVisionHelmet.description>
+  <!-- EN: HEADWEAR // Night Ops -->
+  <USAC_Product_NightVisionHelmet.subLabel>HEADWEAR // Night Ops</USAC_Product_NightVisionHelmet.subLabel>
+  
+  <!-- EN: M110 "Omaha" -->
+  <USAC_Product_Omaha.label>M110 "Omaha"</USAC_Product_Omaha.label>
+  <!-- EN: An ultra-heavy breaching mech designed for mine clearing and ambush sweeping along transport routes. It features a massive mine plow and a pair of rocket-propelled line charges for long-range obstacle clearance. Built for demolishing structures and fortifications, it also carries sufficient self-defense firepower to neutralize nearby illegal armed groups and guerrilla armored vehicles. -->
+  <USAC_Product_Omaha.description>An ultra-heavy breaching mech designed for mine clearing and ambush sweeping along transport routes. It features a massive mine plow and a pair of rocket-propelled line charges for long-range obstacle clearance. Built for demolishing structures and fortifications, it also carries sufficient self-defense firepower to neutralize nearby illegal armed groups and guerrilla armored vehicles.</USAC_Product_Omaha.description>
+  <!-- EN: ASSAULT // Breach Assault -->
+  <USAC_Product_Omaha.subLabel>ASSAULT // Breach Assault</USAC_Product_Omaha.subLabel>
+  
+  <!-- EN: Objective sniper weapon -->
+  <USAC_Product_OSW.label>Objective sniper weapon</USAC_Product_OSW.label>
+  <!-- EN: M109 "Payload" sniper grenade launcher. A precision-strike weapon designed for exoskeleton infantry, capable of firing shaped-charge grenades to accurately destroy target surface armor and external sensors. -->
+  <USAC_Product_OSW.description>M109 "Payload" sniper grenade launcher. A precision-strike weapon designed for exoskeleton infantry, capable of firing shaped-charge grenades to accurately destroy target surface armor and external sensors.</USAC_Product_OSW.description>
+  <!-- EN: SGL // Sniper Grenades -->
+  <USAC_Product_OSW.subLabel>SGL // Sniper Grenades</USAC_Product_OSW.subLabel>
+  
+  <!-- EN: M939 "Paraman" -->
+  <USAC_Product_Paraman.label>M939 "Paraman"</USAC_Product_Paraman.label>
+  <!-- EN: A large humanoid mech designed as a multifunctional unmanned wingman for USAC mechanized airborne formations. As all-domain autonomous warfare has advanced, this model's extremely low attrition rate and strong survivability have proven exceptional in multiple sector-scale deep-space orbital insertion operations, making it a cornerstone of modern high-intensity orbital assault warfare. -->
+  <USAC_Product_Paraman.description>A large humanoid mech designed as a multifunctional unmanned wingman for USAC mechanized airborne formations. As all-domain autonomous warfare has advanced, this model's extremely low attrition rate and strong survivability have proven exceptional in multiple sector-scale deep-space orbital insertion operations, making it a cornerstone of modern high-intensity orbital assault warfare.</USAC_Product_Paraman.description>
+  <!-- EN: AIRBORNE // Orbital Drop System -->
+  <USAC_Product_Paraman.subLabel>AIRBORNE // Orbital Drop System</USAC_Product_Paraman.subLabel>
+  
+  <!-- EN: B-Ration -->
+  <USAC_Product_Ration.label>B-Ration</USAC_Product_Ration.label>
+  <!-- EN: Grade-B field ration pack. Extremely long shelf life and integrated sustained analgesic compounds significantly improve soldier endurance in harsh environments. -->
+  <USAC_Product_Ration.description>Grade-B field ration pack. Extremely long shelf life and integrated sustained analgesic compounds significantly improve soldier endurance in harsh environments.</USAC_Product_Ration.description>
+  <!-- EN: RATIONS // Field Supply -->
+  <USAC_Product_Ration.subLabel>RATIONS // Field Supply</USAC_Product_Ration.subLabel>
+  
+  <!-- EN: Repair Tool -->
+  <USAC_Product_RepairKit.label>Repair Tool</USAC_Product_RepairKit.label>
+  <!-- EN: A square nano-storage container that releases nanomachines to automatically analyze target structures and repair damaged sections. To prevent unsafe user modifications, this tool is designed for single use. -->
+  <USAC_Product_RepairKit.description>A square nano-storage container that releases nanomachines to automatically analyze target structures and repair damaged sections. To prevent unsafe user modifications, this tool is designed for single use.</USAC_Product_RepairKit.description>
+  <!-- EN: CONSUMABLES // Nano Repair -->
+  <USAC_Product_RepairKit.subLabel>CONSUMABLES // Nano Repair</USAC_Product_RepairKit.subLabel>
+  
+  <!-- EN: M88 "Rocky" -->
+  <USAC_Product_Rocky.label>M88 "Rocky"</USAC_Product_Rocky.label>
+  <!-- EN: A second-generation humanoid mech independently developed by USAC. Built on an advanced USAC compute core and deep bionic design, it delivers overwhelming intelligence and stealth advantages in precision tactical operations. With very high compatibility and strong cost-effectiveness, it has become the preferred model among security forces and private armed groups across the sector. -->
+  <USAC_Product_Rocky.description>A second-generation humanoid mech independently developed by USAC. Built on an advanced USAC compute core and deep bionic design, it delivers overwhelming intelligence and stealth advantages in precision tactical operations. With very high compatibility and strong cost-effectiveness, it has become the preferred model among security forces and private armed groups across the sector.</USAC_Product_Rocky.description>
+  <!-- EN: INFANTRY // Tactical Mech -->
+  <USAC_Product_Rocky.subLabel>INFANTRY // Tactical Mech</USAC_Product_Rocky.subLabel>
+  
+  <!-- EN: M29 SABR -->
+  <USAC_Product_SABR.label>M29 SABR</USAC_Product_SABR.label>
+  <!-- EN: A modular integrated rifle system. It combines a high-precision rifle with a 20mm grenade launcher, enabling engagement of threats at multiple ranges and behind cover. -->
+  <USAC_Product_SABR.description>A modular integrated rifle system. It combines a high-precision rifle with a 20mm grenade launcher, enabling engagement of threats at multiple ranges and behind cover.</USAC_Product_SABR.description>
+  <!-- EN: OICW // Composite System -->
+  <USAC_Product_SABR.subLabel>OICW // Composite System</USAC_Product_SABR.subLabel>
+  
+  <!-- EN: Mechlink Serum -->
+  <USAC_Product_Subscription.label>Mechlink Serum</USAC_Product_Subscription.label>
+  <!-- EN: A neural enhancement drug (Neuro Augment Serum). Its neural nanomachines form a brain-base interface and establish psionic communication with the USAC orbital satellite network. It provides mech control and bandwidth VPN proxy services through a quarterly subscription model. Additional doses can extend service duration during active coverage, but if the user's brain activity ceases, mech-control services terminate immediately and all remaining subscription time is cleared. -->
+  <USAC_Product_Subscription.description>A neural enhancement drug (Neuro Augment Serum). Its neural nanomachines form a brain-base interface and establish psionic communication with the USAC orbital satellite network. It provides mech control and bandwidth VPN proxy services through a quarterly subscription model. Additional doses can extend service duration during active coverage, but if the user's brain activity ceases, mech-control services terminate immediately and all remaining subscription time is cleared.</USAC_Product_Subscription.description>
+  <!-- EN: SYSTEM // Key Protocol -->
+  <USAC_Product_Subscription.subLabel>SYSTEM // Key Protocol</USAC_Product_Subscription.subLabel>
+  
+  <!-- EN: Torchwood RR -->
+  <USAC_Product_Torchwood.label>Torchwood RR</USAC_Product_Torchwood.label>
+  <!-- EN: The Torchwood recoilless rifle. With exceptional armor penetration and structural destruction capability, it is the ultimate tool for breaching and anti-armor operations. -->
+  <USAC_Product_Torchwood.description>The Torchwood recoilless rifle. With exceptional armor penetration and structural destruction capability, it is the ultimate tool for breaching and anti-armor operations.</USAC_Product_Torchwood.description>
+  <!-- EN: RECOILLESS // Anti-Armor Assault -->
+  <USAC_Product_Torchwood.subLabel>RECOILLESS // Anti-Armor Assault</USAC_Product_Torchwood.subLabel>
+  
+  <!-- EN: Viper DMR -->
+  <USAC_Product_Viper.label>Viper DMR</USAC_Product_Viper.label>
+  <!-- EN: The Viper long-range anti-materiel weapon. It uses 35mm autocannon ammunition and is purpose-built for precise long-range destruction of enemy armor and electronic equipment. -->
+  <USAC_Product_Viper.description>The Viper long-range anti-materiel weapon. It uses 35mm autocannon ammunition and is purpose-built for precise long-range destruction of enemy armor and electronic equipment.</USAC_Product_Viper.description>
+  <!-- EN: AMR // Anti-Materiel Interdiction -->
+  <USAC_Product_Viper.subLabel>AMR // Anti-Materiel Interdiction</USAC_Product_Viper.subLabel>
+  
+</LanguageData>

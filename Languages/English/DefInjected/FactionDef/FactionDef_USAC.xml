@@ -3,8 +3,8 @@
   
   <!-- EN: United Stellar Armament Company -->
   <USAC_Faction.label>United Stellar Armament Company</USAC_Faction.label>
-  <!-- EN: A group of resource development companies and armed trading groups driven by profit, originating from a planet that was enlightend by colonization and gained abilities to reach interstellar, countless massive corporations have created this man-eating Leviathan through military hegemony and commercial mergers and acquisitions on their home planet. Their purpose on this world is to gain a foothold  and prepare for a total ground control. -->
-  <USAC_Faction.description>A group of resource development companies and armed trading groups driven by profit, originating from a planet that was enlightend by colonization and gained abilities to reach interstellar, countless massive corporations have created this man-eating Leviathan through military hegemony and commercial mergers and acquisitions on their home planet. Their purpose on this world is to gain a foothold  and prepare for a total ground control.</USAC_Faction.description>
+  <!-- EN: A group of resource development companies and armed trading groups driven by profit, originating from a planet that was enlightend by colonization and gained abilities to reach interstellar, countless massive corporations have created this man-eating Leviathan through military hegemony and commercial mergers and acquisitions on their home planet. Their purpose on this world is to gain a foothold and prepare for a total ground control. -->
+  <USAC_Faction.description>A group of resource development companies and armed trading groups driven by profit, originating from a planet that was enlightend by colonization and gained abilities to reach interstellar, countless massive corporations have created this man-eating Leviathan through military hegemony and commercial mergers and acquisitions on their home planet. Their purpose on this world is to gain a foothold and prepare for a total ground control.</USAC_Faction.description>
   <!-- EN: executive -->
   <USAC_Faction.leaderTitle>executive</USAC_Faction.leaderTitle>
   <!-- EN: {0} from {1} are attacking your {2}. -->

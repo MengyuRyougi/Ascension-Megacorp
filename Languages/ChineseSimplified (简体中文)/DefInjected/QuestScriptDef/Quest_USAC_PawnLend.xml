@@ -64,9 +64,7 @@
     <li>worker->人事</li>
     <li>worker->人工</li>
   </USAC_PawnLend.questNameRules.rulesStrings>
-  <!-- EN: <rulesStrings><li>dutyDescription->gather the harvest</li><li>dutyDescription->fortify a settlement</li><li>dutyDescription->set up a settlement</li><li>dutyDescription->watch for raiders</li><li>dutyDescription->set up a hospital</li><li>dutyDescription->contain an outbreak of [disease]</li></rulesStrings> -->
-  <USAC_PawnLend.root.nodes.ResolveTextNow.rules.slateRef>TODO</USAC_PawnLend.root.nodes.ResolveTextNow.rules.slateRef>
-  <!-- EN: {PAWNS} [pawnListHaveConjugation] returned after helping [asker_nameFull] of [asker_faction_name] to [dutyDescription]. -->
+ <!-- EN: {PAWNS} [pawnListHaveConjugation] returned after helping [asker_nameFull] of [asker_faction_name] to [dutyDescription]. -->
   <USAC_PawnLend.root.nodes.Set.value.slateRef>{PAWNS} [pawnListHaveConjugation] 在完成[asker_faction_name]的[asker_nameFull]所指定的[dutyDescription]工作後返回。</USAC_PawnLend.root.nodes.Set.value.slateRef>
   <!-- EN: Shuttle arrived -->
   <USAC_PawnLend.root.nodes.ShuttleDelay.node.nodes.Letter.label.slateRef>穿梭机已抵达</USAC_PawnLend.root.nodes.ShuttleDelay.node.nodes.Letter.label.slateRef>

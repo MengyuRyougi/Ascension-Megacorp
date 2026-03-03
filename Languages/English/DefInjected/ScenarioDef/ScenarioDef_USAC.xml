@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: The Debt squad -->
+  <USAC_ScenarioDebtStart.label>The Debt squad</USAC_ScenarioDebtStart.label>
+  <!-- EN: Four people tied to USAC contracts hit atmosphere in a failing drop pod line: a debt inheritor, a laid-off mech technician, a former security hand, and a frontier laborer who signed every waiver put in front of them. None of them were meant to lead a colony, but all of them were built to survive hard terms. On this rimworld, contracts mean nothing unless you can defend them. -->
+  <USAC_ScenarioDebtStart.description>Four people tied to USAC contracts hit atmosphere in a failing drop pod line: a debt inheritor, a laid-off mech technician, a former security hand, and a frontier laborer who signed every waiver put in front of them. None of them were meant to lead a colony, but all of them were built to survive hard terms. On this rimworld, contracts mean nothing unless you can defend them.</USAC_ScenarioDebtStart.description>
+  <!-- EN: Four people tied to USAC contracts hit atmosphere in a failing drop pod line: a debt inheritor, a laid-off mech technician, a former security hand, and a frontier laborer who signed every waiver put in front of them. None of them were meant to lead a colony, but all of them were built to survive hard terms. On this rimworld, contracts mean nothing unless you can defend them. -->
+  <USAC_ScenarioDebtStart.scenario.description>Four people tied to USAC contracts hit atmosphere in a failing drop pod line: a debt inheritor, a laid-off mech technician, a former security hand, and a frontier laborer who signed every waiver put in front of them. None of them were meant to lead a colony, but all of them were built to survive hard terms. On this rimworld, contracts mean nothing unless you can defend them.</USAC_ScenarioDebtStart.scenario.description>
+  <!-- EN: The Debt squad -->
+  <USAC_ScenarioDebtStart.scenario.name>The Debt squad</USAC_ScenarioDebtStart.scenario.name>
+  <!-- EN: Four USAC-linked survivors: debt, layoffs, war experience, and frontier contracts forged into one desperate start. -->
+  <USAC_ScenarioDebtStart.scenario.summary>Four USAC-linked survivors: debt, layoffs, war experience, and frontier contracts forged into one desperate start.</USAC_ScenarioDebtStart.scenario.summary>
+  
+</LanguageData>

@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   
-  <!-- EN: M7 Cobalt -->
-  <USAC_Mech_Cobalt.label>M7 Cobalt</USAC_Mech_Cobalt.label>
-  
-  <!-- EN: XM3 Gonk -->
-  <USAC_Mech_Gonk.label>XM3 Gonk</USAC_Mech_Gonk.label>
-  
-  <!-- EN: M110 Omaha -->
-  <USAC_Mech_Omaha.label>M110 Omaha</USAC_Mech_Omaha.label>
-  
-  <!-- EN: M939 Paraman -->
-  <USAC_Mech_Paraman.label>M939 Paraman</USAC_Mech_Paraman.label>
-  
   <!-- EN: M88 Rocky -->
   <USAC_Mech_Rocky.label>M88 Rocky</USAC_Mech_Rocky.label>
   

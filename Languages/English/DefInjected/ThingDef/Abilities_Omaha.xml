@@ -7,9 +7,6 @@
   <!-- EN: flying -->
   <USAC_PawnFlyer_Shovel.label>flying</USAC_PawnFlyer_Shovel.label>
   
-  <!-- EN: mineclearing rocket -->
-  <USAC_Projectile_MICLIC.label>mineclearing rocket</USAC_Projectile_MICLIC.label>
-  
   <!-- EN: towed mineclearing rocket -->
   <USAC_Projectile_MICLIC_Towed.label>towed mineclearing rocket</USAC_Projectile_MICLIC_Towed.label>
   

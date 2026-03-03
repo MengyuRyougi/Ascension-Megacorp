@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Radiotoxicity -->
+  <UASC_Radiotoxicity.label>Radiotoxicity</UASC_Radiotoxicity.label>
+  <!-- EN: {0} has been torn to death. -->
+  <UASC_Radiotoxicity.deathMessage>{0} has been torn to death.</UASC_Radiotoxicity.deathMessage>
+  
+</LanguageData>
