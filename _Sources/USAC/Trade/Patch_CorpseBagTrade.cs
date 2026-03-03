@@ -76,8 +76,7 @@ namespace USAC
                         }
                         // 债券
                         else if (thing.def == bondDef &&
-                            thing.def.category == ThingCategory.Item &&
-                            !thing.IsForbidden(Faction.OfPlayer))
+                            thing.def.category == ThingCategory.Item)
                         {
                             currency.AddThing(thing, Transactor.Colony);
                             addedThings.Add(thing);
@@ -96,16 +95,21 @@ namespace USAC
             if (bondDef == null)
                 return;
 
+            tradeables.RemoveAll(t =>
+                t.ThingDef == bondDef
+                && t is not Tradeable_Bond
+                && t is not Tradeable_USACCurrency);
+
             var bondTradeable = new Tradeable_Bond();
 
-            // 添加商人的债券
+            // 扫描商人库存中的债券加入买入通道
             foreach (var thing in TradeSession.trader.Goods)
             {
                 if (thing.def == bondDef)
                     bondTradeable.AddThing(thing, Transactor.Trader);
             }
 
-            // 只有商人有债券时才添加
+            // 商人持有债券时才显示购买入口
             if (bondTradeable.thingsTrader.Count > 0)
             {
                 tradeables.Add(bondTradeable);

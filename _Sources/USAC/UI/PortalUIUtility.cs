@@ -26,7 +26,7 @@ namespace USAC.InternalUI
         private static int _animCleanFrame;
 
         // 获取动效进度
-        private static float GetAnimAlpha(string key, bool active)
+        public static float GetAnimAlpha(string key, bool active)
         {
             if (key == null) return 0f;
             if (Time.frameCount - _animCleanFrame > 600) PruneAnimStates();

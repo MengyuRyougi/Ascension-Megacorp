@@ -33,15 +33,37 @@ namespace USAC
         public override Vector2 InitialSize => new(1150f, 850f);
         protected override float Margin => 0f;
 
+        private TimeSpeed _preOpenSpeed;
+
         public Dialog_USACPortal()
         {
             doCloseX = false;
-            forcePause = true;
-            absorbInputAroundWindow = true;
+            forcePause = false;
+            absorbInputAroundWindow = false;
             doWindowBackground = false;
             drawShadow = false;
 
             RegisterPages();
+        }
+
+        public override void PreOpen()
+        {
+            base.PreOpen();
+            if (Current.ProgramState == ProgramState.Playing && Find.TickManager != null)
+            {
+                _preOpenSpeed = Find.TickManager.CurTimeSpeed;
+                Find.TickManager.Pause();
+            }
+        }
+
+        public override void PostClose()
+        {
+            base.PostClose();
+            if (Current.ProgramState == ProgramState.Playing && Find.TickManager != null
+                && Find.TickManager.CurTimeSpeed == TimeSpeed.Paused)
+            {
+                Find.TickManager.CurTimeSpeed = _preOpenSpeed;
+            }
         }
 
         private void RegisterPages()

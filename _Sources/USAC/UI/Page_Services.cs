@@ -14,14 +14,17 @@ namespace USAC.InternalUI
         private Vector2 scrollPos;
 
         // 租赁参数状态
-        private static int leaseDays = 3;
-        private static bool leaseAutoRenew = false;
+        private int leaseDays = 3;
+        private bool leaseAutoRenew = false;
+
+        // 状态面板动画当前系数
+        private float _panelT = 0f;
+        private const float PanelAnimDur = 0.35f;
 
         private GameComponent_USACServices ServiceComp => Current.Game.GetComponent<GameComponent_USACServices>();
 
         public void Draw(Rect rect, Dialog_USACPortal parent)
         {
-            float viewH = 500f;
             var serviceComp = ServiceComp;
             var map = Find.CurrentMap;
 
@@ -31,12 +34,47 @@ namespace USAC.InternalUI
 
             var activeRigs = (map != null) ? map.listerBuildings.allBuildingsColonist.OfType<Building_HeavyMiningRig>().ToList() : new List<Building_HeavyMiningRig>();
 
+            bool hasPending = serviceComp != null && serviceComp.traderArrivalTick > 0;
+
+            float viewH = 550f;
             if (mechnitors.Count > 0) viewH += mechnitors.Count * 85f + 60f;
             if (activeRigs.Count > 0) viewH += activeRigs.Count * 85f + 60f;
 
             Widgets.BeginScrollView(rect, ref scrollPos, new Rect(0, 0, rect.width - 16, viewH));
             float y = 0;
-            float w = rect.width - 16;
+            float fullW = rect.width - 16;
+
+            // 每帧推进动画系数（任意位置反向都连续）
+            float target = hasPending ? 1f : 0f;
+            _panelT = Mathf.MoveTowards(_panelT, target, Time.unscaledDeltaTime / PanelAnimDur);
+
+            // SmoothStep 曲线化
+            float t = _panelT;
+            float finalSlideT = t * t * (3f - 2f * t);
+
+            // 绘制呼叫卡片 (宽度随 finalSlideT 动态变化)
+            float callCardW = Mathf.Lerp(fullW, fullW * 0.6f - 8f, finalSlideT);
+            DrawTraderCallCard(ref y, callCardW, serviceComp);
+
+            // 商船状态面板：展开 / 收起都用 finalSlideT 控制
+            if (finalSlideT > 0.01f)
+            {
+                float panelW = fullW * 0.4f - 8f;
+                float panelX = fullW * 0.6f + 8f;
+                float panelH = 150f;
+                float visibleW = panelW * finalSlideT;
+                Rect clipRect = new(panelX + panelW - visibleW, 0, visibleW, panelH);
+                var origCol = GUI.color;
+                GUI.color = new Color(1, 1, 1, Mathf.Min(1f, finalSlideT * 2.5f));
+                GUI.BeginClip(clipRect);
+                if (serviceComp != null)
+                    DrawTraderStatusPanel(new Rect(-(panelW - visibleW), 0, panelW, panelH), serviceComp);
+                GUI.EndClip();
+                GUI.color = origCol;
+            }
+
+            // 恢复全宽给后续区块
+            float w = fullW;
 
             // 租赁申请区块
             string priceStr = $"₿{leaseDays * 1000} / {leaseDays} DAYS";
@@ -209,6 +247,85 @@ namespace USAC.InternalUI
                 }, false);
                 y += 85;
             }
+        }
+        // 呼叫商船卡片区块
+        private void DrawTraderCallCard(ref float y, float w, GameComponent_USACServices comp)
+        {
+            const float cardH = 150f;
+            bool hasPending = comp != null && comp.traderArrivalTick > 0;
+            Rect r = new(0, y, w, cardH);
+            DrawBentoBox(r, (box) =>
+            {
+                Rect inner = box.ContractedBy(20);
+                DrawColoredLabel(inner.TopPartPixels(30),
+                    "USAC.UI.Services.Trader.Title".Translate().ToString().ToUpper(),
+                    ColAccentCamo1, GameFont.Small);
+                DrawColoredLabel(new Rect(inner.x, inner.y + 35, inner.width - 180, 70),
+                    "USAC.UI.Services.Trader.Desc".Translate(), ColTextActive, GameFont.Tiny);
+
+                // 定价标签 - 与租赁卡片保持一致
+                DrawColoredLabel(new Rect(inner.xMax - 165, inner.yMax - 70, 160, 20),
+                    "₿4 BONDS", ColTextMuted, GameFont.Tiny, TextAnchor.LowerRight);
+
+                // 执行按鈕
+                bool blocked = hasPending;
+                if (DrawTacticalButton(new Rect(inner.xMax - 160, inner.yMax - 45, 160, 45),
+                    blocked ? "USAC.UI.Services.Trader.Pending".Translate() : "USAC.UI.Services.Trader.Btn".Translate(),
+                    !blocked, GameFont.Tiny))
+                {
+                    if (!blocked) CallTrader(comp);
+                }
+            }, false);
+            y += cardH + 10f;
+        }
+
+        // 商船到达倒计时状态栏
+        private void DrawTraderStatusPanel(Rect rect, GameComponent_USACServices comp)
+        {
+            DrawBentoBox(rect, (box) =>
+            {
+                Rect inner = box.ContractedBy(16);
+                DrawColoredLabel(inner.TopPartPixels(24),
+                    "USAC.UI.Services.Trader.Status.Title".Translate().ToString().ToUpper(),
+                    ColAccentCamo1, GameFont.Tiny);
+
+                int ticksLeft = comp.traderArrivalTick - Find.TickManager.TicksGame;
+                string timeStr = ticksLeft > 0 ? ticksLeft.ToStringTicksToPeriod() : "--";
+                DrawColoredLabel(new Rect(inner.x, inner.y + 30, inner.width, 24),
+                    "USAC.UI.Services.Trader.Status.ETA".Translate(timeStr),
+                    Color.white, GameFont.Tiny);
+
+                // 进度条
+                float totalTicks = 2500f;
+                float progress = 1f - Mathf.Clamp01((float)ticksLeft / totalTicks);
+                Rect barR = new(inner.x, inner.y + 62, inner.width, 8);
+                Widgets.FillableBar(barR, progress, SolidColorMaterials.NewSolidColorTexture(ColAccentCamo1));
+
+                // 变化状态文字
+                string pct = $"{(int)(progress * 100)}%";
+                DrawColoredLabel(new Rect(inner.x, inner.y + 78, inner.width - 50, 20),
+                    "USAC.UI.Services.Trader.Status.Desc".Translate(),
+                    ColTextMuted, GameFont.Tiny);
+                DrawColoredLabel(new Rect(inner.xMax - 50, inner.y + 78, 48, 20),
+                    pct, ColAccentCamo1, GameFont.Tiny, TextAnchor.MiddleRight);
+            }, false);
+        }
+
+        // 执行呼叫商船
+        private void CallTrader(GameComponent_USACServices comp)
+        {
+            var debtComp = GameComponent_USACDebt.Instance;
+            if (debtComp == null) return;
+
+            if (debtComp.GetBondCountNearBeacons(Find.CurrentMap) < 4)
+            {
+                Messages.Message("USAC.Message.InsufficientBonds".Translate(), MessageTypeDefOf.RejectInput);
+                return;
+            }
+
+            debtComp.ConsumeBondsNearBeacons(Find.CurrentMap, 4);
+            comp.traderArrivalTick = Find.TickManager.TicksGame + 2500;
+            Messages.Message("USAC.Message.TraderCalled".Translate(), MessageTypeDefOf.NeutralEvent);
         }
     }
 }

@@ -139,5 +139,16 @@
   <USAC_LeaseDurationLeft>租期剩余时间: {0}</USAC_LeaseDurationLeft>
   <USAC.UI.Drill.EmptyMinerals>清空矿仓</USAC.UI.Drill.EmptyMinerals>
   <USAC.UI.Drill.EmptyMinerals.Desc>手动将已采集的矿物从密封舱中弹出。注意：如果在撤离前未清空，USAC 轨道平台将直接回收所有机内物资。</USAC.UI.Drill.EmptyMinerals.Desc>
-  
+
+  <!-- 轨道商船呼叫服务 -->
+  <USAC.UI.Services.Trader.Title>ORBITAL_TRADE_REQUEST // 商船呼叫</USAC.UI.Services.Trader.Title>
+  <USAC.UI.Services.Trader.Desc>通过轨道结算网络发送优先交易请求。USAC 轨道商船将于约一小时后抵达该区域。</USAC.UI.Services.Trader.Desc>
+  <USAC.UI.Services.Trader.Btn>发送呼叫请求</USAC.UI.Services.Trader.Btn>
+  <USAC.UI.Services.Trader.Pending>商船已在途中</USAC.UI.Services.Trader.Pending>
+  <USAC.UI.Services.Trader.Status.Title>ORBITAL_INBOUND // 商船抵达状态</USAC.UI.Services.Trader.Status.Title>
+  <USAC.UI.Services.Trader.Status.ETA>预计到达：{0}</USAC.UI.Services.Trader.Status.ETA>
+  <USAC.UI.Services.Trader.Status.Desc>USAC 轨道商船正在抵达中</USAC.UI.Services.Trader.Status.Desc>
+  <USAC.Message.TraderCalled>[USAC] 请求已受理：USAC 轨道商船正在赶往您的位置，预计约一小时后抵达。</USAC.Message.TraderCalled>
+  <USAC.Message.TraderArrived>[USAC] 轨道商船已就位：USAC 轨道商船现在可供交易。</USAC.Message.TraderArrived>
+
 </LanguageData>

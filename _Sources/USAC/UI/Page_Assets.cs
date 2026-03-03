@@ -119,11 +119,11 @@ namespace USAC.InternalUI
             // --- 风险定价调节区 ---
             // 绘制周期利率调节
             DrawParamAdjuster(ref curY, inner.width, "USAC.UI.Assets.InterestRate".Translate(),
-                ref _targetInterest, 0.01f, 0.01f, 0.50f, "{0:P0}", "interest");
+                ref _targetInterest, 0.01f, 0.01f, 0.50f, "{0:P0}", "interest", inner.x);
 
             // 绘制手续费调节
             DrawParamAdjuster(ref curY, inner.width, "USAC.UI.Assets.GrowthRate".Translate(),
-                ref _targetGrowth, 0.01f, 0f, 0.30f, "{0:P0}", "growth");
+                ref _targetGrowth, 0.01f, 0f, 0.30f, "{0:P0}", "growth", inner.x);
 
             // 绘制增长模式切换
             float modeLabelY = curY;
@@ -195,13 +195,15 @@ namespace USAC.InternalUI
             y += 500;
         }
 
-        private void DrawParamAdjuster(ref float y, float width, string label, ref float value, float step, float min, float max, string format, string keyPrefix)
+        private void DrawParamAdjuster(ref float y, float width, string label,
+            ref float value, float step, float min, float max,
+            string format, string keyPrefix, float xOffset = 0f)
         {
-            // 文本标签垂直对齐按钮中心
-            DrawColoredLabel(new Rect(0, y + 3, 160, 30), label, ColTextMuted, GameFont.Tiny, TextAnchor.MiddleLeft);
+            // 标签垂直对齐按鈕中心
+            DrawColoredLabel(new Rect(xOffset, y + 3, 160, 30), label, ColTextMuted, GameFont.Tiny, TextAnchor.MiddleLeft);
 
             // 紧凑、平衡的操作按钮组
-            float btnX = 165;
+            float btnX = xOffset + 165;
             if (DrawTacticalButton(new Rect(btnX, y, 32, 32), "-", key: $"{keyPrefix}_minus"))
                 value = Mathf.Max(min, value - step);
 

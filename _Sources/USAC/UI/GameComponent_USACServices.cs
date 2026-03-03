@@ -10,6 +10,9 @@ namespace USAC
         #region 字段
         // 自动续费名单
         public HashSet<Pawn> autoRenewPawns = new HashSet<Pawn>();
+
+        // 轨道商船预约到达时刻
+        public int traderArrivalTick = -1;
         #endregion
 
         #region 生命周期
@@ -17,10 +20,16 @@ namespace USAC
 
         public override void GameComponentTick()
         {
-            // 每隔一小时执行一次续费检查
             if (Find.TickManager.TicksGame % 2500 == 0)
             {
                 CheckAutoRenewals();
+            }
+
+            // 检测商船预约到期
+            if (traderArrivalTick > 0 && Find.TickManager.TicksGame >= traderArrivalTick)
+            {
+                SpawnScheduledTrader();
+                traderArrivalTick = -1;
             }
         }
 
@@ -29,6 +38,7 @@ namespace USAC
             base.ExposeData();
             Scribe_Collections.Look(ref autoRenewPawns, "autoRenewPawns", LookMode.Reference);
             if (autoRenewPawns == null) autoRenewPawns = new HashSet<Pawn>();
+            Scribe_Values.Look(ref traderArrivalTick, "traderArrivalTick", -1);
         }
         #endregion
 
@@ -77,6 +87,28 @@ namespace USAC
                 autoRenewPawns.Remove(pawn);
                 Messages.Message("USAC.Message.AutoRenewFailed".Translate(pawn.LabelShort), pawn, MessageTypeDefOf.NegativeEvent);
             }
+        }
+
+        // 刷新预约的轨道商船
+        private void SpawnScheduledTrader()
+        {
+            Map map = Find.AnyPlayerHomeMap;
+            if (map == null) return;
+
+            Faction usacFaction = Find.FactionManager.FirstFactionOfDef(
+                DefDatabase<FactionDef>.GetNamed("USAC_Faction"));
+            if (usacFaction == null || usacFaction.HostileTo(Faction.OfPlayer)) return;
+
+            if (map.passingShipManager.passingShips.Count >= 5) return;
+
+            TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamedSilentFail("USAC_Trader_Orbital");
+            if (traderKind == null) return;
+
+            TradeShip ship = new TradeShip(traderKind, usacFaction);
+            map.passingShipManager.AddShip(ship);
+            ship.GenerateThings();
+
+            Messages.Message("USAC.Message.TraderArrived".Translate(), MessageTypeDefOf.PositiveEvent);
         }
         #endregion
     }
