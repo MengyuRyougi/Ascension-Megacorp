@@ -22,7 +22,7 @@
     <label>towed mineclearing line</label>
     <description>Launch a rocket that tows a continuous demolition cable behind it. Upon impact, the cable detonates along its entire path to clear mines.</description>
     <iconPath>UI/Abilities/USAC_MICLIC</iconPath>
-    <cooldownTicksRange>3600</cooldownTicksRange>
+    <cooldownTicksRange>60000</cooldownTicksRange>
     <verbProperties>
       <verbClass>Verb_CastAbility</verbClass>
       <range>32</range>
@@ -65,7 +65,7 @@
     <label>mineclearing shovel</label>
     <description>The mech dashes forward to the target location and releases two powerful fan-shaped explosions along the path to clear mines and obstacles.</description>
     <iconPath>UI/Abilities/USAC_MineclearingShovel</iconPath>
-    <cooldownTicksRange>1200</cooldownTicksRange>
+    <cooldownTicksRange>12000</cooldownTicksRange>
     <jobDef>CastJump</jobDef>
     <verbProperties>
       <verbClass>USAC.Verb_CastAbilityMineclearingShovel</verbClass>

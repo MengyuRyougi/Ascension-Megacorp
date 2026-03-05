@@ -215,8 +215,8 @@
     <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
     <isRanged>true</isRanged>
     <makesAnimalsFlee>true</makesAnimalsFlee>
-    <defaultDamage>20</defaultDamage>
-    <defaultArmorPenetration>0.5</defaultArmorPenetration>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>0.25</defaultArmorPenetration>
     <buildingDamageFactorImpassable>8</buildingDamageFactorImpassable>
     <buildingDamageFactorPassable>4</buildingDamageFactorPassable>
   </DamageDef>
