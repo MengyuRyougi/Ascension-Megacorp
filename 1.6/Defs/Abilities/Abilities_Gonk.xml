@@ -23,8 +23,9 @@
     <comps>
       <li Class="Fortified.CompProperties_ActiveProtectionSystem">
         <Radius>30</Radius>
-        <chanceToFail>0.98</chanceToFail>
+        <chanceToFail>0.92</chanceToFail>
         <spawnLeaving>Filth_Ash</spawnLeaving>
+				<fleckDef>FFF_Fleck_RocketFlame</fleckDef>
         <interceptedFleckDef>FFF_Fleck_RocketFlame</interceptedFleckDef>
         <soundIntercepted>Explosion_Thump</soundIntercepted>
         <interceptThings>
