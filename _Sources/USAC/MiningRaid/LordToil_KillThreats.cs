@@ -52,31 +52,23 @@ namespace USAC
 
         public override void LordToilTick()
         {
-            // 校验区域内是否存在敌对目标
+            // 每15tick检查一次
+            if (Find.TickManager.TicksGame % 15 != 0) return;
+
             bool hasEnemy = false;
 
-            if (lord.LordJob is LordJob_MiningGuard miningGuard)
+            // 直接查引擎维护的敌对目标缓存
+            var hostileTargets = lord.Map.attackTargetsCache
+                .TargetsHostileToFaction(lord.faction);
+
+            foreach (var target in hostileTargets)
             {
-                foreach (Pawn guard in lord.ownedPawns)
+                if (target is not Pawn enemy) continue;
+                if (enemy.Dead || enemy.Downed || !enemy.Spawned) continue;
+                if (enemy.Position.InHorDistOf(defendPoint, maxChaseRadius))
                 {
-                    if (guard.Dead || guard.Downed || !guard.Spawned) continue;
-
-                    // 检查追击范围内是否有敌对目标
-                    foreach (Faction hostileFaction in miningGuard.HostileFactions)
-                    {
-                        foreach (Pawn enemy in lord.Map.mapPawns.SpawnedPawnsInFaction(hostileFaction))
-                        {
-                            if (enemy.Dead || enemy.Downed) continue;
-
-                            if (enemy.Position.InHorDistOf(defendPoint, maxChaseRadius))
-                            {
-                                hasEnemy = true;
-                                break;
-                            }
-                        }
-                        if (hasEnemy) break;
-                    }
-                    if (hasEnemy) break;
+                    hasEnemy = true;
+                    break;
                 }
             }
 
@@ -86,51 +78,9 @@ namespace USAC
             }
             else
             {
-                noEnemyTicks++;
-
-                // 无敌人一段时间后返回防守
+                noEnemyTicks += 15;
                 if (noEnemyTicks >= ReturnToDefendDelay)
-                {
                     lord.ReceiveMemo("ThreatsCleared");
-                }
-            }
-        }
-
-        public override void Notify_PawnDamaged(Pawn victim, DamageInfo dinfo)
-        {
-            base.Notify_PawnDamaged(victim, dinfo);
-
-            // 获取攻击者的攻击者实例
-            Thing instigator = dinfo.Instigator;
-            if (instigator == null) return;
-
-            Faction attackerFaction = instigator.Faction;
-
-            // 不对自己派系敌对敌对
-            if (attackerFaction != null && attackerFaction == lord.faction) return;
-
-            // 将攻击者派系加入敌对列表
-            if (attackerFaction != null && lord.LordJob is LordJob_MiningGuard miningGuard)
-            {
-                miningGuard.AddHostileFaction(attackerFaction);
-            }
-
-            // 更新攻击目标缓存标缓存
-            Map map = lord.Map;
-            if (map != null)
-            {
-                foreach (Pawn guard in lord.ownedPawns)
-                {
-                    if (guard.Spawned)
-                    {
-                        map.attackTargetsCache.UpdateTarget(guard);
-                    }
-                }
-
-                if (instigator is Pawn attackerPawn && attackerPawn.Spawned)
-                {
-                    map.attackTargetsCache.UpdateTarget(attackerPawn);
-                }
             }
         }
 

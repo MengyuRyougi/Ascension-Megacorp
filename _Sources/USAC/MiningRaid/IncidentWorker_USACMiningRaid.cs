@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -54,9 +53,6 @@ namespace USAC
             Faction usacFaction = Find.FactionManager.FirstFactionOfDef(USAC_FactionDefOf.USAC_Faction);
             if (usacFaction == null) return false;
 
-            // 校验地图深层资源存续情况
-            if (!HasDeepResources(map)) return false;
-
             // 搜寻合理的采矿突袭落点
             return TryFindMiningLocation(map, out _);
         }
@@ -107,9 +103,9 @@ namespace USAC
 
             // 构建最终实战护卫名单
             List<Pawn> finalGuards = new List<Pawn>();
-            finalGuards.AddRange(lightMechs.Skip(lightToConvert));
-            finalGuards.AddRange(mediumMechs.Skip(mediumToConvert));
-            finalGuards.AddRange(ultraMechs.Skip(ultraToConvert));
+            for (int i = lightToConvert; i < lightMechs.Count; i++) finalGuards.Add(lightMechs[i]);
+            for (int i = mediumToConvert; i < mediumMechs.Count; i++) finalGuards.Add(mediumMechs[i]);
+            for (int i = ultraToConvert; i < ultraMechs.Count; i++) finalGuards.Add(ultraMechs[i]);
 
             // 执行最终名单保底校验
             if (finalGuards.Count == 0 && originalGuards.Count > 0 && goodwill < 90)
@@ -174,38 +170,22 @@ namespace USAC
 
         #region 逻辑支持
 
-        private bool HasDeepResources(Map map)
-        {
-            DeepResourceGrid grid = map.deepResourceGrid;
-            if (grid == null) return false;
-
-            // 快速检索可用矿床的存在
-            foreach (IntVec3 cell in map.AllCells)
-            {
-                if (grid.ThingDefAt(cell) != null && grid.CountAt(cell) > 0)
-                {
-                    if (cell.GetEdifice(map) == null) return true;
-                }
-            }
-            return false;
-        }
+        // 复用候选列表避免事件级分配
+        private static readonly List<IntVec3> potentialCells = new List<IntVec3>();
 
         private bool TryFindMiningLocation(Map map, out IntVec3 location)
         {
             DeepResourceGrid grid = map.deepResourceGrid;
 
-            // 收集所有潜在矿床坐标点
-            List<IntVec3> potentialCells = new List<IntVec3>();
-            foreach (IntVec3 cell in map.AllCells)
+            // 全量扫描收集合格候选格
+            potentialCells.Clear();
+            int cellCount = map.cellIndices.NumGridCells;
+            for (int i = 0; i < cellCount; i++)
             {
-                if (grid.ThingDefAt(cell) != null && grid.CountAt(cell) > 0)
-                {
-                    // 执行矿床落点初步预过滤
-                    if (cell.Walkable(map) && !cell.Roofed(map) && cell.GetEdifice(map) == null)
-                    {
-                        potentialCells.Add(cell);
-                    }
-                }
+                if (grid.CountAt(map.cellIndices.IndexToCell(i)) <= 0) continue;
+                IntVec3 cell = map.cellIndices.IndexToCell(i);
+                if (cell.Walkable(map) && !cell.Roofed(map) && cell.GetEdifice(map) == null)
+                    potentialCells.Add(cell);
             }
 
             if (potentialCells.Count == 0)
@@ -214,8 +194,7 @@ namespace USAC
                 return false;
             }
 
-            // 执行多轮落点有效性验证
-            // 预期此次验证具有高成功率
+            // 随机抽样验证放置可行性
             for (int i = 0; i < 50; i++)
             {
                 IntVec3 target = potentialCells.RandomElement();
@@ -259,12 +238,25 @@ namespace USAC
             List<Pawn> guards = new List<Pawn>();
             float pointsLeft = points;
 
-            var availableOptions = MechOptions.Where(opt => DefDatabase<PawnKindDef>.GetNamedSilentFail(opt.KindDefName) != null).ToList();
+            // 预筛可用选项
+            List<MechGenOption> availableOptions = new List<MechGenOption>();
+            for (int i = 0; i < MechOptions.Count; i++)
+            {
+                if (DefDatabase<PawnKindDef>.GetNamedSilentFail(MechOptions[i].KindDefName) != null)
+                    availableOptions.Add(MechOptions[i]);
+            }
             if (availableOptions.Count == 0) return guards;
 
+            // 复用筛选列表
+            List<MechGenOption> validOptions = new List<MechGenOption>();
             while (pointsLeft > 0)
             {
-                var validOptions = availableOptions.Where(opt => opt.CombatPower <= pointsLeft).ToList();
+                validOptions.Clear();
+                for (int i = 0; i < availableOptions.Count; i++)
+                {
+                    if (availableOptions[i].CombatPower <= pointsLeft)
+                        validOptions.Add(availableOptions[i]);
+                }
                 if (validOptions.Count == 0) break;
 
                 MechGenOption chosen = validOptions.RandomElementByWeight(opt => opt.SelectionWeight);

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -382,7 +381,8 @@ namespace USAC
             int yieldCount = Mathf.Max(1, GenMath.RoundRandom(portionCount * yieldPct));
 
             // 扣除地图深层资源格数值
-            Map.deepResourceGrid.SetAt(cell, resDef, countPresent - portionCount);
+            int remaining = countPresent - portionCount;
+            Map.deepResourceGrid.SetAt(cell, resDef, remaining);
 
             // 存入机内矿物存储字典
             storedMinerals.TryGetValue(resDef, out int existing);
@@ -391,11 +391,15 @@ namespace USAC
             // 周期性执行污染扩散逻辑
             SpreadPollution();
 
-            if (!GetNextResource(out _, out _, out currentMiningCell))
+            // 若本格资源耗尽再搜索下一格
+            if (remaining <= 0)
             {
-                hasResources = false;
-                currentMiningCell = IntVec3.Invalid;
-                if (leaseTicksLeft <= 0) StartExtraction();
+                if (!GetNextResource(out _, out _, out currentMiningCell))
+                {
+                    hasResources = false;
+                    currentMiningCell = IntVec3.Invalid;
+                    if (leaseTicksLeft <= 0) StartExtraction();
+                }
             }
         }
 
@@ -523,8 +527,9 @@ namespace USAC
                 Skyfaller_MiningRigLeaving skyfaller = (Skyfaller_MiningRigLeaving)ThingMaker.MakeThing(leavingDef);
 
                 // 转移守备力量至降落器
-                foreach (Thing thing in innerContainer.ToList())
+                for (int i = innerContainer.Count - 1; i >= 0; i--)
                 {
+                    Thing thing = innerContainer[i];
                     innerContainer.Remove(thing);
                     skyfaller.innerContainer.TryAdd(thing);
                 }

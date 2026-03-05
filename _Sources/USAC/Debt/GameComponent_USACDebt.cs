@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -24,21 +23,47 @@ namespace USAC
 
         #region 属性
         // 总负债
-        public float TotalDebt =>
-            ActiveContracts
-                .Where(c => c.IsActive)
-                .Sum(c => c.Principal + c.AccruedInterest);
+        public float TotalDebt
+        {
+            get
+            {
+                float sum = 0f;
+                for (int i = 0; i < ActiveContracts.Count; i++)
+                {
+                    var c = ActiveContracts[i];
+                    if (c.IsActive) sum += c.Principal + c.AccruedInterest;
+                }
+                return sum;
+            }
+        }
 
         // 最近到期的合同
-        public DebtContract NextDueContract =>
-            ActiveContracts
-                .Where(c => c.IsActive)
-                .OrderBy(c => c.NextCycleTick)
-                .FirstOrDefault();
+        public DebtContract NextDueContract
+        {
+            get
+            {
+                DebtContract best = null;
+                for (int i = 0; i < ActiveContracts.Count; i++)
+                {
+                    var c = ActiveContracts[i];
+                    if (c.IsActive && (best == null || c.NextCycleTick < best.NextCycleTick))
+                        best = c;
+                }
+                return best;
+            }
+        }
 
         // 活跃合同数量
-        public int ActiveCount =>
-            ActiveContracts.Count(c => c.IsActive);
+        public int ActiveCount
+        {
+            get
+            {
+                int count = 0;
+                for (int i = 0; i < ActiveContracts.Count; i++)
+                    if (ActiveContracts[i].IsActive) count++;
+                return count;
+            }
+        }
 
         // 增加债务本金（服务费/租赁费）
         public void AddDebt(float amount, string reason)
@@ -353,19 +378,14 @@ namespace USAC
         {
             if (map == null) return 0;
             int count = 0;
-            var beacons = map.listerBuildings
-                .allBuildingsColonist
-                .Where(b => b is Building_OrbitalTradeBeacon);
-
-            foreach (var b in beacons)
+            var buildings = map.listerBuildings.allBuildingsColonist;
+            for (int i = 0; i < buildings.Count; i++)
             {
-                var beacon = (Building_OrbitalTradeBeacon)b;
+                if (buildings[i] is not Building_OrbitalTradeBeacon beacon) continue;
                 foreach (IntVec3 c in beacon.TradeableCells)
                 {
-                    var bond = c.GetFirstThing(
-                        map, USAC_DefOf.USAC_Bond);
-                    if (bond != null)
-                        count += bond.stackCount;
+                    var bond = c.GetFirstThing(map, USAC_DefOf.USAC_Bond);
+                    if (bond != null) count += bond.stackCount;
                 }
             }
             return count;
@@ -374,19 +394,14 @@ namespace USAC
         public void ConsumeBondsNearBeacons(Map map, int count)
         {
             int remaining = count;
-            var beacons = map.listerBuildings
-                .allBuildingsColonist
-                .Where(b => b is Building_OrbitalTradeBeacon);
-
-            foreach (var b in beacons)
+            var buildings = map.listerBuildings.allBuildingsColonist;
+            for (int i = 0; i < buildings.Count; i++)
             {
-                var beacon = (Building_OrbitalTradeBeacon)b;
+                if (buildings[i] is not Building_OrbitalTradeBeacon beacon) continue;
                 foreach (IntVec3 c in beacon.TradeableCells)
                 {
-                    var bond = c.GetFirstThing(
-                        map, USAC_DefOf.USAC_Bond);
+                    var bond = c.GetFirstThing(map, USAC_DefOf.USAC_Bond);
                     if (bond == null) continue;
-
                     int take = Math.Min(remaining, bond.stackCount);
                     bond.SplitOff(take).Destroy();
                     remaining -= take;
@@ -398,9 +413,12 @@ namespace USAC
         public int GetBondCountOnMap()
         {
             Map map = Find.AnyPlayerHomeMap;
-            return map?.listerThings
-                .ThingsOfDef(USAC_DefOf.USAC_Bond)
-                .Sum(b => b.stackCount) ?? 0;
+            if (map == null) return 0;
+            var bonds = map.listerThings.ThingsOfDef(USAC_DefOf.USAC_Bond);
+            int count = 0;
+            for (int i = 0; i < bonds.Count; i++)
+                count += bonds[i].stackCount;
+            return count;
         }
 
         public void ConsumeBonds(Map map, int count)
@@ -438,12 +456,11 @@ namespace USAC
         public void Debug_SkipCycle()
         {
             if (ActiveContracts == null) return;
-            foreach (var contract in ActiveContracts.ToList())
+            for (int i = ActiveContracts.Count - 1; i >= 0; i--)
             {
+                var contract = ActiveContracts[i];
                 if (contract.IsActive)
-                {
                     ProcessContractCycle(contract);
-                }
             }
         }
         #endregion
@@ -469,7 +486,13 @@ namespace USAC
         private void MigrateLegacyData()
         {
             if (legacyTotalDebt <= 0) return;
-            if (ActiveContracts.Any(c => c.IsActive)) return;
+
+            bool hasActive = false;
+            for (int i = 0; i < ActiveContracts.Count; i++)
+            {
+                if (ActiveContracts[i].IsActive) { hasActive = true; break; }
+            }
+            if (hasActive) return;
 
             var legacy = new DebtContract(
                 DebtType.WholeMortgage,

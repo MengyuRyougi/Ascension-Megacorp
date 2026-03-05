@@ -13,7 +13,21 @@ namespace USAC
             threshPercents = new System.Collections.Generic.List<float> { 0.01f };
         }
 
-        private CompMechReadiness Comp => pawn.TryGetComp<CompMechReadiness>();
+        private CompMechReadiness cachedComp;
+        private bool compCacheInit;
+
+        private CompMechReadiness Comp
+        {
+            get
+            {
+                if (!compCacheInit)
+                {
+                    cachedComp = pawn.TryGetComp<CompMechReadiness>();
+                    compCacheInit = true;
+                }
+                return cachedComp;
+            }
+        }
 
         public override float MaxLevel => Comp?.Props.capacity ?? 100f;
 

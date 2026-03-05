@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
 using RimWorld.Planet;
@@ -14,6 +13,9 @@ namespace USAC
         // 声明并复用渲染缓存数据列表
         private List<PawnData> cachedPawnData = new List<PawnData>();
         private List<Pawn> cachedPawnList = new List<Pawn>();
+        private List<Pawn> overflowPawns = new List<Pawn>();
+        private List<PawnData> smallPawns = new List<PawnData>();
+        private List<Pawn> topPawns = new List<Pawn>();
 
         private struct PawnData
         {
@@ -90,8 +92,8 @@ namespace USAC
             // 执行挂载列表按体型权重排序
             cachedPawnData.Sort((a, b) => b.Volume.CompareTo(a.Volume));
 
-            List<Pawn> overflowPawns = new List<Pawn>();
-            List<PawnData> smallPawns = new List<PawnData>();
+            overflowPawns.Clear();
+            smallPawns.Clear();
 
             // 执行挂载列表对象的功能分类
             int tinyIndex = 0;
@@ -115,10 +117,6 @@ namespace USAC
                 else if (data.EffectiveSize <= 1.5f)
                 {
                     smallPawns.Add(data);
-                }
-                else
-                {
-                    // 执行特大型挂载单位状态标记
                 }
             }
 
@@ -149,17 +147,29 @@ namespace USAC
                 smallIndex++;
             }
 
-            // 执行顶部大型挂载槽渲染逻辑
-            var topPawns = cachedPawnData.Where(d => d.EffectiveSize > 1.5f).Select(d => d.Pawn)
-                                        .Concat(overflowPawns)
-                                        .OrderByDescending(p => (p.Drawer.renderer.BodyGraphic?.drawSize.x ?? 1f) * (p.Drawer.renderer.BodyGraphic?.drawSize.y ?? 1f))
-                                        .Take(props.topSlotCount)
-                                        .ToList();
+            // 收集顶部大型挂载单位
+            topPawns.Clear();
+            for (int i = 0; i < cachedPawnData.Count; i++)
+            {
+                if (cachedPawnData[i].EffectiveSize > 1.5f)
+                    topPawns.Add(cachedPawnData[i].Pawn);
+            }
+            for (int i = 0; i < overflowPawns.Count; i++)
+                topPawns.Add(overflowPawns[i]);
+
+            // 按体积降序排列
+            topPawns.Sort((a, b) =>
+            {
+                float va = (a.Drawer.renderer.BodyGraphic?.drawSize.x ?? 1f) * (a.Drawer.renderer.BodyGraphic?.drawSize.y ?? 1f);
+                float vb = (b.Drawer.renderer.BodyGraphic?.drawSize.x ?? 1f) * (b.Drawer.renderer.BodyGraphic?.drawSize.y ?? 1f);
+                return vb.CompareTo(va);
+            });
+            int topCount = topPawns.Count > props.topSlotCount ? props.topSlotCount : topPawns.Count;
 
             float stackOffset = 0f;
             float layerOffset = 0f;
 
-            for (int i = 0; i < topPawns.Count; i++)
+            for (int i = 0; i < topCount; i++)
             {
                 Pawn p = topPawns[i];
                 float ds = p.Drawer.renderer.BodyGraphic?.drawSize.x ?? 1f;

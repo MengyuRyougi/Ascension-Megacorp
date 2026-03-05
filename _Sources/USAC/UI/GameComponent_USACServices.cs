@@ -13,6 +13,9 @@ namespace USAC
 
         // 轨道商船预约到达时刻
         public int traderArrivalTick = -1;
+
+        // 复用移除列表避免每次分配
+        private static readonly List<Pawn> tmpRemove = new List<Pawn>();
         #endregion
 
         #region 生命周期
@@ -45,31 +48,31 @@ namespace USAC
         #region 逻辑
         private void CheckAutoRenewals()
         {
-            List<Pawn> toRemove = new List<Pawn>();
+            tmpRemove.Clear();
             foreach (var pawn in autoRenewPawns)
             {
                 if (pawn == null || pawn.Dead || pawn.Destroyed)
                 {
-                    toRemove.Add(pawn);
+                    tmpRemove.Add(pawn);
                     continue;
                 }
 
-                var trigger = pawn.health.hediffSet.GetFirstHediffOfDef(DefDatabase<HediffDef>.GetNamed("USAC_TempMechlinkTrigger")) as HediffWithComps;
+                // 直接使用 DefOf 静态引用
+                var trigger = pawn.health.hediffSet
+                    .GetFirstHediffOfDef(USAC_DefOf.USAC_TempMechlinkTrigger) as HediffWithComps;
                 if (trigger == null)
                 {
-                    toRemove.Add(pawn);
+                    tmpRemove.Add(pawn);
                     continue;
                 }
 
                 var disappearComp = trigger.TryGetComp<HediffComp_Disappears>();
-                // 临近过期自动扣费续期
                 if (disappearComp != null && disappearComp.ticksToDisappear < 2550)
-                {
                     TryRenew(pawn, disappearComp);
-                }
             }
 
-            foreach (var p in toRemove) autoRenewPawns.Remove(p);
+            for (int i = 0; i < tmpRemove.Count; i++)
+                autoRenewPawns.Remove(tmpRemove[i]);
         }
 
         public void TryRenew(Pawn pawn, HediffComp_Disappears comp)
@@ -95,16 +98,16 @@ namespace USAC
             Map map = Find.AnyPlayerHomeMap;
             if (map == null) return;
 
-            Faction usacFaction = Find.FactionManager.FirstFactionOfDef(
-                DefDatabase<FactionDef>.GetNamed("USAC_Faction"));
+            // 使用 DefOf 静态引用替代字符串查找
+            Faction usacFaction = Find.FactionManager
+                .FirstFactionOfDef(USAC_FactionDefOf.USAC_Faction);
             if (usacFaction == null || usacFaction.HostileTo(Faction.OfPlayer)) return;
 
             if (map.passingShipManager.passingShips.Count >= 5) return;
 
-            TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamedSilentFail("USAC_Trader_Orbital");
-            if (traderKind == null) return;
+            if (USAC_DefOf.USAC_Trader_Orbital == null) return;
 
-            TradeShip ship = new TradeShip(traderKind, usacFaction);
+            TradeShip ship = new TradeShip(USAC_DefOf.USAC_Trader_Orbital, usacFaction);
             map.passingShipManager.AddShip(ship);
             ship.GenerateThings();
 

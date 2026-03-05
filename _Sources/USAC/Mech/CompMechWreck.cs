@@ -28,9 +28,9 @@ namespace USAC
             }
         }
 
-        public override void CompTick()
+        public override void CompTickRare()
         {
-            base.CompTick();
+            base.CompTickRare();
             if (parent is Pawn pawn && pawn.Spawned)
             {
                 cachedRotation = pawn.Rotation;

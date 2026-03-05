@@ -27,6 +27,8 @@ namespace USAC
 
         private Rot4 targetRotation = Rot4.North;
         private float gripperScale = 1.5f;
+        private Graphic cachedScaledGraphic;
+        private float cachedScaleKey = -1f;
 
         public void SetTarget(Thing target)
         {
@@ -178,8 +180,20 @@ namespace USAC
             // 绘制目标缩放图像
             if (Graphic != null)
             {
-                Graphic.GetCopy(new Vector2(gripperScale, gripperScale), null).Draw(drawLoc, Rot4.North, this);
+                GetScaledGraphic()?.Draw(drawLoc, Rot4.North, this);
             }
+        }
+
+        // 缓存缩放后的图形对象
+        private Graphic GetScaledGraphic()
+        {
+            if (Graphic == null) return null;
+            if (cachedScaledGraphic == null || cachedScaleKey != gripperScale)
+            {
+                cachedScaledGraphic = Graphic.GetCopy(new Vector2(gripperScale, gripperScale), null);
+                cachedScaleKey = gripperScale;
+            }
+            return cachedScaledGraphic;
         }
 
         // 基于锚点绘制上升动效
@@ -210,10 +224,7 @@ namespace USAC
             gripperPos.y = Altitudes.AltitudeFor(AltitudeLayer.Skyfaller);
 
             // 绘制夹具本体 (应用缩放)
-            if (Graphic != null)
-            {
-                Graphic.GetCopy(new Vector2(gripperScale, gripperScale), null).Draw(gripperPos, Rot4.North, this);
-            }
+                GetScaledGraphic()?.Draw(gripperPos, Rot4.North, this);
         }
 
         // 被摘毁时给产壅增加额外债务

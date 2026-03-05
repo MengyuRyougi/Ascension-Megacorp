@@ -35,6 +35,12 @@ namespace USAC
         // 引用机兵等待整备定义
         public static JobDef USAC_WaitForResupply;
 
+        // 引用临时机械链接触发定义
+        public static HediffDef USAC_TempMechlinkTrigger;
+
+        // 引用轨道商船种类定义
+        public static TraderKindDef USAC_Trader_Orbital;
+
         static USAC_DefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(USAC_DefOf));

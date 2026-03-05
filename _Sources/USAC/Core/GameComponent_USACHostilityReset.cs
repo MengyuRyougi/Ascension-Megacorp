@@ -15,6 +15,7 @@ namespace USAC
 
         public override void GameComponentTick()
         {
+            if (Find.TickManager.TicksGame % 250 != 0) return;
             if (Find.TickManager.TicksGame < lastResetTick + TicksPerReset)
                 return;
 

@@ -34,6 +34,9 @@ namespace USAC
         private Vector3 rocketPhysPos;
         private Vector3 rocketPhysVel;
 
+        // 复用绘制缓存
+        private readonly List<Vector3> activeDots = new List<Vector3>();
+
         public override Vector3 ExactPosition => new Vector3(rocketPhysPos.x, origin.y, rocketPhysPos.y);
 
         private static readonly Material CableMat =
@@ -253,7 +256,7 @@ namespace USAC
                 }
             }
 
-            List<Vector3> activeDots = new List<Vector3>();
+            activeDots.Clear();
             for (int i = startDrawIndex; i < rope.NodeCount; i++)
             {
                 // Y轴折叠模拟

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -16,17 +15,11 @@ namespace USAC
         private IntVec3 defendPoint;
         private Building_HeavyMiningRig targetRig;
 
-        // 记录对抗模式临时敌对派系
-        private HashSet<Faction> hostileFactions = new HashSet<Faction>();
-
         #endregion
 
         #region 属性
 
         public override bool AddFleeToil => false;
-
-        // 检索当前临时敌对派系列表
-        public IReadOnlyCollection<Faction> HostileFactions => hostileFactions;
 
         #endregion
 
@@ -120,10 +113,6 @@ namespace USAC
         {
             Scribe_Values.Look(ref defendPoint, "defendPoint");
             Scribe_References.Look(ref targetRig, "targetRig");
-            Scribe_Collections.Look(ref hostileFactions, "hostileFactions", LookMode.Reference);
-
-            if (hostileFactions == null)
-                hostileFactions = new HashSet<Faction>();
         }
 
         #endregion
@@ -143,51 +132,9 @@ namespace USAC
             foreach (LordToil toil in lord.Graph.lordToils)
             {
                 if (toil is LordToil_BoardMiningRig boardToil)
-                {
                     boardToil.SetTargetRig(targetRig);
-                }
             }
-
             lord.ReceiveMemo("StartBoarding");
-        }
-
-        // 记录并添加临时敌对派系
-        public void AddHostileFaction(Faction faction)
-        {
-            if (faction == null || faction == lord.faction) return;
-
-            if (hostileFactions.Add(faction))
-            {
-                USAC_Debug.Log($"[USAC] AddHostileFaction: {faction.Name}, total hostile factions: {hostileFactions.Count}");
-
-                Map map = lord.Map;
-                if (map != null)
-                {
-                    // 刷新双方战斗目标位置缓存
-                    foreach (Pawn guard in lord.ownedPawns)
-                    {
-                        if (guard.Spawned && !guard.Dead)
-                        {
-                            map.attackTargetsCache.UpdateTarget(guard);
-                            // 强制全员重评估当前战斗目标
-                            if (!guard.Downed)
-                                guard.jobs?.EndCurrentJob(JobCondition.InterruptForced);
-                        }
-                    }
-
-                    foreach (Pawn enemy in map.mapPawns.SpawnedPawnsInFaction(faction))
-                    {
-                        if (!enemy.Dead)
-                            map.attackTargetsCache.UpdateTarget(enemy);
-                    }
-                }
-            }
-        }
-
-        // 校验派系是否存在临时敌对表
-        public bool IsHostileFaction(Faction faction)
-        {
-            return faction != null && hostileFactions.Contains(faction);
         }
 
         #endregion
