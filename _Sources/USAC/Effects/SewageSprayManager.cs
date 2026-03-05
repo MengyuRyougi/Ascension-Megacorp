@@ -32,6 +32,9 @@ namespace USAC
         // 使用有序字典确保索引固定
         private SortedDictionary<int, Vector3> activeSourcesThisTick = new SortedDictionary<int, Vector3>();
 
+        // 仅输出一次诊断日志
+        private static bool gpuFallbackLogged;
+
         #endregion
 
         #region 构造函数与注入
@@ -147,7 +150,15 @@ namespace USAC
             if (particleBuffer != null) return;
 
             computeShader = USAC_AssetBundleLoader.SewageSprayCompute;
-            if (computeShader == null) return;
+            if (computeShader == null)
+            {
+                if (!gpuFallbackLogged)
+                {
+                    gpuFallbackLogged = true;
+                    Log.Warning("[USAC] GPU 粒子路径降级: ComputeShader 未加载 (AssetBundle 缺失或加载失败), 将使用 CPU Fleck 方案.");
+                }
+                return;
+            }
 
             if (instanceMaterial == null && USAC_AssetBundleLoader.SewageSprayInstancedShader != null)
             {
@@ -163,7 +174,15 @@ namespace USAC
                 instanceMaterial.SetTexture("_MainTex", tex);
             }
 
-            if (instanceMaterial == null) return;
+            if (instanceMaterial == null)
+            {
+                if (!gpuFallbackLogged)
+                {
+                    gpuFallbackLogged = true;
+                    Log.Warning("[USAC] GPU 粒子路径降级: Instanced Shader 未加载或 Material 创建失败, 将使用 CPU Fleck 方案.");
+                }
+                return;
+            }
 
             particleBuffer = new ComputeBuffer(MAX_PARTICLES, 52);
             argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);

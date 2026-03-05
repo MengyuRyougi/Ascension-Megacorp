@@ -429,34 +429,48 @@ namespace USAC
         {
             if (Map == null) return;
 
-            // 启动全局粒子喷射计时
-            sprayTicksLeft = 90;
-
-            // 生成随机离散水滴特效
-            if (Rand.Chance(0.1f))
+            // GPU 粒子路径
+            if (USAC_AssetBundleLoader.IsLoaded)
             {
-                Vector3 center = this.TrueCenter();
-                Vector3 dropletPos = center + new Vector3(
-                    Rand.Range(-1.5f, 1.5f),
-                    0f,
-                    Rand.Range(2f, 5f)
-                );
+                sprayTicksLeft = 90;
 
-                if (dropletPos.ToIntVec3().ShouldSpawnMotesAt(Map))
+                // 生成随机离散水滴特效
+                if (Rand.Chance(0.1f))
                 {
-                    FleckCreationData dropletData = FleckMaker.GetDataStatic(
-                        dropletPos,
-                        Map,
-                        USAC_DefOf.USAC_WastewaterDroplet,
-                        Rand.Range(0.3f, 0.6f)
-                    );
-
-                    dropletData.velocityAngle = Rand.Range(0f, 360f);
-                    dropletData.velocitySpeed = Rand.Range(0.5f, 1.5f);
-
-                    Map.flecks.CreateFleck(dropletData);
+                    SpawnWastewaterFleck();
                 }
             }
+            else
+            {
+                // CPU Fallback 每次必定喷出多个水滴
+                for (int i = 0; i < SprayParticleCount; i++)
+                {
+                    SpawnWastewaterFleck();
+                }
+            }
+        }
+
+        // 生成单个水滴粒子
+        private void SpawnWastewaterFleck()
+        {
+            Vector3 center = this.TrueCenter();
+            Vector3 dropletPos = center + new Vector3(
+                Rand.Range(-1.5f, 1.5f),
+                0f,
+                Rand.Range(2f, 5f)
+            );
+
+            if (!dropletPos.ToIntVec3().ShouldSpawnMotesAt(Map)) return;
+
+            FleckCreationData dropletData = FleckMaker.GetDataStatic(
+                dropletPos,
+                Map,
+                USAC_DefOf.USAC_WastewaterDroplet,
+                Rand.Range(0.3f, 0.6f)
+            );
+            dropletData.velocityAngle = Rand.Range(0f, 360f);
+            dropletData.velocitySpeed = Rand.Range(0.5f, 1.5f);
+            Map.flecks.CreateFleck(dropletData);
         }
 
         private void EjectStoredMinerals()
