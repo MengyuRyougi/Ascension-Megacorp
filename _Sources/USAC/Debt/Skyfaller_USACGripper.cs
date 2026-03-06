@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -7,7 +8,7 @@ namespace USAC
 {
     // USAC轨道夹具完整生命周期
     // 下降→着陆抓取→上升离开
-    public class Skyfaller_USACGripper : Skyfaller
+    public class Skyfaller_USACGripper : Skyfaller, IActiveTransporter
     {
         private Thing targetThing;
 
@@ -22,8 +23,8 @@ namespace USAC
         private Vector3 lastTargetPos;
         // 是否已正常完成
         private bool completedNormally;
-        // 位置跳变距离阈值
-        private const float WarpThreshold = 5f;
+        // 位置跳变距离阈值，将其约束到1格
+        private const float WarpThreshold = 1f;
 
         private Rot4 targetRotation = Rot4.North;
         private float gripperScale = 1.5f;
@@ -65,6 +66,16 @@ namespace USAC
             Scribe_Values.Look(ref landedAnchor, "landedAnchor");
             Scribe_Values.Look(ref gripperScale, "gripperScale", 1.5f);
             Scribe_Values.Look(ref targetRotation, "targetRotation", Rot4.North);
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            if (!respawningAfterLoad)
+            {
+                // 赋予敌对派系，使其能够被防空设施自动选作目标
+                factionInt = Find.FactionManager.RandomEnemyFaction(false, false, true, TechLevel.Undefined);
+            }
         }
 
         protected override void Impact()
@@ -154,7 +165,45 @@ namespace USAC
                 return;
             }
 
-            base.Tick();
+            // 主动进行护盾拦截检测，使原版高角护盾生效
+            if (!hasImpacted)
+            {
+                CheckForShieldInterception();
+            }
+
+            if (!Destroyed)
+            {
+                base.Tick();
+            }
+        }
+
+        private void CheckForShieldInterception()
+        {
+            if (Map == null) return;
+
+            // 假设上一帧位于高空轨道上
+            Vector3 lastExactPos = DrawPos + new Vector3(0f, 0f, 10f);
+            Vector3 newExactPos = DrawPos;
+
+            List<Thing> interceptors = Map.listerThings.ThingsInGroup(ThingRequestGroup.ProjectileInterceptor);
+            for (int i = 0; i < interceptors.Count; i++)
+            {
+                var comp = interceptors[i].TryGetComp<CompProjectileInterceptor>();
+                if (comp != null && comp.Active && comp.Props.interceptAirProjectiles)
+                {
+                    // 借用Projectlies的逻辑计算
+                    Vector3 center = interceptors[i].Position.ToVector3Shifted();
+                    float radius = comp.Props.radius;
+                    // 由于夹具从天而降，只检查其在二维平面上是否落入护盾圈
+                    if ((newExactPos.x - center.x) * (newExactPos.x - center.x) + (newExactPos.z - center.z) * (newExactPos.z - center.z) <= radius * radius)
+                    {
+                        // 触发护盾特效并阻断夹具
+                        FleckMaker.ThrowLightningGlow(newExactPos, Map, 2f);
+                        Destroy(DestroyMode.KillFinalize);
+                        return;
+                    }
+                }
+            }
         }
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
@@ -224,31 +273,48 @@ namespace USAC
             gripperPos.y = Altitudes.AltitudeFor(AltitudeLayer.Skyfaller);
 
             // 绘制夹具本体 (应用缩放)
-                GetScaledGraphic()?.Draw(gripperPos, Rot4.North, this);
+            GetScaledGraphic()?.Draw(gripperPos, Rot4.North, this);
         }
 
-        // 被摘毁时给产壅增加额外债务
+        // 补充 IActiveTransporter 必须的装载信息
+        private ActiveTransporterInfo dummyInfo;
+        public ActiveTransporterInfo Contents
+        {
+            get
+            {
+                if (dummyInfo == null)
+                    dummyInfo = new ActiveTransporterInfo { parent = this };
+                return dummyInfo;
+            }
+        }
+
+        // 被摧毁或拦截时增加额外债务
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (!completedNormally
-                && mode == DestroyMode.KillFinalize
-                && Spawned)
+            if (!completedNormally && !Destroyed)
             {
                 // 罚金计入最近合同
-                var debtComp = GameComponent_USACDebt.Instance;
-                var target = debtComp?.NextDueContract;
-                if (debtComp != null && target != null)
+                try
                 {
-                    float penalty = 3000f;
-                    target.Principal += penalty;
-                    target.MissedPayments++;
-                    debtComp.AddTransaction(
-                        USACTransactionType.Penalty, penalty,
-                        "USAC.Debt.Transaction.GripperDestroyed".Translate());
-                    Messages.Message(
-                        "USAC.Debt.Message.GripperDestroyedPenalty"
-                            .Translate(penalty.ToString("N0")),
-                        MessageTypeDefOf.NegativeEvent);
+                    var debtComp = GameComponent_USACDebt.Instance;
+                    var target = debtComp?.NextDueContract;
+                    if (debtComp != null && target != null)
+                    {
+                        float penalty = 3000f;
+                        target.Principal += penalty;
+                        target.MissedPayments++;
+                        debtComp.AddTransaction(
+                            USACTransactionType.Penalty, penalty,
+                            "USAC.Debt.Transaction.GripperDestroyed".Translate());
+                        Messages.Message(
+                            "USAC.Debt.Message.GripperDestroyedPenalty"
+                                .Translate(penalty.ToString("N0")),
+                            MessageTypeDefOf.NegativeEvent);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Error($"[USAC] Failed to apply penalty for gripper destruction: {ex}");
                 }
             }
             base.Destroy(mode);
