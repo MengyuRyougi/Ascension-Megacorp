@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <USAC_Bodybag.tips.0>USAC使用信用债券作为交易中的货币，而非使用常见于边缘世界的白银货币。</USAC_Bodybag.tips.0>
+  <USAC_Bodybag.tips.1>在与USAC商人交易时请确保密封袋处于Trade Beacon的范围内。</USAC_Bodybag.tips.1>
+  <USAC_Bodybag.tips.2>密封袋仅提供尸体储存与运输的功能，因此最好建造一个冷藏库来避免储藏时的自然腐坏，USAC并不收购腐坏的尸体。</USAC_Bodybag.tips.2>
+  <USAC_Bodybag.tips.3>密封袋的估值会受尸体耐久与品质影响，耐久越低越不值钱；在战场快速回收并冷藏，通常比长时间露天堆放更划算。</USAC_Bodybag.tips.3>
+  <USAC_Bodybag.tips.4>密封袋交易货币只计算已装入尸体的袋子，空袋本身不会提供交易价值。</USAC_Bodybag.tips.4>
+
+  <USAC_Bond.tips.0>USAC使用信用债券作为交易中的货币，而非使用常见于边缘世界的白银货币。</USAC_Bond.tips.0>
+  <USAC_Bond.tips.1>USAC在交易中优先收取债券，因此用债券购买新债券可能会被收取额外的"折旧费用"，最好盖个金库来藏好这些纸并保持里面的Trade Beacon处于关闭状态。</USAC_Bond.tips.1>
+  <USAC_Bond.tips.2>信用债券的发行价值只有1000，但经销商贩售时大多会以更高的价格出售，因为多出来的部分属于营销代理的个人收益。溢价幅度取决于与USAC的阵营友好程度。</USAC_Bond.tips.2>
+  <USAC_Bond.tips.3>多数USAC服务会直接消耗Trade Beacon覆盖范围内的债券，而不是地图上全部库存；要保留资金时，请把备用债券放在信标范围外。</USAC_Bond.tips.3>
+  <USAC_Bond.tips.4>若你在同一张地图经营债务与租赁型服务，请预留额外债券缓冲，避免利息结算日和服务扣款撞期导致断供。</USAC_Bond.tips.4>
+
+  <USAC_Debt.tips.0>USAC每30天为一个季度向债务持有人收取利息，请确保交割日时殖民地内有能够结算的信用债券。利息利率由债务签订时的约定比例为准。</USAC_Debt.tips.0>
+  <USAC_Debt.tips.1>在偿还本金时，请注意每季度偿还高于本金总额10%的金额时将会根据数量产生额外的滞纳金费用。</USAC_Debt.tips.1>
+  <USAC_Debt.tips.2>如果你发现本金难以还清，那么至少确定你仍能保持支付每季度利息的收益。</USAC_Debt.tips.2>
+  <USAC_Debt.tips.3>USAC慷慨地为无法缴纳利息的殖民地提供两次宽限，但第三次他们将通过强制手段清收利息。</USAC_Debt.tips.3>
+  <USAC_Debt.tips.4>如果你发现债台高筑到你即将无法支付利息，那么请考虑在清收队抵达前逃出这颗星球。</USAC_Debt.tips.4>
+
+  <USAC_Mech.tips.0>重型采矿机作业期间会持续产生污染，越早准备污染处理与隔离区，越能降低对殖民地核心区的干扰。</USAC_Mech.tips.0>
+  <USAC_Mech.tips.1>重型采矿机可用债券续租，短期资金不足时可先保住机器运作，再安排下一轮交易补回库存。</USAC_Mech.tips.1>
+  <USAC_Mech.tips.2>机兵整备值会随时间下降，降到极低会产生负面状态；维持稳定补给比等到见底再抢修更省人力。</USAC_Mech.tips.2>
+  <USAC_Mech.tips.3>机兵单次补给约回复整备上限的25%，建立固定补给区与充足零件库存，能大幅减少前线断补风险。</USAC_Mech.tips.3>
+  <USAC_Mech.tips.4>USAC空投型单位与装备需要可用落点，基地若过度拥挤，请预先保留空地以降低空投失败或偏移的概率。</USAC_Mech.tips.4>
+</LanguageData>
