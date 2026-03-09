@@ -186,9 +186,25 @@ namespace USAC
 
                 var bag = filledBags[i];
                 float bagValue = Building_CorpseBag.CalculateCorpseValue(bag.ContainedCorpse);
+
+                // 记录数据用于重建
+                Map map = bag.Map;
+                IntVec3 pos = bag.Position;
+                Rot4 rot = bag.Rotation;
+                ThingDef bagDef = bag.def;
+                ThingDef stuff = bag.Stuff;
+                Faction faction = bag.Faction;
+
                 if (bag.Spawned) bag.DeSpawn();
 
                 TradeSession.trader.GiveSoldThingToTrader(bag, 1, TradeSession.playerNegotiator);
+
+                // 卖出后原地生成建筑规划
+                if (map != null && faction == Faction.OfPlayer)
+                {
+                    GenConstruct.PlaceBlueprintForBuild(bagDef, pos, map, rot, faction, stuff);
+                }
+
                 remaining -= bagValue;
             }
             return remaining;

@@ -143,16 +143,6 @@ namespace USAC
                 }
             }
 
-            // 兼容尸体袋交易
-            foreach (var tradeable in ___tradeables)
-            {
-                if (tradeable is Tradeable_CorpseBag)
-                {
-                    __result = tradeable;
-                    return false;
-                }
-            }
-
             __result = null;
             return false;
         }
