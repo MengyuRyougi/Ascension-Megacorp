@@ -42,7 +42,6 @@
       <li Class="Fortified.CompProperties_MechApparel" />
     </comps>
     <modExtensions>
-      <li Class="Fortified.ModExtension_MechCapsule" />
       <li Class="Fortified.HumanlikeMechExtension">
         <bodyTypeOverride>Male</bodyTypeOverride>
         <headTypeOverride>Male_AverageNormal</headTypeOverride>
@@ -111,6 +110,7 @@
     <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
     <weaponTags>
       <li>IndustrialGunAdvanced</li>
+      <li>AMGuns</li>
     </weaponTags>
     <weaponMoney>1000~2500</weaponMoney>
   </PawnKindDef>
