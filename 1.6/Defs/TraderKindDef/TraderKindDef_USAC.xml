@@ -21,15 +21,18 @@
             <li Class="USAC.StockGenerator_USAC_Mechs">
                 <kindCountRange>0~2</kindCountRange>
                 <countPerKindRange>1~2</countPerKindRange>
+                <price>Expensive</price>
             </li>
 
             <li Class="StockGenerator_SingleDef">
                 <thingDef>USAC_MealSurvivalPack</thingDef>
                 <countRange>200~500</countRange>
+                <price>Cheap</price>
             </li>
             <li Class="StockGenerator_SingleDef">
                 <thingDef>MedicineUltratech</thingDef>
                 <countRange>10~50</countRange>
+                <price>Expensive</price>
             </li>
 
             <!-- 出售：临时机控中枢 -->
@@ -111,7 +114,25 @@
             <!-- 收购：化合燃料 -->
             <li Class="StockGenerator_BuySingleDef">
                 <thingDef>Chemfuel</thingDef>
+                <price>Cheap</price>
             </li>
+
+            <!-- AUR聯動 -->
+            <li MayRequire="xmb.ancienturbanruins.mo" Class="StockGenerator_MarketValue">
+                <tradeTag>AM_Med</tradeTag>
+                <countRange>0~0</countRange>
+            </li>
+            <li MayRequire="xmb.ancienturbanruins.mo" Class="StockGenerator_MarketValue">
+                <tradeTag>AM_Electronics</tradeTag>
+                <countRange>0~0</countRange>
+                <price>Cheap</price>
+            </li>
+            <li MayRequire="xmb.ancienturbanruins.mo" Class="StockGenerator_MarketValue">
+                <tradeTag>AMGuns</tradeTag>
+                <countRange>0~0</countRange>
+            </li>
+            
+  
             <!-- DMS聯動 -->
 
             <!-- 收购：沖壓零件 -->
