@@ -52,7 +52,7 @@ namespace USAC
             capsule.TryAcceptMech(mech);
 
             // 查找空投位置
-            IntVec3 dropSpot = FindDropSpotForSize(map, capsuleDef.size, negotiator.Position);
+            IntVec3 dropSpot = FindDropSpotForSize(map, capsuleDef.size, DropCellFinder.TradeDropSpot(map));
 
             // 创建空投舱
             SkyfallerMaker.SpawnSkyfaller(USAC_DefOf.USAC_MechIncoming, capsule, dropSpot, map);
@@ -70,6 +70,18 @@ namespace USAC
             // 优先交易点附近
             IntVec3 targetSpot = nearLoc.IsValid ? nearLoc : DropCellFinder.TradeDropSpot(map);
 
+            // 缓存正在下落的空投舱的区域
+            System.Collections.Generic.List<CellRect> incomingRects = new System.Collections.Generic.List<CellRect>();
+            foreach (Thing t in map.listerThings.ThingsOfDef(USAC_DefOf.USAC_MechIncoming))
+            {
+                Skyfaller skyfaller = t as Skyfaller;
+                if (skyfaller != null && skyfaller.innerContainer.Any)
+                {
+                    IntVec2 otherSize = skyfaller.innerContainer[0].def.size;
+                    incomingRects.Add(GenAdj.OccupiedRect(skyfaller.Position, Rot4.North, otherSize).ExpandedBy(1));
+                }
+            }
+
             // 螺旋搜索空投点
             int maxSearchRadius = 30;
             for (int radius = 0; radius <= maxSearchRadius; radius++)
@@ -83,7 +95,7 @@ namespace USAC
                     if (cell.DistanceToEdge(map) < 10) continue;
 
                     // 检查放置条件
-                    if (CanPlaceAt(map, cell, size))
+                    if (CanPlaceAt(map, cell, size, incomingRects))
                     {
                         return cell;
                     }
@@ -96,10 +108,21 @@ namespace USAC
         }
 
         // 检查位置有效性
-        private static bool CanPlaceAt(Map map, IntVec3 center, IntVec2 size)
+        private static bool CanPlaceAt(Map map, IntVec3 center, IntVec2 size, System.Collections.Generic.List<CellRect> incomingRects)
         {
+            CellRect myRect = GenAdj.OccupiedRect(center, Rot4.North, size);
+
+            // 检查是否有其他的正在空投的机兵重叠
+            for (int i = 0; i < incomingRects.Count; i++)
+            {
+                if (myRect.Overlaps(incomingRects[i]))
+                {
+                    return false;
+                }
+            }
+
             // 检查所有占用的格子
-            foreach (IntVec3 cell in GenAdj.OccupiedRect(center, Rot4.North, size))
+            foreach (IntVec3 cell in myRect)
             {
                 // 基本检查
                 if (!cell.InBounds(map)) return false;
