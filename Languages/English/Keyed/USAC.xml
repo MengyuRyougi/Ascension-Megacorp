@@ -152,4 +152,16 @@
 
 You are four survivors from different contract chains: debt inheritance, automation layoffs, penal security work, and frontier hazard labor. Supplies are limited, support is gone, and every promise now depends on what you can build and defend on this rimworld.</USAC_FourPersonStart_GameStartDialog>
 
+  <USAC_DebtSite_CommercialRaid>USAC asset protection operation</USAC_DebtSite_CommercialRaid>
+  <USAC_DebtSite_CommercialRaid_Desc>Intelligence from a USAC commercial site indicates that it sold information about vulnerabilities in your defenses, luring a pirate assault against your colony.</USAC_DebtSite_CommercialRaid_Desc>
+  
+  <USAC_DebtSite_ArtilleryStrike>Artillery spotting detected from a USAC site...</USAC_DebtSite_ArtilleryStrike>
+  <USAC_DebtSite_AirStrike>Aerial identification detected from a USAC airfield...</USAC_DebtSite_AirStrike>
+
+  <USAC_ArtillerySupport_LetterLabel>Incoming artillery detected</USAC_ArtillerySupport_LetterLabel>
+  <USAC_ArtillerySupport_LetterText>A nearby USAC artillery position has answered the current assault on your colony and is providing ranged bombardment support after remote spotting. Take cover immediately!</USAC_ArtillerySupport_LetterText>
+  
+  <USAC_AirbaseSupport_LetterLabel>Incoming airstrike detected</USAC_AirbaseSupport_LetterLabel>
+  <USAC_AirbaseSupport_LetterText>A nearby temporary USAC airfield has dispatched a tactical bombing wing to your coordinates in support of the current ground offensive. The airstrike is about to reach the designated target area!</USAC_AirbaseSupport_LetterText>
+
 </LanguageData>

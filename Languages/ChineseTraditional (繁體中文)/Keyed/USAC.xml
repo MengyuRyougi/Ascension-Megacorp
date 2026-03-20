@@ -217,6 +217,19 @@
 You are four survivors from different contract chains: debt inheritance, automation layoffs, penal security work, and frontier hazard labor. Supplies are limited, support is gone, and every promise now depends on what you can build and defend on this rimworld. -->
   <USAC_FourPersonStart_GameStartDialog>重返大氣層的警報聲撕裂艙體，USAC早已把這次損失列入可接受風險。\n\n你們四人來自不同的契約鏈：繼承債務者、被自動機兵取代的技工、做過懲戒看守的武裝人員，你們都是簽下整份免責條款的邊疆計畫參與者。補給有限、支援中斷，從現在起，所有承諾都只取決於你們能在這顆邊緣世界上建立並守住什麼。\n\n以及記得履行每個月的債務支付。</USAC_FourPersonStart_GameStartDialog>
 
+  <!-- 債務據點預警與襲擊相關 -->
+  <USAC_DebtSite_CommercialRaid>USAC 資產保障行動</USAC_DebtSite_CommercialRaid>
+  <USAC_DebtSite_CommercialRaid_Desc>來自 USAC 商業據點的情報顯示，該據點透過出售您的防禦漏洞資訊，誘使一波海盜對您的殖民地發起了進攻。</USAC_DebtSite_CommercialRaid_Desc>
+  
+  <USAC_DebtSite_ArtilleryStrike>檢測到來自 USAC 據點的火炮校射...</USAC_DebtSite_ArtilleryStrike>
+  <USAC_DebtSite_AirStrike>檢測到來自 USAC 機場的航空識別...</USAC_DebtSite_AirStrike>
+
+  <USAC_ArtillerySupport_LetterLabel>檢測到來襲炮火</USAC_ArtillerySupport_LetterLabel>
+  <USAC_ArtillerySupport_LetterText>一個臨近的 USAC 火炮陣地回應了目前對您殖民地的襲擊，並提供了遠程校射後的火炮轟炸支援。請立即進入掩體！</USAC_ArtillerySupport_LetterText>
+  
+  <USAC_AirbaseSupport_LetterLabel>檢測到來襲空襲</USAC_AirbaseSupport_LetterLabel>
+  <USAC_AirbaseSupport_LetterText>一個臨近的 USAC 臨時機場已向您的座標派遣了戰術轟炸隊，以配合目前的地面攻勢。空襲即將抵達預定目標區！</USAC_AirbaseSupport_LetterText>
+
   <!-- UNUSED -->
   <USAC_SiteLabel_HostileCamp>敵軍據點</USAC_SiteLabel_HostileCamp>
   <USAC_SiteLabel_HostileBase>叛軍營地</USAC_SiteLabel_HostileBase>

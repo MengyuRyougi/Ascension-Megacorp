@@ -12,5 +12,8 @@
   
   <!-- EN: mech (incoming) -->
   <USAC_MechIncoming.label>機兵(下落中)</USAC_MechIncoming.label>
+
+  <!-- EN: orbital transport (incoming) -->
+  <USAC_TransportIncoming.label>軌道運輸夾(下落中)</USAC_TransportIncoming.label>
   
 </LanguageData>
