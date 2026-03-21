@@ -5,12 +5,12 @@ using USAC.Endings;
 
 namespace USAC
 {
-    // 显示围攻准备倒计时或防守剩余时间
+    // 围攻防守倒计时显示
     public class Alert_USACSiegeCountdown : Alert
     {
         public Alert_USACSiegeCountdown()
         {
-            // 预设标签
+            // 队列有序则后续未到期预设标签
             defaultLabel = "USAC.Alert.SiegeCountdown.Label".Translate();
         }
 

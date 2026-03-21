@@ -13,12 +13,16 @@ namespace USAC
         private static readonly System.Collections.Generic.Dictionary<int, int> inputValues = new();
         
         // 列宽常量 确保左右对称
-        private const float COL_ICON = 40f;
-        private const float COL_NAME = 130f;
-        private const float COL_COUNT = 55f;
-        private const float COL_PRICE = 65f;
-        private const float COL_ADJUSTER = 115f;
-        private const float COL_SPACING = 5f;
+        public const float COL_ICON = 45f;
+        public const float COL_COUNT = 55f;
+        public const float COL_PRICE = 65f;
+        public const float COL_ADJUSTER = 90f;
+        public const float COL_SPACING = 0f;
+
+        public static float CalcNameWidth(float totalWidth)
+        {
+            return Mathf.Max(100f, totalWidth - COL_ICON - COL_COUNT - COL_PRICE - COL_ADJUSTER);
+        }
         #endregion
 
         #region 公共方法
@@ -26,37 +30,46 @@ namespace USAC
         {
             DrawRowBackground(rect, index);
             
-            Rect inner = rect.ContractedBy(4);
-            float x = inner.x;
+            float x = rect.x;
+            string label = trad.Label;
             
-            // 图标
-            DrawItemIcon(new Rect(x, inner.y, COL_ICON - COL_SPACING, COL_ICON - COL_SPACING), trad);
+            // 图标填满高度
+            Rect iconRect = new(x, rect.y, rect.height, rect.height);
+            if (Mouse.IsOver(iconRect))
+            {
+                Widgets.DrawHighlight(iconRect);
+                TooltipHandler.TipRegion(iconRect, () => label, trad.GetHashCode() * 2);
+            }
+            DrawItemIcon(iconRect, trad);
             x += COL_ICON;
             
-            // 物品名
+            // 物品名独立高亮
+            float colNameWidth = CalcNameWidth(rect.width);
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = trad.TraderWillTrade ? Color.white : ColTextMuted;
             
-            string label = trad.Label;
-            string displayLabel = TruncateMiddle(label, COL_NAME - COL_SPACING);
+            string displayLabel = TruncateMiddle(label, colNameWidth);
             
-            Rect labelRect = new Rect(x, inner.y, COL_NAME - COL_SPACING, inner.height);
-            Widgets.Label(labelRect, displayLabel);
-            
-            if (Mouse.IsOver(labelRect))
+            Rect nameRect = new(x, rect.y, colNameWidth, rect.height);
+            if (Mouse.IsOver(nameRect))
             {
-                Widgets.DrawHighlight(labelRect);
-                TooltipHandler.TipRegion(labelRect, () => label, trad.GetHashCode() * 2);
+                Widgets.DrawHighlight(nameRect);
+                TooltipHandler.TipRegion(nameRect, () => label, trad.GetHashCode() * 3);
             }
-            x += COL_NAME;
+            
+            // 绘制文本 (带一点点左边距美观)
+            Rect labelTextRect = nameRect;
+            labelTextRect.xMin += 5f;
+            Widgets.Label(labelTextRect, displayLabel);
+            x += colNameWidth;
             
             // 持有数
             int colonyCount = trad.CountHeldBy(Transactor.Colony);
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
-            Widgets.Label(new Rect(x, inner.y, COL_COUNT - COL_SPACING, inner.height), colonyCount.ToString());
+            Widgets.Label(new Rect(x, rect.y, COL_COUNT, rect.height), colonyCount.ToString());
             x += COL_COUNT;
             
             // 单价
@@ -66,14 +79,14 @@ namespace USAC
                 float sellPrice = trad.GetPriceFor(TradeAction.PlayerSells);
                 Text.Font = GameFont.Small;
                 GUI.color = ColAccentCamo3;
-                Widgets.Label(new Rect(x, inner.y, COL_PRICE - COL_SPACING, inner.height), sellPrice.ToString("F0"));
+                Widgets.Label(new Rect(x, rect.y, COL_PRICE, rect.height), sellPrice.ToString("F0"));
             }
             x += COL_PRICE;
             
             // 调整器
             if (trad.TraderWillTrade && colonyCount > 0)
             {
-                Rect adjustRect = new(x, inner.y + 5, COL_ADJUSTER - COL_SPACING, 28);
+                Rect adjustRect = new(x + 5, rect.y + (rect.height - 28) / 2f, COL_ADJUSTER - 10f, 28);
                 DrawCountAdjuster(adjustRect, trad, true, onChanged);
             }
             
@@ -85,13 +98,12 @@ namespace USAC
         {
             DrawRowBackground(rect, index);
             
-            Rect inner = rect.ContractedBy(4);
-            float x = inner.x;
+            float x = rect.x;
             
-            // 调整器
+            // 调整器 (带垂直居中修正)
             if (trad.TraderWillTrade && trad.CountHeldBy(Transactor.Trader) > 0)
             {
-                Rect adjustRect = new(x, inner.y + 5, COL_ADJUSTER - COL_SPACING, 28);
+                Rect adjustRect = new(x + 5, rect.y + (rect.height - 28) / 2f, COL_ADJUSTER - 10f, 28);
                 DrawCountAdjuster(adjustRect, trad, false, onChanged);
             }
             x += COL_ADJUSTER;
@@ -103,7 +115,7 @@ namespace USAC
                 Text.Font = GameFont.Small;
                 Text.Anchor = TextAnchor.MiddleCenter;
                 GUI.color = ColAccentCamo3;
-                Widgets.Label(new Rect(x, inner.y, COL_PRICE - COL_SPACING, inner.height), buyPrice.ToString("F0"));
+                Widgets.Label(new Rect(x, rect.y, COL_PRICE, rect.height), buyPrice.ToString("F0"));
             }
             x += COL_PRICE;
             
@@ -114,30 +126,41 @@ namespace USAC
                 Text.Anchor = TextAnchor.MiddleCenter;
                 GUI.color = Color.white;
                 Text.Font = GameFont.Small;
-                Widgets.Label(new Rect(x, inner.y, COL_COUNT - COL_SPACING, inner.height), traderCount.ToString());
+                Widgets.Label(new Rect(x, rect.y, COL_COUNT, rect.height), traderCount.ToString());
             }
             x += COL_COUNT;
             
             // 物品名
+            float colNameWidth = CalcNameWidth(rect.width);
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = trad.TraderWillTrade ? Color.white : ColTextMuted;
             
             string label = trad.Label;
-            string displayLabel = TruncateMiddle(label, COL_NAME - COL_SPACING);
+            string displayLabel = TruncateMiddle(label, colNameWidth);
             
-            Rect labelRect = new Rect(x, inner.y, COL_NAME - COL_SPACING, inner.height);
-            Widgets.Label(labelRect, displayLabel);
-            
-            if (Mouse.IsOver(labelRect))
+            Rect nameRect = new(x, rect.y, colNameWidth, rect.height);
+            if (Mouse.IsOver(nameRect))
             {
-                Widgets.DrawHighlight(labelRect);
-                TooltipHandler.TipRegion(labelRect, () => label, trad.GetHashCode() * 3);
+                Widgets.DrawHighlight(nameRect);
+                TooltipHandler.TipRegion(nameRect, () => label, trad.GetHashCode() * 4);
             }
-            x += COL_NAME;
             
-            // 图标
-            DrawItemIcon(new Rect(x, inner.y, COL_ICON - COL_SPACING, COL_ICON - COL_SPACING), trad);
+            // 文本右对齐一点
+            Rect labelTextRect = nameRect;
+            labelTextRect.xMax -= 5f;
+            Text.Anchor = TextAnchor.MiddleRight;
+            Widgets.Label(labelTextRect, displayLabel);
+            x += colNameWidth;
+            
+            // 渲染独立图标并响应高位对齐 (填满最右侧)
+            Rect iconRect = new(rect.xMax - rect.height, rect.y, rect.height, rect.height);
+            if (Mouse.IsOver(iconRect))
+            {
+                Widgets.DrawHighlight(iconRect);
+                TooltipHandler.TipRegion(iconRect, () => label, trad.GetHashCode() * 5);
+            }
+            DrawItemIcon(iconRect, trad);
             
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
@@ -157,8 +180,20 @@ namespace USAC
         private static void DrawItemIcon(Rect iconRect, Tradeable trad)
         {
             if (trad.AnyThing == null) return;
-            
-            Widgets.ThingIcon(iconRect, trad.AnyThing);
+
+            // 根据物理尺寸计算缩放 防止溢出
+            float scale = 0.9f;
+            if (trad.ThingDef?.graphicData != null)
+            {
+                var drawSize = trad.ThingDef.graphicData.drawSize;
+                float maxSide = Mathf.Max(drawSize.x, drawSize.y);
+                if (maxSide > 1f)
+                {
+                    scale /= maxSide;
+                }
+            }
+
+            Widgets.ThingIcon(iconRect.ScaledBy(scale), trad.AnyThing);
             
             if (Mouse.IsOver(iconRect))
             {
@@ -170,28 +205,23 @@ namespace USAC
 
         private static string TruncateMiddle(string text, float maxWidth)
         {
-            if (Text.CalcSize(text).x <= maxWidth)
-                return text;
-            
-            // 逐步减少显示字符直到适合宽度
-            int totalLen = text.Length;
-            
-            // 保留开头和结尾各至少3个字符
-            for (int keepStart = Mathf.Max(3, totalLen / 2); keepStart >= 3; keepStart--)
+            if (Text.CalcSize(text).x <= maxWidth) return text;
+
+            // 预处理颜色标签
+            string stripped = text.StripTags();
+            if (Text.CalcSize(stripped).x <= maxWidth) return stripped;
+
+            int len = stripped.Length;
+            // 寻找最佳截断点 基于纯文本
+            for (int k = len - 1; k >= 6; k--)
             {
-                for (int keepEnd = Mathf.Max(3, totalLen / 3); keepEnd >= 3; keepEnd--)
-                {
-                    if (keepStart + keepEnd >= totalLen - 1)
-                        continue;
-                    
-                    string truncated = text.Substring(0, keepStart) + "..." + text.Substring(totalLen - keepEnd);
-                    if (Text.CalcSize(truncated).x <= maxWidth)
-                        return truncated;
-                }
+                int left = k / 2;
+                int right = k - left;
+                string res = stripped.Substring(0, left) + "..." + stripped.Substring(len - right);
+                if (Text.CalcSize(res).x <= maxWidth) return res;
             }
-            
-            // 如果还是太长只保留开头3个字符
-            return text.Substring(0, 3) + "...";
+
+            return stripped.Substring(0, Math.Min(len, 3)) + "...";
         }
 
         private static void DrawCountAdjuster(Rect rect, Tradeable trad, bool isPlayerSide, Action onChanged)
@@ -248,8 +278,8 @@ namespace USAC
             bool canTransfer = isPlayerSide 
                 ? trad.CountHeldBy(Transactor.Colony) > 0
                 : trad.CountHeldBy(Transactor.Trader) > 0;
-            
-            if (DrawTacticalButton(arrowRect, arrowSymbol, canTransfer, GameFont.Medium, $"arrow_{tradeableId}"))
+            string sideKey = isPlayerSide ? "p" : "t";
+            if (DrawTacticalButton(arrowRect, arrowSymbol, canTransfer, GameFont.Medium, $"arrow_{sideKey}_{tradeableId}"))
             {
                 int amountToAdd = inputValues[tradeableId] > 0 ? inputValues[tradeableId] : 1;
                 
@@ -266,7 +296,7 @@ namespace USAC
                         ? currentCount - amountToAdd
                         : currentCount + amountToAdd;
                     
-                    // 使用 ClampAmount 确保在有效范围内
+                    // 值边界保护
                     int clampedTotal = trad.ClampAmount(newTotal);
                     
                     // 仅在值有效时调用

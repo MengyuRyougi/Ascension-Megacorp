@@ -109,7 +109,13 @@ namespace USAC.InternalUI
             Text.Anchor = TextAnchor.MiddleCenter;
             Text.Font = font;
             GUI.color = active ? (alpha > 0.5f ? Color.white : ColAccentCamo1) : ColTextMuted;
-            Widgets.Label(r, label);
+            
+            Rect labelRect = r;
+            if (label == "←" || label == "→" || label == "↑" || label == "↓")
+            {
+                labelRect.y -= 2f;
+            }
+            Widgets.Label(labelRect, label);
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 

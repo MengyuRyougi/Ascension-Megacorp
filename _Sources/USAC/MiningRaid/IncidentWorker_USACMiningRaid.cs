@@ -178,17 +178,17 @@ namespace USAC
             DeepResourceGrid grid = map.deepResourceGrid;
             potentialCells.Clear();
 
-            // 使用索引直接遍历避免IntVec3转换开销
+            // 索引遍历避免转换开销
             int cellCount = map.cellIndices.NumGridCells;
             
-            // 采样策略：每10个格子检查1个
+            // 采样每十格检查一次
             int step = Mathf.Max(1, cellCount / 10000);
             
             for (int i = 0; i < cellCount; i += step)
             {
                 IntVec3 cell = map.cellIndices.IndexToCell(i);
                 
-                // 快速检查：先检查资源再检查其他条件
+                // 资源优先快速检查条件
                 if (grid.CountAt(cell) <= 0) continue;
                 if (!cell.Walkable(map)) continue;
                 if (cell.Roofed(map)) continue;
@@ -200,7 +200,7 @@ namespace USAC
                 if (potentialCells.Count >= 50) break;
             }
 
-            // 如果采样没找到足够候选则全图扫描
+            // 候选不足启动全图扫描
             if (potentialCells.Count < 10)
             {
                 potentialCells.Clear();

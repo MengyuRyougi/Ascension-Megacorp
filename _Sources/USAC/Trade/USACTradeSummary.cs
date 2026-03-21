@@ -221,7 +221,7 @@ namespace USAC
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = inputCount > 0 ? ColAccentCamo3 : ColTextMuted;
             
-            string buffer = inputCount > 0 ? inputCount.ToString() : "";
+            string buffer = inputCount > 0 ? inputCount.ToString() : "1";
             string newBuffer = Widgets.TextField(inputRect, buffer, 6, new System.Text.RegularExpressions.Regex(@"^\d*$"));
             
             if (newBuffer != buffer)
@@ -254,12 +254,12 @@ namespace USAC
                     int newTotal;
                     if (isSelling)
                     {
-                        // 出售：从负数向0增加
+                        // 出售数量修正
                         newTotal = currentCount + amountToReduce;
                     }
                     else
                     {
-                        // 购买：从正数向0减少
+                        // 购买数量归正
                         newTotal = currentCount - amountToReduce;
                     }
                     
@@ -302,7 +302,7 @@ namespace USAC
             float contentX = inner.x + 60;
             float contentWidth = inner.width - 65;
             
-            // 第一行：货币名称
+            // 输出货币名称
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = ColAccentCamo3;
@@ -338,6 +338,7 @@ namespace USAC
             Text.Anchor = TextAnchor.MiddleLeft;
             Text.WordWrap = false;
             
+            // 资产汇总行：仍避开左侧大图标
             float labelWidth = Text.CalcSize("USAC.Trade.Summary.Current".Translate()).x + 5;
             Widgets.Label(new Rect(contentX, row2Y, labelWidth, 20), "USAC.Trade.Summary.Current".Translate());
             
@@ -380,13 +381,14 @@ namespace USAC
                 Widgets.Label(new Rect(contentX, row3Y, contentWidth, 20), "USAC.Trade.Summary.NoChange".Translate());
             }
             
-            // 展示离散核销损耗
+            // 底部横穿全宽区域 (小贴士与损耗)
             float row4Y = inner.y + 80;
             GUI.color = new Color(1f, 1f, 1f, 0.1f);
-            Widgets.DrawLineHorizontal(contentX, row4Y, contentWidth);
+            Widgets.DrawLineHorizontal(inner.x, row4Y, inner.width);
             
             Text.Font = GameFont.Tiny;
             GUI.color = new Color(0.6f, 0.6f, 0.6f);
+            Text.Anchor = TextAnchor.MiddleCenter;
             Text.WordWrap = true;
             
             float wastage = projectedConsumableValue - (totalBuyValue - totalSellValue);
@@ -394,7 +396,8 @@ namespace USAC
                 ? "USAC.Trade.Summary.Wastage".Translate(wastage.ToString("F0"))
                 : $"USAC.Trade.Summary.Tip_{currentTipIndex}".Translate();
                 
-            Widgets.Label(new Rect(contentX, row4Y + 5, contentWidth, 50), footerText);
+            Rect footerTextRect = new(inner.x, row4Y + 5, inner.width, 50);
+            Widgets.Label(footerTextRect, footerText);
             
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;

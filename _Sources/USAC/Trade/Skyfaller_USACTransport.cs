@@ -199,7 +199,7 @@ namespace USAC
                     // 直接生成在目标位置
                     GenPlace.TryPlaceThing(thing, pos, map, ThingPlaceMode.Direct);
                     
-                    // 强制设置最终旋转（部分物体在 TryPlaceThing 后会重置）
+                    // 强制纠正最终旋转状态
                     if (thing is Building b)
                         b.Rotation = cargoRotation;
                 }

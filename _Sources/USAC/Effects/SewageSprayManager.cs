@@ -107,7 +107,7 @@ namespace USAC
             if (!snapshotEmitting)
             {
                 idleFrameCount++;
-                // 空闲超过2秒且曾经发射过则跳过更新
+                // 超时自动停更优化
                 if (idleFrameCount > MAX_IDLE_FRAMES && hasEverEmitted)
                 {
                     return;

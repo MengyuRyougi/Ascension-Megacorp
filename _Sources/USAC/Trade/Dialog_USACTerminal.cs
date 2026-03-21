@@ -21,10 +21,10 @@ namespace USAC
         private List<Tradeable> cachedTradeables;
         private List<Tradeable> filteredTradeables;
         private Tradeable cachedCurrencyTradeable;
-        
+
         // 使用原版搜索组件
         private QuickSearchWidget quickSearchWidget = new();
-        
+
         // 排序状态
         private enum SortColumn { Name, Count, Price }
         private SortColumn playerSortColumn = SortColumn.Name;
@@ -44,7 +44,7 @@ namespace USAC
             absorbInputAroundWindow = true;
             doWindowBackground = false;
             drawShadow = false;
-            
+
             // 初始化过滤列表
             filteredTradeables = new List<Tradeable>();
         }
@@ -74,23 +74,23 @@ namespace USAC
             DrawBackgroundGrid(fullRect);
 
             GUI.BeginGroup(inRect);
-            
+
             // 绘制头部
             DrawTerminalHeader(new Rect(0, 0, inRect.width, 70));
-            
+
             // 绘制搜索栏
             DrawSearchBar(new Rect(0, 80, inRect.width, 35));
-            
+
             // 绘制主交易区域
             Rect mainRect = new(0, 125, inRect.width, inRect.height - 205);
             BeginTacticalScroll(out var prevBar, out var prevThumb, out var prevColor);
             DrawTradeArea(mainRect);
             EndTacticalScroll(prevBar, prevThumb, prevColor);
-            
+
             // 绘制底部操作栏
             Rect footerRect = new(0, inRect.height - 70, inRect.width, 70);
             DrawFooter(footerRect);
-            
+
             GUI.EndGroup();
         }
 
@@ -103,7 +103,7 @@ namespace USAC
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = ColAccentCamo1;
-            Widgets.Label(new Rect(20, 0, 300, rect.height), "USAC.Trade.Terminal".Translate());
+            Widgets.Label(new Rect(20, 0, 500, rect.height), "USAC.Trade.Terminal".Translate());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
@@ -112,7 +112,11 @@ namespace USAC
             Text.Anchor = TextAnchor.MiddleRight;
             GUI.color = ColTextMuted;
             string traderInfo = TradeSession.trader.TraderName;
-            Widgets.Label(new Rect(rect.width - 320, 0, 280, rect.height), traderInfo);
+
+            float traderNameMaxWidth = 600f;
+            Rect traderRect = new(rect.width - 70 - traderNameMaxWidth, 0, traderNameMaxWidth, rect.height);
+            Widgets.Label(traderRect, traderInfo);
+
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
@@ -126,12 +130,12 @@ namespace USAC
         private void DrawSearchBar(Rect rect)
         {
             Widgets.DrawBoxSolidWithOutline(rect, ColHeaderBg, ColBorder);
-            
+
             Rect inner = rect.ContractedBy(5);
-            
-            // 使用原版QuickSearchWidget
+
+            // 绘制搜索组件
             quickSearchWidget.OnGUI(inner, ApplySearchFilter, () => ApplySearchFilter());
-            
+
             // 搜索结果计数
             if (quickSearchWidget.filter.Active && filteredTradeables != null)
             {
@@ -147,19 +151,19 @@ namespace USAC
 
         private void DrawTradeArea(Rect rect)
         {
-            // 布局分配
-            float leftWidth = rect.width * 0.38f;
-            float centerWidth = rect.width * 0.20f;
-            float rightWidth = rect.width * 0.38f;
-            float gap = 10f;
-            
+            // 分配布局宽度
+            float totalActive = rect.width;
+            float leftWidth = Mathf.Round(totalActive * 0.40f);
+            float centerWidth = Mathf.Round(totalActive * 0.20f);
+            float rightWidth = totalActive - leftWidth - centerWidth;
+
             Rect leftColumn = new(rect.x, rect.y, leftWidth, rect.height);
             DrawPlayerColumn(leftColumn);
-            
-            Rect centerColumn = new(leftColumn.xMax + gap, rect.y, centerWidth, rect.height);
+
+            Rect centerColumn = new(leftColumn.xMax, rect.y, centerWidth, rect.height);
             DrawSummaryColumn(centerColumn);
-            
-            Rect rightColumn = new(centerColumn.xMax + gap, rect.y, rightWidth, rect.height);
+
+            Rect rightColumn = new(centerColumn.xMax, rect.y, rightWidth, rect.height);
             DrawTraderColumn(rightColumn);
         }
 
@@ -176,33 +180,33 @@ namespace USAC
 
             Rect listRect = new(rect.x, rect.y + 35, rect.width, rect.height - 35);
             Widgets.DrawBoxSolidWithOutline(listRect, new Color(0, 0, 0, 0.2f), ColBorder);
-            
+
             Rect innerRect = listRect.ContractedBy(5);
-            
+
             // 绘制列表头
             Rect columnHeaderRect = new(innerRect.x, innerRect.y, innerRect.width, 20);
             DrawPlayerColumnHeaders(columnHeaderRect);
-            
-            var playerItems = filteredTradeables.Where(t => 
+
+            var playerItems = filteredTradeables.Where(t =>
                 t.CountHeldBy(Transactor.Colony) > 0 || t.CountToTransfer < 0).ToList();
-            
+
             // 应用排序
             ApplySort(playerItems, playerSortColumn, playerSortAscending, true);
-            
+
             float viewHeight = playerItems.Count * 50f + 25f;
-            Rect viewRect = new(0, 0, innerRect.width - 20f, viewHeight);
-            
+            Rect viewRect = new(0, 0, innerRect.width - 16f, viewHeight);
+
             Rect scrollRect = new(innerRect.x, innerRect.y + 25, innerRect.width, innerRect.height - 25);
             Widgets.BeginScrollView(scrollRect, ref scrollPositionLeft, viewRect);
-            
+
             float y = 5f;
             for (int i = 0; i < playerItems.Count; i++)
             {
-                Rect rowRect = new(10, y, viewRect.width - 20, 45);
+                Rect rowRect = new(0, y, viewRect.width, 45);
                 USACTradePanel.DrawPlayerItemRow(rowRect, playerItems[i], i, CountToTransferChanged);
                 y += 50f;
             }
-            
+
             Widgets.EndScrollView();
         }
 
@@ -224,33 +228,33 @@ namespace USAC
 
             Rect listRect = new(rect.x, rect.y + 35, rect.width, rect.height - 35);
             Widgets.DrawBoxSolidWithOutline(listRect, new Color(0, 0, 0, 0.2f), ColBorder);
-            
+
             Rect innerRect = listRect.ContractedBy(5);
-            
+
             // 绘制列表头
             Rect columnHeaderRect = new(innerRect.x, innerRect.y, innerRect.width, 20);
             DrawTraderColumnHeaders(columnHeaderRect);
-            
-            var traderItems = filteredTradeables.Where(t => 
+
+            var traderItems = filteredTradeables.Where(t =>
                 t.CountHeldBy(Transactor.Trader) > 0 || t.CountToTransfer > 0).ToList();
-            
+
             // 应用排序
             ApplySort(traderItems, traderSortColumn, traderSortAscending, false);
-            
+
             float viewHeight = traderItems.Count * 50f + 25f;
-            Rect viewRect = new(0, 0, innerRect.width - 20f, viewHeight);
-            
+            Rect viewRect = new(0, 0, innerRect.width - 16f, viewHeight);
+
             Rect scrollRect = new(innerRect.x, innerRect.y + 25, innerRect.width, innerRect.height - 25);
             Widgets.BeginScrollView(scrollRect, ref scrollPositionRight, viewRect);
-            
+
             float y = 5f;
             for (int i = 0; i < traderItems.Count; i++)
             {
-                Rect rowRect = new(10, y, viewRect.width - 20, 45);
+                Rect rowRect = new(0, y, viewRect.width, 45);
                 USACTradePanel.DrawTraderItemRow(rowRect, traderItems[i], i, CountToTransferChanged);
                 y += 50f;
             }
-            
+
             Widgets.EndScrollView();
         }
 
@@ -270,7 +274,7 @@ namespace USAC
             float optionsX = 30f;
             float optionWidth = 200f;
             float rowHeight = 24f;
-            
+
             // 是否启用债券支付
             Rect useBondsRect = new(optionsX, rect.y + 10, optionWidth, rowHeight);
             bool enableBonds = Tradeable_USACCurrency.EnableBondsForPayment;
@@ -305,10 +309,10 @@ namespace USAC
             }
 
             // 确认交易按钮
-            string acceptLabel = giftsOnly 
-                ? "OfferGifts".Translate() 
+            string acceptLabel = giftsOnly
+                ? "OfferGifts".Translate()
                 : "AcceptButton".Translate();
-            
+
             if (DrawTacticalButton(
                 new Rect(centerX + 10, centerY, buttonWidth, buttonHeight),
                 acceptLabel, true, GameFont.Small, "accept_trade"))
@@ -329,33 +333,33 @@ namespace USAC
         private bool IsPlayerMoneyEnough()
         {
             if (giftsOnly) return true;
-            
+
             // 计算净支出
             float totalBuy = 0f;
             float totalSell = 0f;
-            
+
             foreach (var trad in TradeSession.deal.AllTradeables)
             {
                 if (trad.IsCurrency) continue;
-                
+
                 if (trad.CountToTransfer > 0)
                     totalBuy += trad.CurTotalCurrencyCostForSource;
                 else if (trad.CountToTransfer < 0)
                     totalSell += trad.CurTotalCurrencyCostForDestination;
             }
-            
+
             float netCost = totalBuy - totalSell;
-            
+
             // 检查处理状态平衡
             if (netCost <= 0) return true;
-            
+
             // 否则检查可用货币总量
             if (cachedCurrencyTradeable != null)
             {
                 int available = cachedCurrencyTradeable.CountHeldBy(Transactor.Colony);
                 return (available >= netCost);
             }
-            
+
             return false;
         }
         #endregion
@@ -363,11 +367,8 @@ namespace USAC
         #region 辅助方法
         private bool DrawSortableHeader(Rect rect, string label, bool isActive, bool ascending)
         {
-            Text.Anchor = TextAnchor.MiddleCenter;
-            Text.WordWrap = false;
-            
             bool clicked = false;
-            
+
             if (Mouse.IsOver(rect))
             {
                 Widgets.DrawHighlight(rect);
@@ -377,32 +378,49 @@ namespace USAC
                     clicked = true;
                 }
             }
-            
-            // 绘制标签
-            GUI.color = isActive ? ColAccentCamo1 : ColAccentCamo3;
-            Widgets.Label(rect, label);
-            
-            // 绘制排序箭头
-            if (isActive)
+
+            // 动态选择字体以适应多语言 (如果太长则用 Tiny)
+            Text.Font = GameFont.Tiny;
+            float labelWidth = Text.CalcSize(label).x;
+            if (labelWidth > rect.width - (isActive ? 12 : 0))
             {
-                string arrow = ascending ? "▲" : "▼";
-                float arrowWidth = Text.CalcSize(arrow).x;
-                Rect arrowRect = new(rect.xMax - arrowWidth - 2, rect.y, arrowWidth, rect.height);
-                Widgets.Label(arrowRect, arrow);
+                Text.Font = GameFont.Tiny;
             }
             
+            // 居中绘制标签
+            GUI.color = isActive ? ColAccentCamo1 : ColAccentCamo3;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Text.WordWrap = false;
+            
+            // 绘制标签 (留一点点缝隙给箭头，但不影响整体居中感)
+            Rect labelRect = rect;
+            if (isActive)
+            {
+                labelRect.xMax -= 8; // 稍微压缩一点宽度，而非偏移起始位置，以保持视觉中心
+            }
+            Widgets.Label(labelRect, label);
+
+            // 绘制排序箭头 (稳固在右侧)
+            if (isActive)
+            {
+                Text.Anchor = TextAnchor.MiddleRight;
+                string arrow = ascending ? "▲" : "▼";
+                Rect arrowRect = new(rect.xMax - 14, rect.y, 12, rect.height);
+                Widgets.Label(arrowRect, arrow);
+            }
+
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             Text.WordWrap = true;
-            
+
             return clicked;
         }
-        
+
         private void ApplySort(List<Tradeable> list, SortColumn column, bool ascending, bool isPlayerSide)
         {
             if (list == null || list.Count == 0)
                 return;
-            
+
             switch (column)
             {
                 case SortColumn.Name:
@@ -412,7 +430,7 @@ namespace USAC
                         return ascending ? result : -result;
                     });
                     break;
-                    
+
                 case SortColumn.Count:
                     list.Sort((a, b) =>
                     {
@@ -423,7 +441,7 @@ namespace USAC
                         return ascending ? result : -result;
                     });
                     break;
-                    
+
                 case SortColumn.Price:
                     list.Sort((a, b) =>
                     {
@@ -440,17 +458,17 @@ namespace USAC
         {
             Text.Font = GameFont.Tiny;
             GUI.color = ColAccentCamo3;
-            
-            // 与数据行保持一致的内边距
-            Rect inner = rect.ContractedBy(4, 0);
-            float x = inner.x;
-            
-            // 图标列 40px
-            x += 40f;
-            
-            // 物品名列 130px
-            Rect nameRect = new(x, rect.y, 130f, rect.height);
-            if (DrawSortableHeader(nameRect, "物品", playerSortColumn == SortColumn.Name, playerSortAscending))
+
+            float x = rect.x; // 现在 Row 没有 ContractedBy(4) 了，直接对齐
+            float rowInnerWidth = rect.width - 16f; // 仅减去滚动条宽度
+            float nameWidth = USACTradePanel.CalcNameWidth(rowInnerWidth);
+
+            // 图标列 (对应 45px 行高)
+            x += USACTradePanel.COL_ICON;
+
+            // 计算物品列宽
+            Rect nameRect = new(x, rect.y, nameWidth - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(nameRect, "USAC.Trade.Header.Item".Translate(), playerSortColumn == SortColumn.Name, playerSortAscending))
             {
                 if (playerSortColumn == SortColumn.Name)
                     playerSortAscending = !playerSortAscending;
@@ -461,37 +479,27 @@ namespace USAC
                 }
                 ApplySearchFilter();
             }
-            x += 130f;
-            
-            // 持有列 55px
-            Rect countRect = new(x, rect.y, 55f, rect.height);
-            if (DrawSortableHeader(countRect, "持有", playerSortColumn == SortColumn.Count, playerSortAscending))
+            x += nameWidth;
+
+            // 计算持有列宽
+            Rect countRect = new(x, rect.y, USACTradePanel.COL_COUNT - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(countRect, "USAC.Trade.Header.Held".Translate(), playerSortColumn == SortColumn.Count, playerSortAscending))
             {
-                if (playerSortColumn == SortColumn.Count)
-                    playerSortAscending = !playerSortAscending;
-                else
-                {
-                    playerSortColumn = SortColumn.Count;
-                    playerSortAscending = false;
-                }
+                playerSortColumn = SortColumn.Count; // Simplified logic
+                playerSortAscending = !playerSortAscending; // Simplified logic
                 ApplySearchFilter();
             }
-            x += 55f;
-            
-            // 单价列 65px
-            Rect priceRect = new(x, rect.y, 65f, rect.height);
-            if (DrawSortableHeader(priceRect, "单价", playerSortColumn == SortColumn.Price, playerSortAscending))
+            x += USACTradePanel.COL_COUNT;
+
+            // 计算单价列宽
+            Rect priceRect = new(x, rect.y, USACTradePanel.COL_PRICE - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(priceRect, "USAC.Trade.Header.Price".Translate(), playerSortColumn == SortColumn.Price, playerSortAscending))
             {
-                if (playerSortColumn == SortColumn.Price)
-                    playerSortAscending = !playerSortAscending;
-                else
-                {
-                    playerSortColumn = SortColumn.Price;
-                    playerSortAscending = false;
-                }
+                playerSortColumn = SortColumn.Price; // Simplified logic
+                playerSortAscending = !playerSortAscending; // Simplified logic
                 ApplySearchFilter();
             }
-            
+
             GUI.color = Color.white;
         }
 
@@ -499,47 +507,37 @@ namespace USAC
         {
             Text.Font = GameFont.Tiny;
             GUI.color = ColAccentCamo3;
-            
-            // 与数据行保持一致的内边距
-            Rect inner = rect.ContractedBy(4, 0);
-            float x = inner.x;
-            
-            // 调整器列 115px
-            x += 115f;
-            
-            // 单价列 65px
-            Rect priceRect = new(x, rect.y, 65f, rect.height);
-            if (DrawSortableHeader(priceRect, "单价", traderSortColumn == SortColumn.Price, traderSortAscending))
+
+            float x = rect.x; 
+            float rowInnerWidth = rect.width - 16f; 
+            float nameWidth = USACTradePanel.CalcNameWidth(rowInnerWidth);
+
+            // 预留调整器列宽
+            x += USACTradePanel.COL_ADJUSTER;
+
+            // 计算单价列宽
+            Rect priceRect = new(x, rect.y, USACTradePanel.COL_PRICE - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(priceRect, "USAC.Trade.Header.Price".Translate(), traderSortColumn == SortColumn.Price, traderSortAscending))
             {
-                if (traderSortColumn == SortColumn.Price)
-                    traderSortAscending = !traderSortAscending;
-                else
-                {
-                    traderSortColumn = SortColumn.Price;
-                    traderSortAscending = false;
-                }
+                traderSortColumn = SortColumn.Price; // Simplified logic
+                traderSortAscending = !traderSortAscending; // Simplified logic
                 ApplySearchFilter();
             }
-            x += 65f;
-            
-            // 库存列 55px
-            Rect countRect = new(x, rect.y, 55f, rect.height);
-            if (DrawSortableHeader(countRect, "库存", traderSortColumn == SortColumn.Count, traderSortAscending))
+            x += USACTradePanel.COL_PRICE;
+
+            // 计算库存列宽
+            Rect countRect = new(x, rect.y, USACTradePanel.COL_COUNT - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(countRect, "USAC.Trade.Header.Stock".Translate(), traderSortColumn == SortColumn.Count, traderSortAscending))
             {
-                if (traderSortColumn == SortColumn.Count)
-                    traderSortAscending = !traderSortAscending;
-                else
-                {
-                    traderSortColumn = SortColumn.Count;
-                    traderSortAscending = false;
-                }
+                traderSortColumn = SortColumn.Count;
+                traderSortAscending = !traderSortAscending;
                 ApplySearchFilter();
             }
-            x += 55f;
-            
-            // 物品名列 130px
-            Rect nameRect = new(x, rect.y, 130f, rect.height);
-            if (DrawSortableHeader(nameRect, "物品", traderSortColumn == SortColumn.Name, traderSortAscending))
+            x += USACTradePanel.COL_COUNT;
+
+            // 计算物品列宽
+            Rect nameRect = new(x, rect.y, nameWidth - USACTradePanel.COL_SPACING, rect.height);
+            if (DrawSortableHeader(nameRect, "USAC.Trade.Header.Item".Translate(), traderSortColumn == SortColumn.Name, traderSortAscending))
             {
                 if (traderSortColumn == SortColumn.Name)
                     traderSortAscending = !traderSortAscending;
@@ -550,7 +548,7 @@ namespace USAC
                 }
                 ApplySearchFilter();
             }
-            
+
             GUI.color = Color.white;
         }
 
@@ -558,7 +556,7 @@ namespace USAC
         {
             TradeSession.deal.UpdateCurrencyCount();
             USACTradeSummary.Refresh(cachedTradeables, cachedCurrencyTradeable);
-            
+
             if (Prefs.DevMode)
             {
                 var activeTradeables = cachedTradeables?.Where(t => t.CountToTransfer != 0).ToList();
@@ -579,7 +577,7 @@ namespace USAC
                         SoundDefOf.ExecuteTrade.PlayOneShotOnCamera();
                         TradeSession.playerNegotiator.GetCaravan()?.RecacheInventory();
                         Close(doCloseSound: false);
-                        
+
                         // 启动交付流程
                         USAC_MechTradeUtility.StartDeliveryProcess();
                     }
@@ -608,11 +606,11 @@ namespace USAC
                 .FirstOrDefault(x => x.IsCurrency);
 
             cachedTradeables = (from tr in TradeSession.deal.AllTradeables
-                where !tr.IsCurrency
-                where tr.TraderWillTrade || !TradeSession.trader.TraderKind.hideThingsNotWillingToTrade
-                orderby (!tr.TraderWillTrade) ? (-1) : 0 descending
-                select tr).ToList();
-            
+                                where !tr.IsCurrency
+                                where tr.TraderWillTrade || !TradeSession.trader.TraderKind.hideThingsNotWillingToTrade
+                                orderby (!tr.TraderWillTrade) ? (-1) : 0 descending
+                                select tr).ToList();
+
             USACTradeSummary.Refresh(cachedTradeables, cachedCurrencyTradeable);
         }
 
@@ -631,13 +629,13 @@ namespace USAC
             else
             {
                 filteredTradeables = new List<Tradeable>();
-                
+
                 foreach (var tradeable in cachedTradeables)
                 {
                     if (MatchesSearch(tradeable))
                         filteredTradeables.Add(tradeable);
                 }
-                
+
                 // 更新搜索结果状态
                 quickSearchWidget.noResultsMatched = filteredTradeables.Count == 0;
             }
@@ -648,12 +646,12 @@ namespace USAC
             // 搜索物品名称
             if (quickSearchWidget.filter.Matches(tradeable.Label.ToString()))
                 return true;
-                
+
             // 搜索物品描述
-            if (!string.IsNullOrEmpty(tradeable.ThingDef?.description) && 
+            if (!string.IsNullOrEmpty(tradeable.ThingDef?.description) &&
                 quickSearchWidget.filter.Matches(tradeable.ThingDef.description))
                 return true;
-                
+
             // 搜索分类
             if (tradeable.ThingDef?.thingCategories != null)
             {
@@ -663,7 +661,7 @@ namespace USAC
                         return true;
                 }
             }
-            
+
             return false;
         }
 
@@ -691,7 +689,6 @@ namespace USAC
         {
             GUI.DrawTexture(rect, GetOrCreateGridTex((int)rect.width, (int)rect.height));
 
-            // 绘制USAC标识水印在正中间
             var logo = ContentFinder<Texture2D>.Get("UI/StyleCategories/USACIcon", false);
             if (logo != null)
             {

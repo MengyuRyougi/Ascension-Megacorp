@@ -72,7 +72,7 @@ namespace USAC
             {
                 var evt = scheduledEvents[0];
                 
-                // 队列有序所以第一个未到期则后续都未到期
+                // 队列有序则后续未到期
                 if (evt.triggerTick > currentTick)
                     break;
 

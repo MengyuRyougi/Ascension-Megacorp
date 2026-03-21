@@ -38,7 +38,7 @@ namespace USAC.Endings
             // 刷新锁定状态
             comp.RefreshSystemLockStatus();
 
-            // 摧毁据点达到上限触发防御胜利结局
+            // 据点上限触发防御胜利结局
             if (comp.DestroyedDebtSiteCount >= 4)
             {
                 GameComponent_DebtTransfer.TriggerEnding(contract);
