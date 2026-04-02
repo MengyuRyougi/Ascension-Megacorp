@@ -228,6 +228,14 @@ namespace USAC
         #region 周期结算
         internal void ProcessContractCycle(DebtContract contract)
         {
+            // 合同已结清则立即退出
+            if (!contract.IsActive || contract.Principal <= 0)
+            {
+                contract.IsActive = false;
+                scheduler.UnscheduleContract(contract.ContractId);
+                return;
+            }
+
             Map map = GetRichestPlayerHomeMap();
 
             // 确定基准时间 防止漂移

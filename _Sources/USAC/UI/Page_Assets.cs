@@ -78,7 +78,7 @@ namespace USAC.InternalUI
 
             Rect scrollRect = new(0, 100, rect.width, rect.height - 100);
             // 计算动态视图高度
-            float viewH = Mathf.Max(scrollRect.height, comp.ActiveContracts.Count * 110 + 550);
+            float viewH = Mathf.Max(scrollRect.height, comp.ActiveCount * 110 + 550);
             Rect viewRect = new(0, 0, rect.width - 20, viewH);
 
             Widgets.BeginScrollView(scrollRect, ref scrollPos, viewRect);
@@ -89,7 +89,7 @@ namespace USAC.InternalUI
                 "USAC.UI.Assets.ActiveContracts".Translate(), ColAccentCamo2, GameFont.Small);
             y += 35;
 
-            if (comp.ActiveContracts.Count == 0)
+            if (comp.ActiveCount == 0)
             {
                 GUI.color = ColTextMuted;
                 Widgets.Label(new Rect(0, y, rect.width, 30), "USAC.UI.Assets.NoAgreement".Translate());
@@ -98,7 +98,10 @@ namespace USAC.InternalUI
             else
             {
                 foreach (var contract in comp.ActiveContracts)
+                {
+                    if (!contract.IsActive) continue;
                     y = DrawContractRow(y, rect.width, contract, parent);
+                }
             }
 
             y += 20;
@@ -261,7 +264,7 @@ namespace USAC.InternalUI
         {
             string id = parent.GetParam("id");
             var contract = FindContractById(comp.ActiveContracts, id);
-            if (contract == null)
+            if (contract == null || !contract.IsActive)
             { parent.NavigateTo("usac://internal/assets?view=index"); return; }
 
             DrawContractHeader(rect, contract, parent);
