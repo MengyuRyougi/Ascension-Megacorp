@@ -412,9 +412,6 @@ namespace USAC.InternalUI
 
                 float freeLimit = contract.Principal * 0.10f;
                 float used = contract.PrincipalPaidThisQuarter;
-                string feeHint = "USAC.UI.Assets.SurchargeHint"
-                    .Translate(freeLimit.ToString("N0"), used.ToString("N0"));
-                DrawColoredLabel(new Rect(inner.x, inner.y + 22, inner.width, 18), feeHint, ColTextMuted, GameFont.Tiny);
 
                 Rect adjRow = new(inner.x, inner.y + 44, inner.width - 185, 32);
                 float maxRepayK = Mathf.Ceil(contract.Principal / 1000f) * 1000f;
@@ -425,8 +422,17 @@ namespace USAC.InternalUI
                 if (DrawTacticalButton(new Rect(adjRow.xMax - 100, adjRow.y, 45, 32), "+1k", curRepayAmount + 1000f <= maxRepayK, key: "repay_p1k")) curRepayAmount += 1000f;
                 if (DrawTacticalButton(adjRow.RightPartPixels(50), "+10k", curRepayAmount + 10000f <= maxRepayK, key: "repay_p10k")) curRepayAmount += 10000f;
 
+                // 提前计算手续费用于提示栏动态显示
                 float totalThisQ = used + curRepayAmount;
                 float fee = SurchargeTable.Calculate(contract.Principal, totalThisQ) - SurchargeTable.Calculate(contract.Principal, used);
+                float actualTotal = curRepayAmount + fee;
+
+                // 动态手续费提示 含{0}=免费额 {1}=已用 {2}=本次手续费 {3}=实付总额
+                string feeHint = "USAC.UI.Assets.SurchargeHint"
+                    .Translate(freeLimit.ToString("N0"), used.ToString("N0"),
+                               fee.ToString("N0"), actualTotal.ToString("N0"));
+                Color hintColor = fee > 0 ? ColAccentRed.ToTransp(0.85f) : ColTextMuted;
+                DrawColoredLabel(new Rect(inner.x, inner.y + 22, inner.width - 185, 18), feeHint, hintColor, GameFont.Tiny);
                 int totalBonds = Mathf.CeilToInt((curRepayAmount + fee) / 1000f);
                 bool canRepay = contract.AccruedInterest <= 0 && comp.GetBondCountOnMap() >= totalBonds;
 

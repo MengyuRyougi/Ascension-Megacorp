@@ -49,7 +49,7 @@
   <USAC.UI.Assets.Apply.Title>RISK_PRICING_APPLICATION//风险定价申请</USAC.UI.Assets.Apply.Title>
   <USAC.UI.Assets.InterestRate>基础方案利率</USAC.UI.Assets.InterestRate>
   <USAC.UI.Assets.GrowthRate>周期风险费率/手续费</USAC.UI.Assets.GrowthRate>
-  <USAC.UI.Assets.Stat.GrowthMode>风险增长基准</USAC.UI.Assets.Stat.GrowthMode>
+  <USAC.UI.Assets.Stat.GrowthMode>本金增长方式</USAC.UI.Assets.Stat.GrowthMode>
   <USAC.UI.Assets.Stat.ActualInterest>实际执行利率</USAC.UI.Assets.Stat.ActualInterest>
   <USAC.UI.Assets.Stat.CreditDiscount>信用折扣优惠</USAC.UI.Assets.Stat.CreditDiscount>
   <USAC.UI.Assets.Apply.Confirm>确认签署合同</USAC.UI.Assets.Apply.Confirm>
@@ -57,8 +57,8 @@
   <USAC.UI.Assets.NextSettlement>距结算</USAC.UI.Assets.NextSettlement>
   <USAC.UI.Assets.MissedWarning>⚠ 已欠缴 {0} 次！再次欠缴将触发强制徵收！</USAC.UI.Assets.MissedWarning>
   <USAC.UI.Assets.Cycle>每周期</USAC.UI.Assets.Cycle>
-  <USAC.UI.Assets.GrowthMode.WealthBased>资产联动增长 ({0}%/周期)</USAC.UI.Assets.GrowthMode.WealthBased>
-  <USAC.UI.Assets.GrowthMode.PrincipalBased>本金联动增长 ({0}%/周期)</USAC.UI.Assets.GrowthMode.PrincipalBased>
+  <USAC.UI.Assets.GrowthMode.WealthBased>按地图财富增长（财富×{0}%/周期）</USAC.UI.Assets.GrowthMode.WealthBased>
+  <USAC.UI.Assets.GrowthMode.PrincipalBased>按当前本金增长（本金×{0}%/周期）</USAC.UI.Assets.GrowthMode.PrincipalBased>
   <USAC.UI.Assets.Block.LowCredit>信用评分不足 (需≥30)，系统已关闭融资通道。</USAC.UI.Assets.Block.LowCredit>
   <USAC.UI.Assets.Block.LowWealth>当前资产估值不足以支持申请额度，请提高利率方案以通过评估。</USAC.UI.Assets.Block.LowWealth>
   <USAC.UI.Assets.Stat.CreditScore>信用评分</USAC.UI.Assets.Stat.CreditScore>
@@ -89,8 +89,8 @@
   <USAC.UI.Assets.Repay>偿还本金 ({0} 张债券)</USAC.UI.Assets.Repay>
   <USAC.UI.Assets.RepaySurcharge>偿还本金 ({0} 张, 含手续费 {1} 张)</USAC.UI.Assets.RepaySurcharge>
   <USAC.UI.Assets.GrowthForecast>GROWTH_FORECAST//本金增长预测</USAC.UI.Assets.GrowthForecast>
-  <USAC.UI.Assets.GrowthMode.Wealth>财富百分比增长 ({0}% / 周期)</USAC.UI.Assets.GrowthMode.Wealth>
-  <USAC.UI.Assets.GrowthMode.Principal>本金百分比增长 ({0}% / 周期)</USAC.UI.Assets.GrowthMode.Principal>
+  <USAC.UI.Assets.GrowthMode.Wealth>本金增加 = 地图财富 × {0}% / 周期</USAC.UI.Assets.GrowthMode.Wealth>
+  <USAC.UI.Assets.GrowthMode.Principal>本金增加 = 当前本金 × {0}% / 周期</USAC.UI.Assets.GrowthMode.Principal>
   <USAC.UI.Assets.CurrentWealth>当前地图财富: ₿{0}</USAC.UI.Assets.CurrentWealth>
   <USAC.UI.Nav.Home>战略概览</USAC.UI.Nav.Home>
   <USAC.UI.Nav.Assets>资产终端</USAC.UI.Nav.Assets>
@@ -178,8 +178,8 @@
   <USAC.Debt.Transaction.PrincipalRepay>{0} 本金偿还</USAC.Debt.Transaction.PrincipalRepay>
   <USAC.Debt.Transaction.RepaySurcharge>{0} 超额还款手续费</USAC.Debt.Transaction.RepaySurcharge>
   <USAC.Debt.Message.ContractSettled>[USAC] {0} 已结清！</USAC.Debt.Message.ContractSettled>
-  <USAC.Debt.GrowthMode.WealthBase>财富基准</USAC.Debt.GrowthMode.WealthBase>
-  <USAC.Debt.GrowthMode.PrincipalBase>本金基准</USAC.Debt.GrowthMode.PrincipalBase>
+  <USAC.Debt.GrowthMode.WealthBase>按地图财富</USAC.Debt.GrowthMode.WealthBase>
+  <USAC.Debt.GrowthMode.PrincipalBase>按当前本金</USAC.Debt.GrowthMode.PrincipalBase>
   <USAC.Debt.ScenPart.Summary>USAC{0}：₿{1}\n周期增长：{2}%（{3}）\n周期利率：{4}%</USAC.Debt.ScenPart.Summary>
   <USAC.Debt.ScenPart.InitialDebt>初始债务本金：</USAC.Debt.ScenPart.InitialDebt>
   <USAC.Debt.ScenPart.DebtType>贷款类型：</USAC.Debt.ScenPart.DebtType>
@@ -195,7 +195,7 @@
   <USAC.Debt.Message.PawnDemolished>[USAC]债务清算执行：{0} 已被完全拆解。</USAC.Debt.Message.PawnDemolished>
   <USAC.Debt.Message.CreditDanger>[USAC]信用等级已触发风险警报，债务管理部门将对审批通道采取预防性冻结。</USAC.Debt.Message.CreditDanger>
   <USAC.Debt.Message.CreditPenalty>[USAC]信用贷欠缴，信用分 -25（当前：{0}）</USAC.Debt.Message.CreditPenalty>
-  <USAC.UI.Assets.SurchargeHint>本季免费额度 ₿{0} | 已使用 ₿{1} | 10%▸免费 20%▸50% 30%▸100% 50%+▸200%</USAC.UI.Assets.SurchargeHint>
+  <USAC.UI.Assets.SurchargeHint>季度免费额 ₿{0}（已用 ₿{1}）  ▸  本次手续费 ₿{2}  →  实付 ₿{3}</USAC.UI.Assets.SurchargeHint>
   <USAC.UI.Assets.AccessDenied>ACCESS_DENIED//拒绝访问\n\n您的权限无法访问此页面。。</USAC.UI.Assets.AccessDenied>
 
   <!-- 债务清偿结局 (Settled) -->

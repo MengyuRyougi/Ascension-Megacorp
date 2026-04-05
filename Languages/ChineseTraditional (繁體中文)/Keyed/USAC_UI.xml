@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   
   <!-- UNUSED -->
@@ -51,7 +51,7 @@
   <USAC.UI.Assets.Apply.Title>RISK_PRICING_APPLICATION // 風險定價申請</USAC.UI.Assets.Apply.Title>
   <USAC.UI.Assets.InterestRate>基礎方案利率</USAC.UI.Assets.InterestRate>
   <USAC.UI.Assets.GrowthRate>週期風險費率/手續費</USAC.UI.Assets.GrowthRate>
-  <USAC.UI.Assets.Stat.GrowthMode>風險增長基準</USAC.UI.Assets.Stat.GrowthMode>
+  <USAC.UI.Assets.Stat.GrowthMode>本金增長方式</USAC.UI.Assets.Stat.GrowthMode>
   <USAC.UI.Assets.Stat.ActualInterest>實際執行利率</USAC.UI.Assets.Stat.ActualInterest>
   <USAC.UI.Assets.Stat.CreditDiscount>信用折扣優惠</USAC.UI.Assets.Stat.CreditDiscount>
   <USAC.UI.Assets.Apply.Confirm>確認簽署合同</USAC.UI.Assets.Apply.Confirm>
@@ -59,8 +59,8 @@
   <USAC.UI.Assets.NextSettlement>距結算</USAC.UI.Assets.NextSettlement>
   <USAC.UI.Assets.MissedWarning>⚠ 已欠繳 {0} 次！再次欠繳將觸發強制徵收！</USAC.UI.Assets.MissedWarning>
   <USAC.UI.Assets.Cycle>每週期</USAC.UI.Assets.Cycle>
-  <USAC.UI.Assets.GrowthMode.WealthBased>資產聯動增長 ({0}%/週期)</USAC.UI.Assets.GrowthMode.WealthBased>
-  <USAC.UI.Assets.GrowthMode.PrincipalBased>本金聯動增長 ({0}%/週期)</USAC.UI.Assets.GrowthMode.PrincipalBased>
+  <USAC.UI.Assets.GrowthMode.WealthBased>按地圖財富增長（財富×{0}%/週期）</USAC.UI.Assets.GrowthMode.WealthBased>
+  <USAC.UI.Assets.GrowthMode.PrincipalBased>按當前本金增長（本金×{0}%/週期）</USAC.UI.Assets.GrowthMode.PrincipalBased>
   <USAC.UI.Assets.Block.LowCredit>信用評分不足 (需≥30)，系統已關閉融資通道。</USAC.UI.Assets.Block.LowCredit>
   <USAC.UI.Assets.Block.LowWealth>當前資產估值不足以支持申請額度，請提高利率方案以通過評估。</USAC.UI.Assets.Block.LowWealth>
   <USAC.UI.Assets.Stat.CreditScore>信用評分</USAC.UI.Assets.Stat.CreditScore>
@@ -91,8 +91,8 @@
   <USAC.UI.Assets.Repay>償還本金 ({0} 張債券)</USAC.UI.Assets.Repay>
   <USAC.UI.Assets.RepaySurcharge>償還本金 ({0} 張, 含手續費 {1} 張)</USAC.UI.Assets.RepaySurcharge>
   <USAC.UI.Assets.GrowthForecast>GROWTH_FORECAST // 本金增長預測</USAC.UI.Assets.GrowthForecast>
-  <USAC.UI.Assets.GrowthMode.Wealth>財富百分比增長 ({0}% / 週期)</USAC.UI.Assets.GrowthMode.Wealth>
-  <USAC.UI.Assets.GrowthMode.Principal>本金百分比增長 ({0}% / 週期)</USAC.UI.Assets.GrowthMode.Principal>
+  <USAC.UI.Assets.GrowthMode.Wealth>本金增加 = 地圖財富 × {0}% / 週期</USAC.UI.Assets.GrowthMode.Wealth>
+  <USAC.UI.Assets.GrowthMode.Principal>本金增加 = 當前本金 × {0}% / 週期</USAC.UI.Assets.GrowthMode.Principal>
   <USAC.UI.Assets.CurrentWealth>當前地圖財富: ₿{0}</USAC.UI.Assets.CurrentWealth>
   <USAC.UI.Nav.Home>戰略概覽</USAC.UI.Nav.Home>
   <USAC.UI.Nav.Assets>資產終端</USAC.UI.Nav.Assets>
@@ -176,8 +176,8 @@
   <USAC.Debt.Transaction.PrincipalRepay>{0} 本金償還</USAC.Debt.Transaction.PrincipalRepay>
   <USAC.Debt.Transaction.RepaySurcharge>{0} 超額還款手續費</USAC.Debt.Transaction.RepaySurcharge>
   <USAC.Debt.Message.ContractSettled>[USAC] {0} 已結清！</USAC.Debt.Message.ContractSettled>
-  <USAC.Debt.GrowthMode.WealthBase>財富基準</USAC.Debt.GrowthMode.WealthBase>
-  <USAC.Debt.GrowthMode.PrincipalBase>本金基準</USAC.Debt.GrowthMode.PrincipalBase>
+  <USAC.Debt.GrowthMode.WealthBase>按地圖財富</USAC.Debt.GrowthMode.WealthBase>
+  <USAC.Debt.GrowthMode.PrincipalBase>按當前本金</USAC.Debt.GrowthMode.PrincipalBase>
   <USAC.Debt.ScenPart.Summary>USAC {0}：₿{1}\n週期增長：{2}%（{3}）\n週期利率：{4}%</USAC.Debt.ScenPart.Summary>
   <USAC.Debt.ScenPart.InitialDebt>初始債務本金： </USAC.Debt.ScenPart.InitialDebt>
   <USAC.Debt.ScenPart.DebtType>貸款類型： </USAC.Debt.ScenPart.DebtType>
@@ -193,6 +193,6 @@
   <USAC.Debt.Message.PawnDemolished>[USAC] 債務清算執行：{0} 已被完全拆解。</USAC.Debt.Message.PawnDemolished>
   <USAC.Debt.Message.CreditDanger>[USAC] 信用等級降至危險水平，USAC 貿易通道即將關閉。</USAC.Debt.Message.CreditDanger>
   <USAC.Debt.Message.CreditPenalty>[USAC] 信用貸欠繳，信用分 -25（當前：{0}）</USAC.Debt.Message.CreditPenalty>
-  <USAC.UI.Assets.SurchargeHint>本季免費額度 ₿{0} | 已使用 ₿{1} | 10%▸免費 20%▸50% 30%▸100% 50%+▸200%</USAC.UI.Assets.SurchargeHint>
+  <USAC.UI.Assets.SurchargeHint>季度免費額 &#x20BF;{0}（已用 &#x20BF;{1}）  ▸  本次手續費 &#x20BF;{2}  →  實付 &#x20BF;{3}</USAC.UI.Assets.SurchargeHint>
   
 </LanguageData>

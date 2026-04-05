@@ -244,13 +244,10 @@ namespace USAC
             // 确定基准时间 防止漂移
             int baseTick = Math.Max(contract.NextCycleTick, Find.TickManager.TicksGame);
 
-            // 连续抗缴2次跳过结算
+            // 已升级为据点模式 仅维持调度不执行税收
             if (contract.ConsecutiveCollectionFails >= 2)
             {
-                contract.ProcessCycle(map);
                 contract.NextCycleTick = baseTick + DebtContract.CycleTicks;
-
-                // 重新调度下次周期
                 scheduler.ScheduleContractCycle(contract, () => ProcessContractCycle(contract));
                 return;
             }
@@ -364,6 +361,9 @@ namespace USAC
             // 抗缴升级据点模式并弹窗
             else if (contract.ConsecutiveCollectionFails == 2)
             {
+                // 初始化据点生成倒计时
+                TicksUntilNextSiteBatch = 900000;
+
                 Find.LetterStack.ReceiveLetter(
                     "USAC_DebtSite_EscalationLetterLabel".Translate(),
                     "USAC_DebtSite_EscalationLetterText".Translate(contract.Label),

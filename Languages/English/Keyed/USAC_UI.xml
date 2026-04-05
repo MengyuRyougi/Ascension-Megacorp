@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   
   <!-- UNUSED -->
@@ -51,7 +51,7 @@
   <USAC.UI.Assets.Apply.Title>RISK_PRICING_APPLICATION // Risk Pricing Application</USAC.UI.Assets.Apply.Title>
   <USAC.UI.Assets.InterestRate>Base Plan Interest Rate</USAC.UI.Assets.InterestRate>
   <USAC.UI.Assets.GrowthRate>Per-Cycle Risk Fee / Surcharge</USAC.UI.Assets.GrowthRate>
-  <USAC.UI.Assets.Stat.GrowthMode>Risk Growth Basis</USAC.UI.Assets.Stat.GrowthMode>
+  <USAC.UI.Assets.Stat.GrowthMode>Principal Growth Method</USAC.UI.Assets.Stat.GrowthMode>
   <USAC.UI.Assets.Stat.ActualInterest>Effective Interest Rate</USAC.UI.Assets.Stat.ActualInterest>
   <USAC.UI.Assets.Stat.CreditDiscount>Credit Discount</USAC.UI.Assets.Stat.CreditDiscount>
   <USAC.UI.Assets.Apply.Confirm>Confirm Contract Signature</USAC.UI.Assets.Apply.Confirm>
@@ -59,8 +59,8 @@
   <USAC.UI.Assets.NextSettlement>Time Until Settlement</USAC.UI.Assets.NextSettlement>
   <USAC.UI.Assets.MissedWarning>⚠ Missed payments: {0}! One more miss will trigger forced collection!</USAC.UI.Assets.MissedWarning>
   <USAC.UI.Assets.Cycle>Per Cycle</USAC.UI.Assets.Cycle>
-  <USAC.UI.Assets.GrowthMode.WealthBased>Wealth-Linked Growth ({0}%/cycle)</USAC.UI.Assets.GrowthMode.WealthBased>
-  <USAC.UI.Assets.GrowthMode.PrincipalBased>Principal-Linked Growth ({0}%/cycle)</USAC.UI.Assets.GrowthMode.PrincipalBased>
+  <USAC.UI.Assets.GrowthMode.WealthBased>Grows by Map Wealth (Wealth ×{0}%/cycle)</USAC.UI.Assets.GrowthMode.WealthBased>
+  <USAC.UI.Assets.GrowthMode.PrincipalBased>Grows by Current Principal (Principal ×{0}%/cycle)</USAC.UI.Assets.GrowthMode.PrincipalBased>
   <USAC.UI.Assets.Block.LowCredit>Credit score too low (requires ≥30). Financing channel has been disabled.</USAC.UI.Assets.Block.LowCredit>
   <USAC.UI.Assets.Block.LowWealth>Current asset valuation is insufficient for the requested limit. Increase the rate plan to pass assessment.</USAC.UI.Assets.Block.LowWealth>
   <USAC.UI.Assets.Stat.CreditScore>Credit Score</USAC.UI.Assets.Stat.CreditScore>
@@ -91,8 +91,8 @@
   <USAC.UI.Assets.Repay>Repay Principal ({0} Credit Bonds)</USAC.UI.Assets.Repay>
   <USAC.UI.Assets.RepaySurcharge>Repay Principal ({0} Credit Bonds, incl. surcharge {1})</USAC.UI.Assets.RepaySurcharge>
   <USAC.UI.Assets.GrowthForecast>GROWTH_FORECAST // Principal Growth Forecast</USAC.UI.Assets.GrowthForecast>
-  <USAC.UI.Assets.GrowthMode.Wealth>Wealth Percentage Growth ({0}% / cycle)</USAC.UI.Assets.GrowthMode.Wealth>
-  <USAC.UI.Assets.GrowthMode.Principal>Principal Percentage Growth ({0}% / cycle)</USAC.UI.Assets.GrowthMode.Principal>
+  <USAC.UI.Assets.GrowthMode.Wealth>Increase = Map Wealth × {0}% / cycle</USAC.UI.Assets.GrowthMode.Wealth>
+  <USAC.UI.Assets.GrowthMode.Principal>Increase = Current Principal × {0}% / cycle</USAC.UI.Assets.GrowthMode.Principal>
   <USAC.UI.Assets.CurrentWealth>Current Map Wealth: ₿{0}</USAC.UI.Assets.CurrentWealth>
   <USAC.UI.Nav.Home>Strategic Overview</USAC.UI.Nav.Home>
   <USAC.UI.Nav.Assets>Asset Terminal</USAC.UI.Nav.Assets>
@@ -176,8 +176,8 @@
   <USAC.Debt.Transaction.PrincipalRepay>{0} principal repayment</USAC.Debt.Transaction.PrincipalRepay>
   <USAC.Debt.Transaction.RepaySurcharge>{0} excess repayment surcharge</USAC.Debt.Transaction.RepaySurcharge>
   <USAC.Debt.Message.ContractSettled>[USAC] {0} fully settled!</USAC.Debt.Message.ContractSettled>
-  <USAC.Debt.GrowthMode.WealthBase>Wealth-based</USAC.Debt.GrowthMode.WealthBase>
-  <USAC.Debt.GrowthMode.PrincipalBase>Principal-based</USAC.Debt.GrowthMode.PrincipalBase>
+  <USAC.Debt.GrowthMode.WealthBase>By Map Wealth</USAC.Debt.GrowthMode.WealthBase>
+  <USAC.Debt.GrowthMode.PrincipalBase>By Current Principal</USAC.Debt.GrowthMode.PrincipalBase>
   <USAC.Debt.ScenPart.Summary>USAC {0}: ₿{1}\nCycle growth: {2}% ({3})\nCycle interest: {4}%</USAC.Debt.ScenPart.Summary>
   <USAC.Debt.ScenPart.InitialDebt>Initial Debt Principal: </USAC.Debt.ScenPart.InitialDebt>
   <USAC.Debt.ScenPart.DebtType>Debt Type: </USAC.Debt.ScenPart.DebtType>
@@ -193,7 +193,7 @@
   <USAC.Debt.Message.PawnDemolished>[USAC] Debt liquidation executed: {0} has been fully dismantled.</USAC.Debt.Message.PawnDemolished>
   <USAC.Debt.Message.CreditDanger>[USAC] Credit rating has dropped to dangerous levels. USAC trade channel will soon be closed.</USAC.Debt.Message.CreditDanger>
   <USAC.Debt.Message.CreditPenalty>[USAC] Credit-loan missed payment: Credit score -25 (current: {0})</USAC.Debt.Message.CreditPenalty>
-  <USAC.UI.Assets.SurchargeHint>Quarterly Free Allowance ₿{0} | Used ₿{1} | 10%▸Free 20%▸50% 30%▸100% 50%+▸200%</USAC.UI.Assets.SurchargeHint>
+  <USAC.UI.Assets.SurchargeHint>Quarterly free allowance ₿{0} (used ₿{1})  ▸  This surcharge ₿{2}  →  Total cost ₿{3}</USAC.UI.Assets.SurchargeHint>
 <USAC.UI.Assets.AccessDenied>ACCESS_DENIED//ACCESS DENIED.\n\n Insufficient permission to access...</USAC.UI.Assets.AccessDenied>
 
   <!-- 债务清偿结局 (Settled) -->
