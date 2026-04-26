@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 替换债务据点炮击弹药为CE迫击炮弹 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/vanillaBombardmentDef</xpath>
+    <value>
+      <vanillaBombardmentDef>Bullet_81mmMortarShell_HE</vanillaBombardmentDef>
+    </value>
+  </Operation>
+
+</Patch>
