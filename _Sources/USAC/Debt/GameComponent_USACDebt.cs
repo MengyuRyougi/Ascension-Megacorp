@@ -7,8 +7,6 @@ using Verse;
 
 namespace USAC
 {
-    // 债务管理游戏组件（重构版）
-    // 职责：协调子组件、维护全局状态、处理结局逻辑
     public class GameComponent_USACDebt : GameComponent
     {
         #region 子组件
@@ -25,11 +23,7 @@ namespace USAC
         public bool EndingTriggered;
         public List<Pawn> LiquidatedPawns = new();
         public int RepayCountDuringLock;
-
-        // 下次据点批量生成的绝对游戏Tick
         private int nextSiteBatchTick = -1;
-
-        // 旧版兼容迁移字段
         private float legacyTotalDebt;
         private float legacyInterest;
         #endregion
@@ -37,7 +31,6 @@ namespace USAC
         public GameComponent_USACDebt(Game game) { }
 
         #region 属性
-        // 供Alert读取的剩余tick数
         public int TicksUntilNextSiteBatch
         {
             get
@@ -53,14 +46,10 @@ namespace USAC
                     nextSiteBatchTick = Find.TickManager.TicksGame + value;
             }
         }
-
-        // 委托到 ContractManager
         public float TotalDebt => ContractManager.TotalDebt;
         public DebtContract NextDueContract => ContractManager.NextDueContract;
         public int ActiveCount => ContractManager.ActiveCount;
         public List<DebtContract> ActiveContracts => ContractManager.ActiveContracts;
-
-        // 全局据点模式判断
         public bool IsInGlobalSiteMode
         {
             get
@@ -77,8 +66,6 @@ namespace USAC
 
         public static GameComponent_USACDebt Instance =>
             Current.Game?.GetComponent<GameComponent_USACDebt>();
-
-        // 返回财富最高的玩家殖民地地图
         public static Map GetRichestPlayerHomeMap()
         {
             Map best = null;
@@ -108,55 +95,34 @@ namespace USAC
         {
             if (LiquidatedPawns == null)
                 LiquidatedPawns = new List<Pawn>();
-
             MigrateLegacyData();
             MigrateSiteBatchTick();
             ContractManager.LoadedGame(this);
-
-            // 订阅债务事件
             SubscribeToDebtEvents();
         }
-
-        // 订阅债务事件
         private void SubscribeToDebtEvents()
         {
-            // 订阅合同结清事件
             DebtEventBus.Instance.Subscribe(DebtEventType.ContractSettled, OnContractSettled);
-
-            // 订阅本金变更事件
             DebtEventBus.Instance.Subscribe(DebtEventType.PrincipalChanged, OnPrincipalChanged);
-
-            // 订阅利息累积事件
             DebtEventBus.Instance.Subscribe(DebtEventType.InterestAccrued, OnInterestAccrued);
         }
-
-        // 处理合同结清事件
         private void OnContractSettled(DebtEventArgs args)
         {
             CheckDebtSettledEnding();
             RefreshSystemLockStatus();
         }
-
-        // 处理本金变更事件
         private void OnPrincipalChanged(DebtEventArgs args)
         {
             RefreshSystemLockStatus();
         }
-
-        // 处理利息累积事件
         private void OnInterestAccrued(DebtEventArgs args)
         {
-            // 可以在此添加利息累积的额外逻辑
         }
 
         public override void GameComponentTick()
         {
-            // 合同管理器Tick
             ContractManager.Tick();
-
             int now = Find.TickManager.TicksGame;
-
-            // 据点批量生成计时检查
             if (IsSystemLocked && nextSiteBatchTick > 0 && now >= nextSiteBatchTick)
             {
                 Log.Message($"[USAC] 据点批量生成触发 now={now} nextSiteBatchTick={nextSiteBatchTick}");
@@ -169,8 +135,6 @@ namespace USAC
         private void GenerateSiteBatch()
         {
             Log.Message($"[USAC] GenerateSiteBatch 开始执行");
-
-            // 查找第一个据点模式合同
             var siteContract = ContractManager.GetFirstSiteModeContract();
 
             if (siteContract == null)
@@ -184,8 +148,6 @@ namespace USAC
             Log.Message($"[USAC] 准备生成 {count} 个据点 合同={siteContract.Label} 地图={map?.Parent?.Label}");
             SiteGenerator.GenerateSiteBatch(siteContract, map, count);
         }
-
-        // 检查剧本债务是否全部清偿
         public void CheckDebtSettledEnding()
         {
             if (IsSystemLocked) return;
@@ -201,8 +163,7 @@ namespace USAC
         }
         #endregion
 
-        #region 对外接口（保持兼容性）
-        // 增加债务本金
+        #region 对外接口
         public void AddDebt(float amount, string reason)
         {
             ContractManager.AddDebt(amount, reason);

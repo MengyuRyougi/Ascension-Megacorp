@@ -1,12 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
-  <!-- 替换债务据点炮击弹药为CE迫击炮弹 -->
-  <Operation Class="PatchOperationReplace">
-    <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/vanillaBombardmentDef</xpath>
-    <value>
-      <vanillaBombardmentDef>Bullet_81mmMortarShell_HE</vanillaBombardmentDef>
-    </value>
+  <!-- 替换债务据点炮击弹药为CE 120mm火炮 -->
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]</xpath>
+      </li>
+      <!-- 替换弹药类型 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/vanillaBombardmentDef</xpath>
+        <value>
+          <vanillaBombardmentDef>Bullet_120mmMortarShell_HE</vanillaBombardmentDef>
+        </value>
+      </li>
+      <!-- 修改打击轮次为3轮 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/strikeCycles</xpath>
+        <value>
+          <strikeCycles>3</strikeCycles>
+        </value>
+      </li>
+      <!-- 修改每轮波次为1波 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/wavesPerStrike</xpath>
+        <value>
+          <wavesPerStrike>1</wavesPerStrike>
+        </value>
+      </li>
+      <!-- 修改每波弹药数为6发 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/WorldObjectDef[defName="USAC_DebtSite"]/comps/li[@Class="Fortified.WorldObjectCompProperties_PeriodicAirSupport" and requiresAnySitePart/li="USAC_ArtilleryPosition"]/projectilesPerStrike</xpath>
+        <value>
+          <projectilesPerStrike>6</projectilesPerStrike>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+  <!-- 替换空中支援弹药为CE兼容版本 -->
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <!-- 替换扫射机炮弹 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/Fortified.AirSupportDef[defName="USAC_StrafingRun"]/comps/li[@Class="Fortified.AirSupportComp_StrafeII" and ProjectileDef="USAC_Bullet_CASAC"]/ProjectileDef</xpath>
+        <value>
+          <ProjectileDef>Bullet_20x102mmNATO_AP</ProjectileDef>
+        </value>
+      </li>
+      <!-- 替换火箭弹 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/Fortified.AirSupportDef[defName="USAC_StrafingRun"]/comps/li[@Class="Fortified.AirSupportComp_StrafeII" and ProjectileDef="USAC_Proj_RocketCAS"]/ProjectileDef</xpath>
+        <value>
+          <ProjectileDef>Bullet_70mmAPKWS_HEAT</ProjectileDef>
+        </value>
+      </li>
+      <!-- 替换制导炸弹 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/Fortified.AirSupportDef[defName="USAC_GuidedBomb"]/comps/li[@Class="Fortified.AirSupportComp_StrafeII"]/ProjectileDef</xpath>
+        <value>
+          <ProjectileDef>Bullet_81mmMortarShell_HE</ProjectileDef>
+        </value>
+      </li>
+      <!-- 替换EMP机炮弹 -->
+      <li Class="PatchOperationReplace">
+        <xpath>Defs/Fortified.AirSupportDef[defName="USAC_EMPStrike"]/comps/li[@Class="Fortified.AirSupportComp_StrafeII"]/ProjectileDef</xpath>
+        <value>
+          <ProjectileDef>Bullet_20x102mmNATO_AP</ProjectileDef>
+        </value>
+      </li>
+    </operations>
   </Operation>
 
 </Patch>

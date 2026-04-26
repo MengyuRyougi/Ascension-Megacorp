@@ -133,12 +133,24 @@
             </points>
         </maxPawnCostPerTotalPointsCurve>
         <pawnGroupMakers>
+            <!-- 据点人类居民组 -->
+            <li>
+                <kindDef>Settlement</kindDef>
+                <commonality>100</commonality>
+                <options>
+                    <USAC_Rifleman>10</USAC_Rifleman>
+                    <USAC_Heavy>5</USAC_Heavy>
+                    <USAC_Sniper>3</USAC_Sniper>
+                    <USAC_Elite>2</USAC_Elite>
+                </options>
+            </li>
             <!-- 据点守卫组 -->
             <li>
                 <kindDef>Settlement</kindDef>
                 <commonality>100</commonality>
                 <options>
-                    <USAC_Mech_Rocky>10</USAC_Mech_Rocky>
+                    <USAC_Mech_Rocky_AR>8</USAC_Mech_Rocky_AR>
+                    <USAC_Mech_Rocky_LMG>4</USAC_Mech_Rocky_LMG>
                     <USAC_Mech_Paraman>6</USAC_Mech_Paraman>
                     <USAC_Mech_Cobalt>6</USAC_Mech_Cobalt>
                     <USAC_Mech_Gonk>2</USAC_Mech_Gonk>
@@ -153,7 +165,7 @@
                     <USAC_Mech_Paraman>8</USAC_Mech_Paraman>
                     <USAC_Mech_Gonk>5</USAC_Mech_Gonk>
                     <USAC_Mech_Omaha>5</USAC_Mech_Omaha>
-                    <USAC_Mech_Rocky>3</USAC_Mech_Rocky>
+                    <USAC_Mech_Rocky_Heavy>3</USAC_Mech_Rocky_Heavy>
                 </options>
             </li>
             <!-- 纯机兵战斗组 -->
@@ -161,7 +173,8 @@
                 <kindDef>Combat</kindDef>
                 <commonality>100</commonality>
                 <options>
-                    <USAC_Mech_Rocky>10</USAC_Mech_Rocky>
+                    <USAC_Mech_Rocky_AR>8</USAC_Mech_Rocky_AR>
+                    <USAC_Mech_Rocky_LMG>4</USAC_Mech_Rocky_LMG>
                     <USAC_Mech_Paraman>6</USAC_Mech_Paraman>
                     <USAC_Mech_Cobalt>6</USAC_Mech_Cobalt>
                     <USAC_Mech_Gonk>2</USAC_Mech_Gonk>
@@ -173,7 +186,8 @@
                 <kindDef>Combat</kindDef>
                 <commonality>60</commonality>
                 <options>
-                    <USAC_Mech_Rocky>10</USAC_Mech_Rocky>
+                    <USAC_Mech_Rocky_AR>8</USAC_Mech_Rocky_AR>
+                    <USAC_Mech_Rocky_DMR>4</USAC_Mech_Rocky_DMR>
                     <USAC_Mech_Cobalt>8</USAC_Mech_Cobalt>
                     <USAC_Mech_Paraman>4</USAC_Mech_Paraman>
                 </options>

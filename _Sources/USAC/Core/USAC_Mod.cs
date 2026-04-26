@@ -6,11 +6,8 @@ namespace USAC
 {
     public class USAC_ModSettings : ModSettings
     {
-        // 全局启用终端
         public bool enableUSACTerminal = true;
-        // 协议处理状态
         public bool termsProcessed = false;
-        // 协议接受状态
         public bool hasAcceptedTerms = false;
 
         public override void ExposeData()
@@ -46,7 +43,6 @@ namespace USAC
                 Settings.termsProcessed = false;
                 Messages.Message("USAC.Settings.ResetAgreementSuccess".Translate(), MessageTypeDefOf.TaskCompletion, false);
             }
-            // 说明文字建议换行显示
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
             listing.Label("USAC.Settings.ResetAgreementDesc".Translate());

@@ -10,7 +10,6 @@ using static USAC.InternalUI.PortalUIUtility;
 
 namespace USAC
 {
-    // USAC贸易终端窗口
     [StaticConstructorOnStartup]
     public class Dialog_USACTerminal : Window
     {
@@ -21,11 +20,7 @@ namespace USAC
         private List<Tradeable> cachedTradeables;
         private List<Tradeable> filteredTradeables;
         private Tradeable cachedCurrencyTradeable;
-
-        // 使用原版搜索组件
         private QuickSearchWidget quickSearchWidget = new();
-
-        // 排序状态
         private enum SortColumn { Name, Count, Price }
         private SortColumn playerSortColumn = SortColumn.Name;
         private SortColumn traderSortColumn = SortColumn.Name;
@@ -44,8 +39,6 @@ namespace USAC
             absorbInputAroundWindow = true;
             doWindowBackground = false;
             drawShadow = false;
-
-            // 初始化过滤列表
             filteredTradeables = new List<Tradeable>();
         }
 
@@ -68,26 +61,17 @@ namespace USAC
         #region 核心绘制
         public override void DoWindowContents(Rect inRect)
         {
-            // 绘制终端背景
             Rect fullRect = new(0, 0, InitialSize.x, InitialSize.y);
             Widgets.DrawBoxSolid(fullRect, ColWindowBg);
             DrawBackgroundGrid(fullRect);
 
             GUI.BeginGroup(inRect);
-
-            // 绘制头部
             DrawTerminalHeader(new Rect(0, 0, inRect.width, 70));
-
-            // 绘制搜索栏
             DrawSearchBar(new Rect(0, 80, inRect.width, 35));
-
-            // 绘制主交易区域
             Rect mainRect = new(0, 125, inRect.width, inRect.height - 205);
             BeginTacticalScroll(out var prevBar, out var prevThumb, out var prevColor);
             DrawTradeArea(mainRect);
             EndTacticalScroll(prevBar, prevThumb, prevColor);
-
-            // 绘制底部操作栏
             Rect footerRect = new(0, inRect.height - 70, inRect.width, 70);
             DrawFooter(footerRect);
 
@@ -98,16 +82,12 @@ namespace USAC
         {
             Widgets.DrawBoxSolid(rect, ColHeaderBg);
             DrawUIGradient(rect, new Color(1, 1, 1, 0.05f), new Color(0, 0, 0, 0.1f));
-
-            // USAC标识
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = ColAccentCamo1;
             Widgets.Label(new Rect(20, 0, 500, rect.height), "USAC.Trade.Terminal".Translate());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
-
-            // 交易商信息
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleRight;
             GUI.color = ColTextMuted;
@@ -119,8 +99,6 @@ namespace USAC
 
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
-
-            // 关闭按钮
             if (DrawTacticalButton(new Rect(rect.width - 50, 18, 34, 34), "X", true, GameFont.Small, "close_terminal"))
             {
                 Close();
@@ -130,13 +108,8 @@ namespace USAC
         private void DrawSearchBar(Rect rect)
         {
             Widgets.DrawBoxSolidWithOutline(rect, ColHeaderBg, ColBorder);
-
             Rect inner = rect.ContractedBy(5);
-
-            // 绘制搜索组件
             quickSearchWidget.OnGUI(inner, ApplySearchFilter, () => ApplySearchFilter());
-
-            // 搜索结果计数
             if (quickSearchWidget.filter.Active && filteredTradeables != null)
             {
                 string countText = $"{filteredTradeables.Count}/{cachedTradeables?.Count ?? 0}";
@@ -151,7 +124,6 @@ namespace USAC
 
         private void DrawTradeArea(Rect rect)
         {
-            // 分配布局宽度
             float totalActive = rect.width;
             float leftWidth = Mathf.Round(totalActive * 0.40f);
             float centerWidth = Mathf.Round(totalActive * 0.20f);
@@ -180,17 +152,12 @@ namespace USAC
 
             Rect listRect = new(rect.x, rect.y + 35, rect.width, rect.height - 35);
             Widgets.DrawBoxSolidWithOutline(listRect, new Color(0, 0, 0, 0.2f), ColBorder);
-
             Rect innerRect = listRect.ContractedBy(5);
-
-            // 绘制列表头
             Rect columnHeaderRect = new(innerRect.x, innerRect.y, innerRect.width, 20);
             DrawPlayerColumnHeaders(columnHeaderRect);
 
             var playerItems = filteredTradeables.Where(t =>
                 t.CountHeldBy(Transactor.Colony) > 0 || t.CountToTransfer < 0).ToList();
-
-            // 应用排序
             ApplySort(playerItems, playerSortColumn, playerSortAscending, true);
 
             float viewHeight = playerItems.Count * 50f + 25f;
@@ -228,17 +195,12 @@ namespace USAC
 
             Rect listRect = new(rect.x, rect.y + 35, rect.width, rect.height - 35);
             Widgets.DrawBoxSolidWithOutline(listRect, new Color(0, 0, 0, 0.2f), ColBorder);
-
             Rect innerRect = listRect.ContractedBy(5);
-
-            // 绘制列表头
             Rect columnHeaderRect = new(innerRect.x, innerRect.y, innerRect.width, 20);
             DrawTraderColumnHeaders(columnHeaderRect);
 
             var traderItems = filteredTradeables.Where(t =>
                 t.CountHeldBy(Transactor.Trader) > 0 || t.CountToTransfer > 0).ToList();
-
-            // 应用排序
             ApplySort(traderItems, traderSortColumn, traderSortAscending, false);
 
             float viewHeight = traderItems.Count * 50f + 25f;
@@ -269,18 +231,12 @@ namespace USAC
             float buttonHeight = 40f;
             float centerY = rect.y + (rect.height - buttonHeight) / 2f;
             float centerX = rect.width / 2f;
-
-            // 选项区域
             float optionsX = 30f;
             float rowHeight = 24f;
-
-            // 计算选项宽度以适应文本
             Text.Font = GameFont.Small;
             float enableBondsWidth = Text.CalcSize("USAC.Trade.EnableBonds".Translate()).x + 40f;
             float priorityBondsWidth = Text.CalcSize("USAC.Trade.PriorityBonds".Translate()).x + 40f;
             float optionWidth = Mathf.Max(200f, Mathf.Max(enableBondsWidth, priorityBondsWidth));
-
-            // 是否启用债券支付
             Rect useBondsRect = new(optionsX, rect.y + 10, optionWidth, rowHeight);
             bool enableBonds = Tradeable_USACCurrency.EnableBondsForPayment;
             DrawTacticalCheckbox(useBondsRect, "USAC.Trade.EnableBonds".Translate(), ref enableBonds, false, "enable_bonds");
@@ -289,8 +245,6 @@ namespace USAC
                 Tradeable_USACCurrency.EnableBondsForPayment = enableBonds;
                 CountToTransferChanged();
             }
-
-            // 是否优先使用债券支付
             Rect priorityBondsRect = new(optionsX, rect.y + 36, optionWidth, rowHeight);
             bool priorityBonds = Tradeable_USACCurrency.UseBondsForPayment;
             DrawTacticalCheckbox(priorityBondsRect, "USAC.Trade.PriorityBonds".Translate(), ref priorityBonds, !enableBonds, "priority_bonds");
@@ -299,8 +253,6 @@ namespace USAC
                 Tradeable_USACCurrency.UseBondsForPayment = priorityBonds;
                 CountToTransferChanged();
             }
-
-            // 重置按钮
             if (DrawTacticalButton(
                 new Rect(centerX - buttonWidth - 10, centerY, buttonWidth, buttonHeight),
                 "ResetButton".Translate(), true, GameFont.Small, "reset_trade"))
@@ -312,8 +264,6 @@ namespace USAC
                 }
                 CountToTransferChanged();
             }
-
-            // 确认交易按钮
             string acceptLabel = giftsOnly
                 ? "OfferGifts".Translate()
                 : "AcceptButton".Translate();
@@ -322,7 +272,6 @@ namespace USAC
                 new Rect(centerX + 10, centerY, buttonWidth, buttonHeight),
                 acceptLabel, true, GameFont.Small, "accept_trade"))
             {
-                // 校验自定义货币
                 if (IsPlayerMoneyEnough())
                 {
                     ExecuteTrade();
@@ -338,8 +287,6 @@ namespace USAC
         private bool IsPlayerMoneyEnough()
         {
             if (giftsOnly) return true;
-
-            // 计算净支出
             float totalBuy = 0f;
             float totalSell = 0f;
 
@@ -354,11 +301,7 @@ namespace USAC
             }
 
             float netCost = totalBuy - totalSell;
-
-            // 检查处理状态平衡
             if (netCost <= 0) return true;
-
-            // 否则检查可用货币总量
             if (cachedCurrencyTradeable != null)
             {
                 int available = cachedCurrencyTradeable.CountHeldBy(Transactor.Colony);
@@ -383,29 +326,21 @@ namespace USAC
                     clicked = true;
                 }
             }
-
-            // 动态选择字体 适应多语言
             Text.Font = GameFont.Tiny;
             float labelWidth = Text.CalcSize(label).x;
             if (labelWidth > rect.width - (isActive ? 12 : 0))
             {
                 Text.Font = GameFont.Tiny;
             }
-            
-            // 居中绘制标签
             GUI.color = isActive ? ColAccentCamo1 : ColAccentCamo3;
             Text.Anchor = TextAnchor.MiddleCenter;
             Text.WordWrap = false;
-            
-            // 绘制标签 预留箭头缝隙
             Rect labelRect = rect;
             if (isActive)
             {
-                labelRect.xMax -= 8; // 压缩宽度 保持视觉中心
+                labelRect.xMax -= 8;
             }
             Widgets.Label(labelRect, label);
-
-            // 绘制排序箭头 (稳固在右侧)
             if (isActive)
             {
                 Text.Anchor = TextAnchor.MiddleRight;
@@ -464,14 +399,10 @@ namespace USAC
             Text.Font = GameFont.Tiny;
             GUI.color = ColAccentCamo3;
 
-            float x = rect.x; // 直接对齐 排除内缩量
-            float rowInnerWidth = rect.width - 16f; // 仅减去滚动条宽度
+            float x = rect.x;
+            float rowInnerWidth = rect.width - 16f;
             float nameWidth = USACTradePanel.CalcNameWidth(rowInnerWidth);
-
-            // 预留图标列空间
             x += USACTradePanel.COL_ICON;
-
-            // 计算物品列宽
             Rect nameRect = new(x, rect.y, nameWidth - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(nameRect, "USAC.Trade.Header.Item".Translate(), playerSortColumn == SortColumn.Name, playerSortAscending))
             {
@@ -485,23 +416,19 @@ namespace USAC
                 ApplySearchFilter();
             }
             x += nameWidth;
-
-            // 计算持有列宽
             Rect countRect = new(x, rect.y, USACTradePanel.COL_COUNT - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(countRect, "USAC.Trade.Header.Held".Translate(), playerSortColumn == SortColumn.Count, playerSortAscending))
             {
-                playerSortColumn = SortColumn.Count; // 更新排序状态
-                playerSortAscending = !playerSortAscending; // 更新排序状态
+                playerSortColumn = SortColumn.Count;
+                playerSortAscending = !playerSortAscending;
                 ApplySearchFilter();
             }
             x += USACTradePanel.COL_COUNT;
-
-            // 计算单价列宽
             Rect priceRect = new(x, rect.y, USACTradePanel.COL_PRICE - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(priceRect, "USAC.Trade.Header.Price".Translate(), playerSortColumn == SortColumn.Price, playerSortAscending))
             {
-                playerSortColumn = SortColumn.Price; // 更新排序状态
-                playerSortAscending = !playerSortAscending; // 更新排序状态
+                playerSortColumn = SortColumn.Price;
+                playerSortAscending = !playerSortAscending;
                 ApplySearchFilter();
             }
 
@@ -513,24 +440,18 @@ namespace USAC
             Text.Font = GameFont.Tiny;
             GUI.color = ColAccentCamo3;
 
-            float x = rect.x; 
-            float rowInnerWidth = rect.width - 16f; 
+            float x = rect.x;
+            float rowInnerWidth = rect.width - 16f;
             float nameWidth = USACTradePanel.CalcNameWidth(rowInnerWidth);
-
-            // 预留调整器列宽
             x += USACTradePanel.COL_ADJUSTER;
-
-            // 计算单价列宽
             Rect priceRect = new(x, rect.y, USACTradePanel.COL_PRICE - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(priceRect, "USAC.Trade.Header.Price".Translate(), traderSortColumn == SortColumn.Price, traderSortAscending))
             {
-                traderSortColumn = SortColumn.Price; // 更新排序状态
-                traderSortAscending = !traderSortAscending; // 更新排序状态
+                traderSortColumn = SortColumn.Price;
+                traderSortAscending = !traderSortAscending;
                 ApplySearchFilter();
             }
             x += USACTradePanel.COL_PRICE;
-
-            // 计算库存列宽
             Rect countRect = new(x, rect.y, USACTradePanel.COL_COUNT - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(countRect, "USAC.Trade.Header.Stock".Translate(), traderSortColumn == SortColumn.Count, traderSortAscending))
             {
@@ -539,8 +460,6 @@ namespace USAC
                 ApplySearchFilter();
             }
             x += USACTradePanel.COL_COUNT;
-
-            // 计算物品列宽
             Rect nameRect = new(x, rect.y, nameWidth - USACTradePanel.COL_SPACING, rect.height);
             if (DrawSortableHeader(nameRect, "USAC.Trade.Header.Item".Translate(), traderSortColumn == SortColumn.Name, traderSortAscending))
             {

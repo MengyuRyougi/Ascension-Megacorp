@@ -40,6 +40,7 @@ namespace USAC
             float threatPoints = 100000f;
 
             SitePartParams siteParams = siteDef.Worker.GenerateDefaultParams(threatPoints, siteTile, faction);
+            siteParams.faction = faction;
             var sitePartDefWithParams = new SitePartDefWithParams(siteDef, siteParams);
             var parts = new List<SitePartDefWithParams> { sitePartDefWithParams };
 
