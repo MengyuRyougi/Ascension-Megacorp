@@ -29,8 +29,15 @@ namespace USAC
 
             Log.Message($"[USAC] 为订单 {contract.Label} 随机选择了据点类型: {siteDef.defName}");
 
-            Faction faction = Find.FactionManager.RandomEnemyFaction(false, false, true, TechLevel.Industrial);
-            float threatPoints = StorytellerUtility.DefaultThreatPointsNow(map);
+            // 使用USAC派系而不是随机敌对派系
+            Faction faction = Find.FactionManager.FirstFactionOfDef(USAC_FactionDefOf.USAC_Faction);
+            if (faction == null)
+            {
+                Log.Error("[USAC] 无法找到USAC派系，据点生成失败");
+                return;
+            }
+
+            float threatPoints = StorytellerUtility.DefaultThreatPointsNow(map) * 5f;
 
             SitePartParams siteParams = siteDef.Worker.GenerateDefaultParams(threatPoints, siteTile, faction);
             var sitePartDefWithParams = new SitePartDefWithParams(siteDef, siteParams);

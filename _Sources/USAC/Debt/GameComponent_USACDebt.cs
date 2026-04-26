@@ -170,17 +170,8 @@ namespace USAC
         {
             Log.Message($"[USAC] GenerateSiteBatch 开始执行");
 
-            // 检查是否有升级合同并找到第一个据点模式合同
-            DebtContract siteContract = null;
-            for (int i = 0; i < ActiveContracts.Count; i++)
-            {
-                if (ActiveContracts[i].IsActive && ActiveContracts[i].IsInSiteMode)
-                {
-                    siteContract = ActiveContracts[i];
-                    Log.Message($"[USAC] 发现据点模式合同: {siteContract.Label}");
-                    break;
-                }
-            }
+            // 查找第一个据点模式合同
+            var siteContract = ContractManager.GetFirstSiteModeContract();
 
             if (siteContract == null)
             {

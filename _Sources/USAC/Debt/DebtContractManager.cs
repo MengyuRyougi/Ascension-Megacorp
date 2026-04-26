@@ -56,6 +56,17 @@ namespace USAC
                 return count;
             }
         }
+
+        // 获取第一个据点模式合同
+        public DebtContract GetFirstSiteModeContract()
+        {
+            for (int i = 0; i < ActiveContracts.Count; i++)
+            {
+                if (ActiveContracts[i].IsActive && ActiveContracts[i].IsInSiteMode)
+                    return ActiveContracts[i];
+            }
+            return null;
+        }
         #endregion
 
         #region 合同管理

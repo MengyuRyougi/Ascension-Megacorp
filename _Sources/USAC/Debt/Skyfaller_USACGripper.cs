@@ -329,14 +329,7 @@ namespace USAC
                     // 如果没有非据点模式合同 使用第一个据点模式合同
                     if (target == null && debtComp != null)
                     {
-                        for (int i = 0; i < debtComp.ActiveContracts.Count; i++)
-                        {
-                            if (debtComp.ActiveContracts[i].IsActive && debtComp.ActiveContracts[i].IsInSiteMode)
-                            {
-                                target = debtComp.ActiveContracts[i];
-                                break;
-                            }
-                        }
+                        target = debtComp.ContractManager.GetFirstSiteModeContract();
                     }
 
                     if (debtComp != null && target != null)
