@@ -134,17 +134,69 @@ namespace USAC
             }
 
             Map map = GameComponent_USACDebt.GetRichestPlayerHomeMap();
+            int now = Find.TickManager.TicksGame;
 
-            // 确定基准时间 防止漂移
-            int baseTick = Mathf.Max(contract.NextCycleTick, Find.TickManager.TicksGame);
+            // 检查周期时间异常
+            if (contract.NextCycleTick <= 0)
+            {
+                contract.NextCycleTick = now + DebtContract.CycleTicks;
+                scheduler.ScheduleContractCycle(contract, () => ProcessContractCycle(contract));
+                Log.Warning($"[USAC] 合同 {contract.Label} NextCycleTick异常 已重置");
+                return;
+            }
+
+            // 计算错过的周期数
+            int missedCycles = 0;
+            int tempNextTick = contract.NextCycleTick;
+            while (tempNextTick <= now && missedCycles < 10) // 最多补偿10个周期
+            {
+                missedCycles++;
+                tempNextTick += DebtContract.CycleTicks;
+            }
+
+            // 如果错过超过2个周期 批量处理
+            if (missedCycles > 1)
+            {
+                Log.Warning($"[USAC] 合同 {contract.Label} 错过了 {missedCycles} 个周期 正在批量处理");
+
+                // 批量累积本金增长和利息
+                for (int i = 0; i < missedCycles; i++)
+                {
+                    contract.ProcessCycle(map);
+
+                    // 据点模式或错过周期自动将利息并入本金
+                    if (contract.IsInSiteMode || i < missedCycles - 1)
+                    {
+                        if (contract.AccruedInterest > 0)
+                        {
+                            float interest = contract.AccruedInterest;
+                            DebtHandler.AdjustPrincipal(contract, interest,
+                                "USAC.Debt.Transaction.MissedPayment".Translate(contract.Label, contract.MissedPayments),
+                                USACTransactionType.Penalty);
+                            DebtHandler.SetAccruedInterest(contract, 0f);
+                        }
+                    }
+                }
+
+                // 最后一个周期如果不是据点模式 弹窗
+                if (!contract.IsInSiteMode)
+                {
+                    ShowRepaymentDialog(contract, map);
+                }
+
+                contract.NextCycleTick = tempNextTick;
+                scheduler.ScheduleContractCycle(contract, () => ProcessContractCycle(contract));
+                return;
+            }
+
+            // 正常单周期处理
+            int nextTick = contract.NextCycleTick + DebtContract.CycleTicks;
 
             // 据点模式下继续周期结算但自动将利息并入本金
             if (contract.IsInSiteMode)
             {
-                // 执行周期结算 本金增长和利息计算
                 contract.ProcessCycle(map);
 
-                // 自动将利息并入本金 不弹窗不收利息
                 if (contract.AccruedInterest > 0)
                 {
                     float interest = contract.AccruedInterest;
@@ -154,7 +206,7 @@ namespace USAC
                     DebtHandler.SetAccruedInterest(contract, 0f);
                 }
 
-                contract.NextCycleTick = baseTick + DebtContract.CycleTicks;
+                contract.NextCycleTick = nextTick;
                 scheduler.ScheduleContractCycle(contract, () => ProcessContractCycle(contract));
                 return;
             }
@@ -166,7 +218,7 @@ namespace USAC
             ShowRepaymentDialog(contract, map);
 
             // 重置周期
-            contract.NextCycleTick = baseTick + DebtContract.CycleTicks;
+            contract.NextCycleTick = nextTick;
 
             // 重新调度下次周期
             scheduler.ScheduleContractCycle(contract, () => ProcessContractCycle(contract));

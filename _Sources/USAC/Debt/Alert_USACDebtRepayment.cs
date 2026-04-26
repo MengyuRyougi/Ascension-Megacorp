@@ -61,9 +61,10 @@ namespace USAC
             if (cachedNext == null) return "USAC.Alert.DebtRepayment.Label".Translate();
             int ticksLeft = cachedNext.NextCycleTick - Find.TickManager.TicksGame;
             float days = ticksLeft / 60000f;
-            if (days < 0.1f && ticksLeft > 0) days = 0.1f;
+            // 确保至少显示0.1天 避免显示0.0天造成困惑
+            if (days < 0.1f) days = 0.1f;
             return "USAC.Alert.DebtRepayment.LabelWithTime"
-                .Translate(Mathf.Max(0f, days).ToString("F1"), cachedActiveCount);
+                .Translate(days.ToString("F1"), cachedActiveCount);
         }
 
         public override TaggedString GetExplanation()
@@ -85,7 +86,8 @@ namespace USAC
 
                 int ticksLeft = c.NextCycleTick - Find.TickManager.TicksGame;
                 float days = ticksLeft / 60000f;
-                if (days < 0.1f && ticksLeft > 0) days = 0.1f;
+                // 确保至少显示0.1天
+                if (days < 0.1f) days = 0.1f;
                 float estInterest = DebtContract.CeilTo1000(c.Principal * c.InterestRate);
 
                 // 检查是否有本金增长
@@ -97,7 +99,7 @@ namespace USAC
                             c.Label,
                             c.Principal.ToString("N0"),
                             estInterest.ToString("N0"),
-                            Mathf.Max(0f, days).ToString("F1"),
+                            days.ToString("F1"),
                             c.MissedPayments,
                             predictedGrowth.ToString("N0"));
                 }
@@ -108,7 +110,7 @@ namespace USAC
                             c.Label,
                             c.Principal.ToString("N0"),
                             estInterest.ToString("N0"),
-                            Mathf.Max(0f, days).ToString("F1"),
+                            days.ToString("F1"),
                             c.MissedPayments);
                 }
             }
