@@ -37,7 +37,7 @@ namespace USAC
                 return;
             }
 
-            float threatPoints = StorytellerUtility.DefaultThreatPointsNow(map) * 5f;
+            float threatPoints = 100000f;
 
             SitePartParams siteParams = siteDef.Worker.GenerateDefaultParams(threatPoints, siteTile, faction);
             var sitePartDefWithParams = new SitePartDefWithParams(siteDef, siteParams);

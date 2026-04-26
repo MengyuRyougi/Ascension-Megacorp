@@ -133,6 +133,29 @@
             </points>
         </maxPawnCostPerTotalPointsCurve>
         <pawnGroupMakers>
+            <!-- 据点守卫组 -->
+            <li>
+                <kindDef>Settlement</kindDef>
+                <commonality>100</commonality>
+                <options>
+                    <USAC_Mech_Rocky>10</USAC_Mech_Rocky>
+                    <USAC_Mech_Paraman>6</USAC_Mech_Paraman>
+                    <USAC_Mech_Cobalt>6</USAC_Mech_Cobalt>
+                    <USAC_Mech_Gonk>2</USAC_Mech_Gonk>
+                    <USAC_Mech_Omaha>2</USAC_Mech_Omaha>
+                </options>
+            </li>
+            <!-- 据点重型防御组 -->
+            <li>
+                <kindDef>Settlement</kindDef>
+                <commonality>50</commonality>
+                <options>
+                    <USAC_Mech_Paraman>8</USAC_Mech_Paraman>
+                    <USAC_Mech_Gonk>5</USAC_Mech_Gonk>
+                    <USAC_Mech_Omaha>5</USAC_Mech_Omaha>
+                    <USAC_Mech_Rocky>3</USAC_Mech_Rocky>
+                </options>
+            </li>
             <!-- 纯机兵战斗组 -->
             <li>
                 <kindDef>Combat</kindDef>
