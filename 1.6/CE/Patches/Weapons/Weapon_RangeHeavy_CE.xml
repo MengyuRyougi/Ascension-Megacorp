@@ -103,7 +103,7 @@
                     <warmupTime>2.7</warmupTime>
                     <minRange>6.9</minRange>
                     <range>110</range>
-                    <soundCast>USAC_105mmRR</soundCast>
+                    <soundCast>USAC_105mmRR_Shot</soundCast>
                     <muzzleFlashScale>5</muzzleFlashScale>
                     <targetParams>
                         <canTargetLocations>true</canTargetLocations>

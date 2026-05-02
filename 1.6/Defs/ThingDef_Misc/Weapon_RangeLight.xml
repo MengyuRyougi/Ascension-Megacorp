@@ -121,7 +121,7 @@
     </statBases>
     <equippedStatOffsets>
       <HuntingStealth>0.1</HuntingStealth>
-      <ShootingAccuracyPawn>0.5</ShootingAccuracyPawn>
+      <ShootingAccuracyPawn>1</ShootingAccuracyPawn>
     </equippedStatOffsets>
     <costList>
       <Plasteel>75</Plasteel>

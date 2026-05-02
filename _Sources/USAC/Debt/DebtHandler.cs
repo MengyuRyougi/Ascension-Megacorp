@@ -37,7 +37,7 @@ namespace USAC
                 if (comp != null && comp.IsSystemLocked)
                 {
                     comp.RepayCountDuringLock++;
-                    Log.Message($"[USAC] 死锁期间还款计数: {comp.RepayCountDuringLock}/2");
+                    // Log.Message($"[USAC] 死锁期间还款计数: {comp.RepayCountDuringLock}/2");
                 }
                 OnDebtReduced(contract, Math.Abs(amount));
             }

@@ -125,27 +125,27 @@ namespace USAC
             int now = Find.TickManager.TicksGame;
             if (IsSystemLocked && nextSiteBatchTick > 0 && now >= nextSiteBatchTick)
             {
-                Log.Message($"[USAC] 据点批量生成触发 now={now} nextSiteBatchTick={nextSiteBatchTick}");
+                // Log.Message($"[USAC] 据点批量生成触发 now={now} nextSiteBatchTick={nextSiteBatchTick}");
                 GenerateSiteBatch();
                 nextSiteBatchTick = nextSiteBatchTick + 900000;
-                Log.Message($"[USAC] 下次据点生成时间 nextSiteBatchTick={nextSiteBatchTick}");
+                // Log.Message($"[USAC] 下次据点生成时间 nextSiteBatchTick={nextSiteBatchTick}");
             }
         }
 
         private void GenerateSiteBatch()
         {
-            Log.Message($"[USAC] GenerateSiteBatch 开始执行");
+            // Log.Message($"[USAC] GenerateSiteBatch 开始执行");
             var siteContract = ContractManager.GetFirstSiteModeContract();
 
             if (siteContract == null)
             {
-                Log.Warning($"[USAC] 没有据点模式合同 取消生成");
+                // Log.Warning($"[USAC] 没有据点模式合同 取消生成");
                 return;
             }
 
             int count = Rand.RangeInclusive(1, 2);
             Map map = GetRichestPlayerHomeMap();
-            Log.Message($"[USAC] 准备生成 {count} 个据点 合同={siteContract.Label} 地图={map?.Parent?.Label}");
+            // Log.Message($"[USAC] 准备生成 {count} 个据点 合同={siteContract.Label} 地图={map?.Parent?.Label}");
             SiteGenerator.GenerateSiteBatch(siteContract, map, count);
         }
         public void CheckDebtSettledEnding()
@@ -306,7 +306,7 @@ namespace USAC
             if (!anyViolation)
             {
                 IsSystemLocked = false;
-                Log.Message("[USAC] 连续守信表现已核实，系统锁定已解除。");
+                // Log.Message("[USAC] 连续守信表现已核实，系统锁定已解除。");
             }
         }
         #endregion
@@ -380,20 +380,20 @@ namespace USAC
             // 如果nextSiteBatchTick小于当前时间且小于900000 说明是旧版相对tick数
             if (nextSiteBatchTick < now && nextSiteBatchTick < 900000)
             {
-                Log.Warning($"[USAC] 检测到旧版据点计时器数据 ({nextSiteBatchTick}) 正在迁移为绝对tick");
+                // Log.Warning($"[USAC] 检测到旧版据点计时器数据 ({nextSiteBatchTick}) 正在迁移为绝对tick");
                 nextSiteBatchTick = now + nextSiteBatchTick;
-                Log.Message($"[USAC] 迁移后据点计时器 nextSiteBatchTick={nextSiteBatchTick}");
+                // Log.Message($"[USAC] 迁移后据点计时器 nextSiteBatchTick={nextSiteBatchTick}");
             }
             // 如果nextSiteBatchTick远小于当前时间 说明已经过期很久 重置
             else if (nextSiteBatchTick < now - 900000)
             {
-                Log.Warning($"[USAC] 据点计时器已过期 重置为15天后");
+                // Log.Warning($"[USAC] 据点计时器已过期 重置为15天后");
                 nextSiteBatchTick = now + 900000;
-                Log.Message($"[USAC] 重置后据点计时器 nextSiteBatchTick={nextSiteBatchTick}");
+                // Log.Message($"[USAC] 重置后据点计时器 nextSiteBatchTick={nextSiteBatchTick}");
             }
             else
             {
-                Log.Message($"[USAC] 据点计时器正常 nextSiteBatchTick={nextSiteBatchTick} now={now} 剩余={nextSiteBatchTick - now}tick");
+                // Log.Message($"[USAC] 据点计时器正常 nextSiteBatchTick={nextSiteBatchTick} now={now} 剩余={nextSiteBatchTick - now}tick");
             }
         }
         #endregion

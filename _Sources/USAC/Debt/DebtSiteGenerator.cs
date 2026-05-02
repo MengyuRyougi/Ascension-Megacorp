@@ -27,7 +27,7 @@ namespace USAC
             var siteDef = SelectSiteType();
             if (siteDef == null) return;
 
-            Log.Message($"[USAC] 为订单 {contract.Label} 随机选择了据点类型: {siteDef.defName}");
+            // Log.Message($"[USAC] 为订单 {contract.Label} 随机选择了据点类型: {siteDef.defName}");
 
             // 使用USAC派系而不是随机敌对派系
             Faction faction = Find.FactionManager.FirstFactionOfDef(USAC_FactionDefOf.USAC_Faction);
@@ -37,10 +37,7 @@ namespace USAC
                 return;
             }
 
-            float threatPoints = 100000f;
-
-            SitePartParams siteParams = siteDef.Worker.GenerateDefaultParams(threatPoints, siteTile, faction);
-            siteParams.faction = faction;
+            SitePartParams siteParams = siteDef.Worker.GenerateDefaultParams(0f, siteTile, faction);
             var sitePartDefWithParams = new SitePartDefWithParams(siteDef, siteParams);
             var parts = new List<SitePartDefWithParams> { sitePartDefWithParams };
 

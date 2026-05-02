@@ -14,7 +14,7 @@
     </tags>
     <requiresFaction>true</requiresFaction>
     <wantsThreatPoints>true</wantsThreatPoints>
-    <showFactionInInspectString>true</showFactionInInspectString>
+    <showFactionInInspectString>false</showFactionInInspectString>
     <approachOrderString>Attack {0}</approachOrderString>
     <approachingReportString>Attacking {0}.</approachingReportString>
     <arrivedLetter>There is a USAC debt collection outpost in this area.</arrivedLetter>
@@ -47,7 +47,6 @@
   <WorldObjectDef ParentName="Site">
     <defName>USAC_DebtSite</defName>
     <label>debt management site</label>
-    <description>A site established by USAC to manage your debt through local "services".</description>
     <texture>World/WorldObjects/USAC_Settlement</texture>
     <expandingIconTexture>World/WorldObjects/Expanding/USAC_Icon</expandingIconTexture>
     <comps>

@@ -486,7 +486,7 @@ namespace USAC
                 var activeTradeables = cachedTradeables?.Where(t => t.CountToTransfer != 0).ToList();
                 if (activeTradeables?.Any() == true)
                 {
-                    Log.Message($"[USAC] 当前交易状态: {activeTradeables.Count} 个物品有交易数量");
+                    // Log.Message($"[USAC] 当前交易状态: {activeTradeables.Count} 个物品有交易数量");
                 }
             }
         }

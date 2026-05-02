@@ -62,14 +62,14 @@ namespace USAC
             // 拆卸形式的建筑物
             if (thing is MinifiedThing minified)
             {
-                Log.Message($"[USAC] 是MinifiedThing，InnerThing: {minified.InnerThing?.def?.defName}");
+                // Log.Message($"[USAC] 是MinifiedThing，InnerThing: {minified.InnerThing?.def?.defName}");
 
                 // 提取打包内建筑
                 if (minified.InnerThing is Building building)
                 {
                     // 从容器中移除建筑物
                     minified.GetDirectlyHeldThings().Remove(building);
-                    Log.Message($"[USAC] 成功从MinifiedThing中提取建筑物: {building.def.defName}");
+                    // Log.Message($"[USAC] 成功从MinifiedThing中提取建筑物: {building.def.defName}");
 
                     // 销毁空打包容器
                     minified.Destroy(DestroyMode.Vanish);
@@ -81,7 +81,7 @@ namespace USAC
             // 直接是建筑物
             if (thing is Building directBuilding)
             {
-                Log.Message($"[USAC] 直接是建筑物: {directBuilding.def.defName}");
+                // Log.Message($"[USAC] 直接是建筑物: {directBuilding.def.defName}");
                 return directBuilding;
             }
 
